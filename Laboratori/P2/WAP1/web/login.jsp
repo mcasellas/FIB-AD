@@ -1,9 +1,8 @@
 <%-- 
     Document   : login
-    Created on : 14-sep-2018, 10:15:59
-    Author     : marc.casellas
+    Created on : 18-sep-2018, 20:30:15
+    Author     : rando
 --%>
-
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
