@@ -32,7 +32,7 @@
         <br>
         <h2>Benvingut, <%=userName %></h2>
         <br>
-        <form action="http://localhost:8080/WAP1/registrarImagen.jsp" method="POST">
+        <form action="./registrarImagen.jsp" method="POST">
             <input class="boto" type="submit" value="Registra una imatge"> 
         </form>
         <form action="ModificarImatge" method="POST">
