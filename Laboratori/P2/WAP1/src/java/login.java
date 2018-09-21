@@ -50,7 +50,8 @@ public class login extends HttpServlet {
             Class.forName("org.sqlite.JDBC");
             
             //Create a database connection
-            connection = DriverManager.getConnection("jdbc:sqlite:F:\\windows\\FIB-AD\\Laboratori\\P2\\WAP1\\Users.db");
+           // connection = DriverManager.getConnection("jdbc:sqlite:F:\\windows\\FIB-AD\\Laboratori\\P2\\WAP1\\Users.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\Users.db");
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             
