@@ -10,11 +10,11 @@
 <html>
     <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-        <title>JSP Page</title> 
+        <title>FotOK</title> 
         <style><%@include file="/styles/estil.css"%></style>
     </head> 
     
-    <title>W3.CSS</title>
+    <title>FotOK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     
