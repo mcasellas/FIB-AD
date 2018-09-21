@@ -56,10 +56,17 @@ public class login extends HttpServlet {
                 statement.setQueryTimeout(30);
             }
             catch(Exception e) {
+                try{
                 connection = DriverManager.getConnection("jdbc:sqlite:F:\\windows\\FIB-AD\\Laboratori\\P2\\WAP1\\Users.db");
                 Statement statement = connection.createStatement();
                 statement.setQueryTimeout(30);
+                }
+                catch(Exception ex){
+                    System.out.println("No es troba cap base de dades d'usuaris");
+                }
+                
             }
+                
        
             
             
