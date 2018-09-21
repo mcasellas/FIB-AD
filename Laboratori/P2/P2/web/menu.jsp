@@ -42,7 +42,7 @@
             <input class="boto" type="submit" value="Llista les imatges"> 
         </form>
         <form action="BuscarImatge" method="POST">
-            <input class="boto" type="submit" value="Busca una imatge"> 
+            <input class="boto" type="submit" value="Buscar una imatge"> 
         </form>
         <br>
         <br>
