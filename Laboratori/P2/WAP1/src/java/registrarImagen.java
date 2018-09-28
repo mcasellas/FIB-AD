@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,9 @@ import javax.servlet.http.Part;
  *
  * @author rando
  */
-@WebServlet(urlPatterns = {"/registrarImagen"})
+@WebServlet(name="registrarImagen", urlPatterns = {"/registrarImagen"})
+@MultipartConfig(location="/tmp", fileSizeThreshold=1024*1024, 
+    maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)
 public class registrarImagen extends HttpServlet {
     
        private final static Logger LOGGER =
@@ -45,8 +48,8 @@ public class registrarImagen extends HttpServlet {
          response.setContentType("text/html;charset=UTF-8");
 
     // Create path components to save the file
-    final String path = ("ruta")
-    final Part filePart = request.getPart("file");
+    final String path = ("C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\web\\Image");
+    final Part filePart = request.getPart("imatge");
     final String fileName = getFileName(filePart);
 
     OutputStream out = null;
@@ -67,6 +70,7 @@ public class registrarImagen extends HttpServlet {
         writer.println("New file " + fileName + " created at " + path);
         LOGGER.log(Level.INFO, "File{0}being uploaded to {1}",
                 new Object[]{fileName, path});
+         response.sendRedirect("UploadOK.jsp");
     } catch (FileNotFoundException fne) {
         writer.println("You either did not specify a file to upload or are "
                 + "trying to upload a file to a protected or nonexistent "
@@ -85,6 +89,7 @@ public class registrarImagen extends HttpServlet {
         if (writer != null) {
             writer.close();
         }
+        
     }
 }
 

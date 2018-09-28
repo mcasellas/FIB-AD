@@ -31,7 +31,7 @@
         }
     %>  
         
-        <form class="w3-container" method="post" action="upload" enctype="multipart/form-data">
+        <form class="w3-container" method="post" action="registrarImagen" enctype="multipart/form-data">
             <center>
             <input class="w3-input" type="file" id="imatge" name="imatge">
             <input  class="w3-input w3-light-grey" type="text" name="titol" placeholder="Títol" >
