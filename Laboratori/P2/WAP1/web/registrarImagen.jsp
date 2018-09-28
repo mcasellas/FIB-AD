@@ -31,9 +31,9 @@
         }
     %>  
         
-        <form class="w3-container">
+        <form class="w3-container" method="post" action="upload" enctype="multipart/form-data">
             <center>
-            <input class="w3-input" type="file" name="image">
+            <input class="w3-input" type="file" id="imatge" name="imatge">
             <input  class="w3-input w3-light-grey" type="text" name="titol" placeholder="Títol" >
             <input  class="w3-input w3-light-grey" type="text" name="descripcio" placeholder="Descripció">
             <input  class="w3-input w3-light-grey" type="text" name="autor" placeholder="Autor">
