@@ -36,8 +36,9 @@
             <input class="w3-input" type="file" id="imatge" name="imatge">
             <input  class="w3-input w3-light-grey" type="text" name="titol" placeholder="Títol" >
             <input  class="w3-input w3-light-grey" type="text" name="descripcio" placeholder="Descripció">
+            <input class="w3-input w3-light-grey" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) ">
             <input  class="w3-input w3-light-grey" type="text" name="autor" placeholder="Autor">
-            <input  class="w3-input w3-light-grey" type="date" name="datac" >
+            <input  class="w3-input w3-light-grey" type="text" name="datac" placeholder="Dia/Mes/Any" >
             <input  class="boto" type="submit" value="Puja">
             </center>
         </form>

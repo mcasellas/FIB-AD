@@ -51,7 +51,7 @@ public class registrarImagen extends HttpServlet {
     final String path = ("C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\web\\Image");
     final Part filePart = request.getPart("imatge");
     final String fileName = getFileName(filePart);
-
+    String username = request.getParameter("username");
     OutputStream out = null;
     InputStream filecontent = null;
     final PrintWriter writer = response.getWriter();
