@@ -58,7 +58,7 @@ public class login extends HttpServlet {
             // Connexió Marc
             catch(Exception e) {
                 try{
-                connection = DriverManager.getConnection("jdbc:sqlite://Volumes/Macintosh HD//Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P2Users.db");
+                connection = DriverManager.getConnection("jdbc:sqlite://Users//marccasellas//Documents//GitHub//FIB-AD//Laboratori//P2//WAP1//Users.db");
                 Statement statement = connection.createStatement();
                 statement.setQueryTimeout(30);
                 }
