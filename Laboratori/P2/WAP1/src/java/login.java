@@ -58,7 +58,7 @@ public class login extends HttpServlet {
             // Connexió Marc
             catch(Exception e) {
                 try{
-                connection = DriverManager.getConnection("jdbc:sqlite:FotOK.db");
+                connection = DriverManager.getConnection("jdbc:sqlite:/Users/FotOK.db");
                 Statement statement = connection.createStatement();
                 statement.setQueryTimeout(30);
                 }
