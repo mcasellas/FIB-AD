@@ -33,7 +33,7 @@
         <h2>Benvingut, <%=userName %></h2>
         <br>
         <form action="./registrarImagen.jsp" method="POST">
-            <input class="boto" type="submit" value="Registra una imatge"> 
+            <input class="boto" type="submit" value="Penja una imatge"> 
         </form>
         <form action="./modificarImagen.jsp" method="POST">
             <input class="boto" type="submit" value="Modifica una imatge"> 

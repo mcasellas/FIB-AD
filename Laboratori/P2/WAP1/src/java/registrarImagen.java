@@ -76,7 +76,7 @@ public class registrarImagen extends HttpServlet {
         
     Date date= new Date();
     long time = date.getTime();
-    String timestap = Long.toString(time);
+    String timestamp = Long.toString(time);
     OutputStream out = null;
     InputStream filecontent = null;
     final PrintWriter writer = response.getWriter();
@@ -84,7 +84,7 @@ public class registrarImagen extends HttpServlet {
     
     
      int lastDot = fileName.lastIndexOf('.');
-    fileName = timestap + fileName.substring(lastDot);
+    fileName = timestamp + fileName.substring(lastDot);
     
     try {
         
@@ -115,7 +115,7 @@ public class registrarImagen extends HttpServlet {
         else id=0;
         
         
-        PreparedStatement pujafoto = conn.prepareStatement("INSERT INTO imatges(filename,id,titol,descripcio,tags,autor,datac,timestap,username) VALUES(?,?,?,?,?,?,?,?,?)");
+        PreparedStatement pujafoto = conn.prepareStatement("INSERT INTO imatges(filename,id,titol,descripcio,tags,autor,datac,timestamp,username) VALUES(?,?,?,?,?,?,?,?,?)");
         pujafoto.setString(1,fileName);
         pujafoto.setInt(2,id);
         pujafoto.setString(3,titol);
@@ -123,7 +123,7 @@ public class registrarImagen extends HttpServlet {
         pujafoto.setString(5,tags);
         pujafoto.setString(6,autor);
         pujafoto.setString(7,datac);
-        pujafoto.setString(8,timestap);
+        pujafoto.setString(8,timestamp);
         pujafoto.setString(9,user);
         pujafoto.executeUpdate();
        
