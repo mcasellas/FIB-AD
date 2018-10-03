@@ -30,13 +30,10 @@
     %>  
         <h1>MENU PRINCIPAL</h1>
         <br>
-        <h2>Benvingut, <%=userName %></h2>
+        <h2>Hola, <%=userName %></h2>
         <br>
         <form action="./registrarImagen.jsp" method="POST">
             <input class="boto" type="submit" value="Penja una imatge"> 
-        </form>
-        <form action="./modificarImagen.jsp" method="POST">
-            <input class="boto" type="submit" value="Modifica una imatge"> 
         </form>
         <form action="./list.jsp" method="POST">
             <input class="boto" type="submit" value="Llista les imatges"> 

@@ -14,6 +14,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.sql.PreparedStatement"%>
 <!DOCTYPE html>
+   <%
+        String user = null;
+        if(session.getAttribute("username") == null){
+                response.sendRedirect("login.jsp");
+        }else user = (String) session.getAttribute("username");
+        String userName = null;
+        String sessionID = null;
+        Cookie[] cookies = request.getCookies();
+        if(cookies !=null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("username")) userName = cookie.getValue();
+                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+            }
+        }
+    %>  
+
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,7 +46,7 @@
                     con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
                     Statement statement = con.createStatement();
                     statement.setQueryTimeout(30);
-                    PreparedStatement getid = con.prepareStatement("SELECT filename, titol, datac, username, tags  FROM imatges");
+                    PreparedStatement getid = con.prepareStatement("SELECT * FROM imatges");
                     ResultSet rs = getid.executeQuery();
                     
                     int i = 0;
@@ -49,12 +66,26 @@
         <p>Data creació: <%= rs.getString("datac") %></p>
         <p>Usuari: <%= rs.getString("username") %></p>
         <p>Tags: <%= rs.getString("tags") %></p>
+    
+        <%
+                       if (rs.getString("username").equals(userName)){ 
+                       %>
+                        <form class="w3-container" action="login" method="POST">
+                
+                <input class="w3-button  w3-light-grey" type="submit" value="Editar">      
+            </form> 
+                        <%
+                        }
+                        %>
     </th> 
    
   </tr>
   
    
-                        <%
+                        
+                      
+  <%
+      
                         i++;
                     }
 %>
@@ -85,18 +116,4 @@
         
 </html>
 
-     <%
-        String user = null;
-        if(session.getAttribute("username") == null){
-                response.sendRedirect("login.jsp");
-        }else user = (String) session.getAttribute("username");
-        String userName = null;
-        String sessionID = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies !=null){
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals("username")) userName = cookie.getValue();
-                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-            }
-        }
-    %>  
+  

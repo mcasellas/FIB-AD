@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,7 +56,7 @@ public class buscarImagen extends HttpServlet {
             int array = parts.length;
             while (i<array){
                 try {
-                    PreparedStatement getphotos = con.prepareStatement("SELECT * FROM imatges WHERE titol LIKE ? OR descripcio LIKE ? OR autor LIKE ? OR datac LIKE ? OR tags LIKE ?");
+                    PreparedStatement getphotos = con.prepareStatement("SELECT filename FROM imatges WHERE titol LIKE ? OR descripcio LIKE ? OR autor LIKE ? OR datac LIKE ? OR tags LIKE ?");
 
                     String cerca = '%' + parts[i] + '%';
                     getphotos.setString(1, cerca);
@@ -67,7 +68,7 @@ public class buscarImagen extends HttpServlet {
                     ResultSet rs = getphotos.executeQuery();
                     
                     
-                        response.setContentType("text/html");
+                        /*response.setContentType("text/html");
                         try (PrintWriter out = response.getWriter()) {
                             out.println("<html><head><title>Servlet Example</title></head><body>");
                             while (rs.next()){
@@ -80,10 +81,14 @@ public class buscarImagen extends HttpServlet {
                         catch (Exception e){
                             System.err.println(e.getMessage());
                         }
+                    */
+                    if (!rs.next())ar.add("ERRCODE21");
+                    else ar.add(rs.getString(1));
                     
-                    
-                    
-                    // while (rs.next())ar.add(rs.getString(1));    
+                    while (rs.next())ar.add(rs.getString(1));
+                    request.setAttribute("list",ar);
+                    RequestDispatcher rd = request.getRequestDispatcher("buscarImagen.jsp");
+                    rd.forward(request, response);
                 }
                 catch (Exception e){
                     System.err.println(e.getMessage());
