@@ -6,6 +6,13 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,31 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/buscarImagen"})
 public class buscarImagen extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet buscarImagen</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet buscarImagen at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+
     
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -56,7 +39,71 @@ public class buscarImagen extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+ 
+      
+        Connection con = null;
+        ArrayList<String> ar = new ArrayList<String>();
+        try {
+            con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
+            Statement statement = con.createStatement();
+            statement.setQueryTimeout(30);
+
+
+            String a = request.getParameter("tags");
+            String[] parts = a.split(",");
+            int i=0;
+            int array = parts.length;
+            while (i<array){
+                try {
+                    PreparedStatement getphotos = con.prepareStatement("SELECT * FROM imatges WHERE titol LIKE ? OR descripcio LIKE ? OR autor LIKE ? OR datac LIKE ? OR tags LIKE ?");
+
+                    String cerca = '%' + parts[i] + '%';
+                    getphotos.setString(1, cerca);
+                    getphotos.setString(2, cerca);
+                    getphotos.setString(3, cerca);
+                    getphotos.setString(4, cerca);
+                    getphotos.setString(5, cerca);
+
+                    ResultSet rs = getphotos.executeQuery();
+                    
+                    
+                        response.setContentType("text/html");
+                        try (PrintWriter out = response.getWriter()) {
+                            out.println("<html><head><title>Servlet Example</title></head><body>");
+                            while (rs.next()){
+                                out.println("<h1>" + cerca + "</h1>");
+                                out.println("<h1>" + rs.getString("autor") + "</h1>");
+                            }
+                            
+                            out.println("</body></html>");
+                        }
+                        catch (Exception e){
+                            System.err.println(e.getMessage());
+                        }
+                    
+                    
+                    
+                    // while (rs.next())ar.add(rs.getString(1));    
+                }
+                catch (Exception e){
+                    System.err.println(e.getMessage());
+                    //response.sendRedirect("menu.jsp");
+                }
+                i++;
+            }
+            //response.sendRedirect("buscarImagenOK.jsp");
+        }
+        // Connexió Marc
+        catch(Exception e) {
+            try{
+            con = DriverManager.getConnection("jdbc:sqlite:/Users/FotOK.db");
+            Statement statement = con.createStatement();
+            statement.setQueryTimeout(30);
+            }
+            catch(Exception ex){
+                System.out.println("No s'ha trobat cap imatge amb el teu tag");
+            }
+        }  
     }
 
     /**

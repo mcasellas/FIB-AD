@@ -43,12 +43,12 @@
                         // Inici while
                         %>
                        <tr> 
-    <th> <image src="./Image/<%= rs.getString(1) %>" ></th>
+    <th> <image src="./Image/<%= rs.getString("filename") %>" ></th>
     <th>
-        <p>Títol: <%= rs.getString(2) %></p>
-        <p>Data creació: <%= rs.getString(3) %></p>
-        <p>Usuari: <%= rs.getString(4) %></p>
-        <p>Tags: <%= rs.getString(5) %></p>
+        <p>Títol: <%= rs.getString("titol") %></p>
+        <p>Data creació: <%= rs.getString("datac") %></p>
+        <p>Usuari: <%= rs.getString("username") %></p>
+        <p>Tags: <%= rs.getString("tags") %></p>
     </th> 
    
   </tr>
