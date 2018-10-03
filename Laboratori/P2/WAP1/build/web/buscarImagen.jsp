@@ -10,9 +10,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style><%@include file="/styles/estil.css"%></style>
     </head>
     <body>
         <h1>Hello World!</h1>
+        <form class="w3-container" method="post" action="buscarImagen">
+            <input class="w3-input" type="text" name="tags" required>
+            <input  class="boto" type="submit" value="Busca">
+        </form>
     </body>
 </html>
 

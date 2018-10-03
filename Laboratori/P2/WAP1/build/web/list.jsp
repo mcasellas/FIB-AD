@@ -23,39 +23,49 @@
             <%
                 Connection con = null;
                 int rss = 0;
-                String []res = null;
-               
+                String[] res = null;
                 
                 try {
                     con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
                     Statement statement = con.createStatement();
                     statement.setQueryTimeout(30);
-                    PreparedStatement getid = con.prepareStatement("SELECT filename FROM imatges");
+                    PreparedStatement getid = con.prepareStatement("SELECT filename, titol, datac, username, tags  FROM imatges");
                     ResultSet rs = getid.executeQuery();
                     
-                    rs.last();
-                    rss = rs.getRow();
-                    res = new String[rss];
-                    rs.first();
                     int i = 0;
+                    %>
+                    
+                    <table style="width:100%">
+                    
+                    
+                    <%
                     while (rs.next()){
-                        res[i] = rs.getString(1);
+                        // Inici while
+                        %>
+                       <tr> 
+    <th> <image src="./Image/<%= rs.getString(1) %>" ></th>
+    <th>
+        <p>Títol: <%= rs.getString(2) %></p>
+        <p>Data creació: <%= rs.getString(3) %></p>
+        <p>Usuari: <%= rs.getString(4) %></p>
+        <p>Tags: <%= rs.getString(5) %></p>
+    </th> 
+   
+  </tr>
+  
+   
+                        <%
                         i++;
                     }
-                   
+%>
+</table> 
+<%
                 }
-                // Connexió Marc
-                catch(SQLException e) {
-                    try{
-                    con = DriverManager.getConnection("jdbc:sqlite:FotOK.db");
-                    Statement statement = con.createStatement();
-                    statement.setQueryTimeout(30);
-                    }
-                    catch(SQLException ex){
-                        System.out.println("No es troba cap base de dades d'usuaris");
-                    }
-
+                catch(Exception e) {
+                    System.out.println("Error amb la base de dades");
+                    System.err.println(e.getMessage());
                 }
+                
                 finally {
                     try {
                         if(con != null)
@@ -66,16 +76,12 @@
                         System.err.println(e.getMessage());
                     }
                 }
+                
+               
+
             %>
            
-            <% 
-            for (int i2 = 0; i2 < rss; ++i2){ 
-                String hola = res[i2];
-            %>
-                <div> 
-                    <image src="./Image/<%= hola %>" >
-                </div>
-            <% } %>
+            
         
 </html>
 
@@ -88,9 +94,9 @@
         String sessionID = null;
         Cookie[] cookies = request.getCookies();
         if(cookies !=null){
-        for(Cookie cookie : cookies){
+            for(Cookie cookie : cookies){
                 if(cookie.getName().equals("username")) userName = cookie.getValue();
                 if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-        }
+            }
         }
     %>  
