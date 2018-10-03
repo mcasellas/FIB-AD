@@ -15,7 +15,25 @@
     </head>
     <body>
         
-         <%
+        
+        
+        <form class="w3-container" method="post" action="registrarImagen" enctype="multipart/form-data">
+            <center>
+            <input class="w3-input" type="file" id="imatge" name="imatge"required>
+            <input  class="w3-input w3-light-grey" type="text" name="titol" placeholder="Títol" required>
+            <input  class="w3-input w3-light-grey" type="text" name="descripcio" placeholder="Descripció" required>
+            <input class="w3-input w3-light-grey" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " required>
+            <input  class="w3-input w3-light-grey" type="text" name="autor" placeholder="Autor" required>
+            <input  class="w3-input w3-light-grey" type="date" name="datac" required>
+            <input type="hidden" name="username" value=  >
+            <input  class="boto" type="submit" value="Puja">
+            </center>
+        </form>
+    </body>
+</html>
+
+
+ <%
         String user = null;
         if(session.getAttribute("username") == null){
                 response.sendRedirect("login.jsp");
@@ -30,17 +48,3 @@
         }
         }
     %>  
-        
-        <form class="w3-container" method="post" action="registrarImagen" enctype="multipart/form-data">
-            <center>
-            <input class="w3-input" type="file" id="imatge" name="imatge">
-            <input  class="w3-input w3-light-grey" type="text" name="titol" placeholder="Títol" >
-            <input  class="w3-input w3-light-grey" type="text" name="descripcio" placeholder="Descripció">
-            <input class="w3-input w3-light-grey" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) ">
-            <input  class="w3-input w3-light-grey" type="text" name="autor" placeholder="Autor">
-            <input  class="w3-input w3-light-grey" type="text" name="datac" placeholder="Dia/Mes/Any" >
-            <input  class="boto" type="submit" value="Puja">
-            </center>
-        </form>
-    </body>
-</html>

@@ -35,13 +35,13 @@
         <form action="./registrarImagen.jsp" method="POST">
             <input class="boto" type="submit" value="Registra una imatge"> 
         </form>
-        <form action="ModificarImatge" method="POST">
+        <form action="./modificarImagen.jsp" method="POST">
             <input class="boto" type="submit" value="Modifica una imatge"> 
         </form>
-        <form action="LlistarImatges" method="POST">
+        <form action="./list.jsp" method="POST">
             <input class="boto" type="submit" value="Llista les imatges"> 
         </form>
-        <form action="BuscarImatge" method="POST">
+        <form action="./buscarImagen.jsp" method="POST">
             <input class="boto" type="submit" value="Buscar una imatge"> 
         </form>
         <br>

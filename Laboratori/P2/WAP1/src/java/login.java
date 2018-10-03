@@ -71,7 +71,7 @@ public class login extends HttpServlet {
        
             
             
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM username WHERE username = ? AND password = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, password);
 
