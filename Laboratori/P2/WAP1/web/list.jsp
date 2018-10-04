@@ -34,6 +34,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style><%@include file="/styles/estil.css"%></style>
         <title>FotOK</title>
     </head>
     
@@ -64,7 +65,8 @@
     <th>
         <p>Títol: <%= rs.getString("titol") %></p>
         <p>Data creació: <%= rs.getString("datac") %></p>
-        <p>Usuari: <%= rs.getString("username") %></p>
+        <p>Descripcio <%= rs.getString("descripcio") %></p>
+        <p>Autor: <%= rs.getString("autor") %></p>
         <p>Tags: <%= rs.getString("tags") %></p>
     
         <%
@@ -77,6 +79,7 @@
                             <input type="hidden" name="tags" value ="<%=rs.getString("tags")%>">
                             <input type="hidden" name="autor" value ="<%=rs.getString("autor")%>">
                             <input type="hidden" name="id" value="<%= rs.getInt("id")%>">
+                            <input type="hidden" name="filename" value="<%= rs.getString("filename")%>">
                 <input class="w3-button  w3-light-grey" type="submit" value="Editar">      
             </form> 
                         <%

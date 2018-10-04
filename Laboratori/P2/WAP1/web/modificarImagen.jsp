@@ -4,12 +4,7 @@
     Author     : rando
 --%>
 
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,71 +30,33 @@
         }
     %> 
     
+    <%
+        String titol = request.getParameter("titol");
+        String data = request.getParameter("data");
+        String tag =  request.getParameter("tags");
+        String descrip =  request.getParameter("descripcio");
+        String autor = request.getParameter("autor");
+        String id = request.getParameter("id");
+        String filename = request.getParameter("filename");
+    %>
     
         <title>JSP Page</title>
     </head>
-    <body>
-         <%
-                Connection con = null;
-                int rss = 0;
-                String[] res = null;
-                
-                try {
-                    con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
-                    Statement statement = con.createStatement();
-                    statement.setQueryTimeout(30);
-                   
-                     %>
-                     
-                     <%
-                        String titol = request.getParameter("titol");
-                        String data = request.getParameter("data");
-                        String tag =  request.getParameter("tags");
-                        String descrip =  request.getParameter("descripcio");
-                        String autor=  request.getParameter("autor");
-                        String id = request.getParameter("id");
-                        
-                         %>
-        
-        <form class="w3-container" method="post" action="modificarImagen" enctype="multipart/form-data">
-            <center>
-                <input class="w3-input" type="file" id="imatge" name="imatge">
-            <input  class="w3-input w3-light-grey" type="text" name="titol" placeholder="Títol" value="<%= titol %>" required>
-            <input  class="w3-input w3-light-grey" type="text" name="descripcio" placeholder="Descripció" value="<%= descrip %>" required>
+    <body>   
+       
+            <form class="w3-container" method="post" action="modificarImagen">
+                      
+
+            <input  class="w3-input w3-light-grey" type="text" name="titol" placeholder="Títol" value="<%= titol %> " required>
+            <input  class="w3-input w3-light-grey" type="text" name="descripcio" placeholder="Descripció" value=" <%= descrip %> " required>
             <input class="w3-input w3-light-grey" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " value="<%= tag %>" required>
             <input  class="w3-input w3-light-grey" type="text" name="autor" placeholder="Autor" value="<%= autor %>" required>
             <input  class="w3-input w3-light-grey" type="date" name="datac" value="<%= data %>" required>
             <input type="hidden" name="username" value="<%= userName %>"  >
             <input type="hidden" name="id" value="<%= id %>"  >
-            <input  class="boto" type="submit" value="Puja">
-            </center>
+            <input type="hidden" name="anticFilename" value="<%= filename %>"  >
+            <input  class="boto" type="submit" value="Actualitza data">
         </form>
-                     <%
-                     
-      
-                    
-
-                }
-                catch(Exception e) {
-                    System.out.println("Error amb la base de dades");
-                    System.err.println(e.getMessage());
-                }
-                
-                finally {
-                    try {
-                        if(con != null)
-                        con.close();
-                    }
-                    catch(SQLException e) {
-                        // connection close failed.
-                        System.err.println(e.getMessage());
-                    }
-                }
-                
-               
-
-            %>
-        
     </body>
 </html>
 

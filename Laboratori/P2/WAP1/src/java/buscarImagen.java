@@ -118,7 +118,7 @@ public class buscarImagen extends HttpServlet {
                 }
                 i++;
             }
-            //response.sendRedirect("buscarImagenOK.jsp");
+            response.sendRedirect("buscarImagenOK.jsp");
         }
         // Connexió Marc
         catch(Exception e) {
