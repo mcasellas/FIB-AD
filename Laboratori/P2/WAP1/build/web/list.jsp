@@ -70,8 +70,13 @@
         <%
                        if (rs.getString("username").equals(userName)){ 
                        %>
-                        <form class="w3-container" action="login" method="POST">
-                
+                        <form class="w3-container" action="./modificarImagen.jsp" method="POST">
+                            <input type="hidden" name="titol" value ="<%=rs.getString("titol")%>">
+                            <input type="hidden" name="descripcio" value ="<%=rs.getString("descripcio")%>">
+                            <input type="hidden" name="data" value ="<%=rs.getString("datac")%>">
+                            <input type="hidden" name="tags" value ="<%=rs.getString("tags")%>">
+                            <input type="hidden" name="autor" value ="<%=rs.getString("autor")%>">
+                            <input type="hidden" name="id" value="<%= rs.getInt("id")%>">
                 <input class="w3-button  w3-light-grey" type="submit" value="Editar">      
             </form> 
                         <%

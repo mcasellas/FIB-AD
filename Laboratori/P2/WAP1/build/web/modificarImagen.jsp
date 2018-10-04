@@ -48,33 +48,36 @@
                     con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
                     Statement statement = con.createStatement();
                     statement.setQueryTimeout(30);
-                    PreparedStatement getid = con.prepareStatement("SELECT * FROM imatges WHERE id = 2");
-                    ResultSet rs = getid.executeQuery();
-                    
-                    int i = 0;
                    
-                    while (rs.next()){
-                        // Inici while
                      %>
                      
+                     <%
+                        String titol = request.getParameter("titol");
+                        String data = request.getParameter("data");
+                        String tag =  request.getParameter("tags");
+                        String descrip =  request.getParameter("descripcio");
+                        String autor=  request.getParameter("autor");
+                        String id = request.getParameter("id");
+                        
+                         %>
         
-        <form class="w3-container" method="post" action="registrarImagen" enctype="multipart/form-data">
+        <form class="w3-container" method="post" action="modificarImagen" enctype="multipart/form-data">
             <center>
-            <input class="w3-input" type="file" id="imatge" name="imatge">
-            <input  class="w3-input w3-light-grey" type="text" name="titol" placeholder="Títol" value="<%= rs.getString("titol") %>" required>
-            <input  class="w3-input w3-light-grey" type="text" name="descripcio" placeholder="Descripció" value="<%= rs.getString("descripcio") %>" required>
-            <input class="w3-input w3-light-grey" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " value="<%= rs.getString("tags") %>" required>
-            <input  class="w3-input w3-light-grey" type="text" name="autor" placeholder="Autor" value="<%= rs.getString("autor") %>" required>
-            <input  class="w3-input w3-light-grey" type="date" name="datac" value="<%= rs.getString("datac") %>" required>
-            <input type="hidden" name="username" value="<%= rs.getString("username") %>"  >
+                <input class="w3-input" type="file" id="imatge" name="imatge">
+            <input  class="w3-input w3-light-grey" type="text" name="titol" placeholder="Títol" value="<%= titol %>" required>
+            <input  class="w3-input w3-light-grey" type="text" name="descripcio" placeholder="Descripció" value="<%= descrip %>" required>
+            <input class="w3-input w3-light-grey" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " value="<%= tag %>" required>
+            <input  class="w3-input w3-light-grey" type="text" name="autor" placeholder="Autor" value="<%= autor %>" required>
+            <input  class="w3-input w3-light-grey" type="date" name="datac" value="<%= data %>" required>
+            <input type="hidden" name="username" value="<%= userName %>"  >
+            <input type="hidden" name="id" value="<%= id %>"  >
             <input  class="boto" type="submit" value="Puja">
             </center>
         </form>
                      <%
                      
       
-                        i++;
-                    }
+                    
 
                 }
                 catch(Exception e) {

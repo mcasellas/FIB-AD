@@ -37,13 +37,24 @@ public class buscarImagen extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
+    
+    
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
  
       
         Connection con = null;
-        ArrayList<String> ar = new ArrayList<String>();
+        ArrayList<String> filenameA = new ArrayList<String>();
+        ArrayList<String> titolA = new ArrayList<String>();
+        ArrayList<String> descripcioA = new ArrayList<String>();
+        ArrayList<String> tagsA = new ArrayList<String>();
+        ArrayList<String> autorA = new ArrayList<String>();
+        ArrayList<String> datacA = new ArrayList<String>();
+        ArrayList<String> userA = new ArrayList<String>();
+       ArrayList<Integer> idA = new ArrayList<Integer>();
         try {
             con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
             Statement statement = con.createStatement();
@@ -56,7 +67,7 @@ public class buscarImagen extends HttpServlet {
             int array = parts.length;
             while (i<array){
                 try {
-                    PreparedStatement getphotos = con.prepareStatement("SELECT filename FROM imatges WHERE titol LIKE ? OR descripcio LIKE ? OR autor LIKE ? OR datac LIKE ? OR tags LIKE ?");
+                    PreparedStatement getphotos = con.prepareStatement("SELECT filename,titol,descripcio,tags,autor,datac,username,id FROM imatges WHERE titol LIKE ? OR descripcio LIKE ? OR autor LIKE ? OR datac LIKE ? OR tags LIKE ?");
 
                     String cerca = '%' + parts[i] + '%';
                     getphotos.setString(1, cerca);
@@ -66,27 +77,38 @@ public class buscarImagen extends HttpServlet {
                     getphotos.setString(5, cerca);
 
                     ResultSet rs = getphotos.executeQuery();
+                      
+                    if (!rs.next())filenameA.add("ERRCODE21");
+                    else{
+                        filenameA.add(rs.getString(1));
+                        titolA.add(rs.getString(2));
+                        descripcioA.add(rs.getString(3));
+                        tagsA.add(rs.getString(4));
+                        autorA.add(rs.getString(5));
+                        datacA.add(rs.getString(6));
+                        userA.add(rs.getString(7));
+                        idA.add(rs.getInt(8));
+                    }
                     
-                    
-                        /*response.setContentType("text/html");
-                        try (PrintWriter out = response.getWriter()) {
-                            out.println("<html><head><title>Servlet Example</title></head><body>");
-                            while (rs.next()){
-                                out.println("<h1>" + cerca + "</h1>");
-                                out.println("<h1>" + rs.getString("autor") + "</h1>");
-                            }
-                            
-                            out.println("</body></html>");
-                        }
-                        catch (Exception e){
-                            System.err.println(e.getMessage());
-                        }
-                    */
-                    if (!rs.next())ar.add("ERRCODE21");
-                    else ar.add(rs.getString(1));
-                    
-                    while (rs.next())ar.add(rs.getString(1));
-                    request.setAttribute("list",ar);
+                    while (rs.next())
+                    {
+                        filenameA.add(rs.getString(1));
+                        titolA.add(rs.getString(2));
+                        descripcioA.add(rs.getString(3));
+                        tagsA.add(rs.getString(4));
+                        autorA.add(rs.getString(5));
+                        datacA.add(rs.getString(6));
+                        userA.add(rs.getString(7));
+                        idA.add(rs.getInt(8));
+                    }
+                    request.setAttribute("list",filenameA);
+                    request.setAttribute("titol",titolA);
+                    request.setAttribute("descripcio",descripcioA);
+                    request.setAttribute("tags",tagsA);
+                    request.setAttribute("autor",autorA);
+                    request.setAttribute("datac",datacA);
+                    request.setAttribute("user",userA);
+                    request.setAttribute("id",idA);
                     RequestDispatcher rd = request.getRequestDispatcher("buscarImagen.jsp");
                     rd.forward(request, response);
                 }
