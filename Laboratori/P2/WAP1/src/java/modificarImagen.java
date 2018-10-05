@@ -104,7 +104,7 @@ public class modificarImagen extends HttpServlet {
                         System.err.println(e.getMessage());
                     }
                     
-                    response.sendRedirect("menu.jsp");
+                    response.sendRedirect("list.jsp");
                 }
     }
 

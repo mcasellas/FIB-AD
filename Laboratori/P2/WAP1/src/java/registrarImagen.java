@@ -205,4 +205,10 @@ private String getFileName(final Part part) {
         return "Short description";
     }// </editor-fold>
 
+    private static class FileUploadServlet {
+
+        public FileUploadServlet() {
+        }
+    }
+
 }

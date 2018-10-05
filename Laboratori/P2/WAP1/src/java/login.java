@@ -94,7 +94,7 @@ public class login extends HttpServlet {
             else {
                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
                out.println("Username or Password incorrect");
-               response.sendRedirect("login.jsp");
+               response.sendRedirect("error.jsp");
             }
         }
         catch(SQLException | ClassNotFoundException e)
