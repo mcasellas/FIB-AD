@@ -38,8 +38,8 @@ import javax.servlet.http.Cookie;
     maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)
 public class registrarImagen extends HttpServlet {
     
-       private final static Logger LOGGER =
-       Logger.getLogger(FileUploadServlet.class.getCanonicalName());
+       private final static Logger 
+       LOGGER = Logger.getLogger(FileUploadServlet.class.getCanonicalName());
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -65,7 +65,6 @@ public class registrarImagen extends HttpServlet {
     String tags = request.getParameter("tags");
     String autor = request.getParameter("autor");
     String datac = request.getParameter("datac");
-    
     String user=null;
      Cookie[] cookies = request.getCookies();
         if(cookies !=null){
@@ -114,7 +113,7 @@ public class registrarImagen extends HttpServlet {
         if(rs.next()) id = rs.getInt(1)+1;
         else id=0;
         
-        
+        try{
         PreparedStatement pujafoto = conn.prepareStatement("INSERT INTO imatges(filename,id,titol,descripcio,tags,autor,datac,timestamp,username) VALUES(?,?,?,?,?,?,?,?,?)");
         pujafoto.setString(1,fileName);
         pujafoto.setInt(2,id);
@@ -126,7 +125,10 @@ public class registrarImagen extends HttpServlet {
         pujafoto.setString(8,timestamp);
         pujafoto.setString(9,user);
         pujafoto.executeUpdate();
-       
+        }
+        catch (SQLException e){
+             response.sendRedirect("error.jsp");
+        }
         out = new FileOutputStream(new File(path + File.separator
                 + fileName));
         filecontent = filePart.getInputStream();
@@ -152,6 +154,7 @@ public class registrarImagen extends HttpServlet {
 
         LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}",
                 new Object[]{fne.getMessage()});
+         response.sendRedirect("error.jsp");
     }      catch (SQLException ex) {
                Logger.getLogger(registrarImagen.class.getName()).log(Level.SEVERE, null, ex);
            } catch (ClassNotFoundException ex) {
@@ -201,5 +204,11 @@ private String getFileName(final Part part) {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static class FileUploadServlet {
+
+        public FileUploadServlet() {
+        }
+    }
 
 }

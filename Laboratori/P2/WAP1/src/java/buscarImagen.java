@@ -67,7 +67,7 @@ public class buscarImagen extends HttpServlet {
             int array = parts.length;
             while (i<array){
                 try {
-                    PreparedStatement getphotos = con.prepareStatement("SELECT filename,titol,descripcio,tags,autor,datac,username,id FROM imatges WHERE titol LIKE ? OR descripcio LIKE ? OR autor LIKE ? OR datac LIKE ? OR tags LIKE ?");
+                    PreparedStatement getphotos = con.prepareStatement("SELECT filename,titol,descripcio,tags,autor,datac,username,id FROM imatges WHERE titol LIKE ? OR descripcio LIKE ? OR autor LIKE ? OR datac LIKE ? OR tags LIKE ? ORDER BY datac DESC");
 
                     String cerca = '%' + parts[i] + '%';
                     getphotos.setString(1, cerca);
@@ -118,7 +118,7 @@ public class buscarImagen extends HttpServlet {
                 }
                 i++;
             }
-            //response.sendRedirect("buscarImagenOK.jsp");
+            response.sendRedirect("buscarImagenOK.jsp");
         }
         // Connexió Marc
         catch(Exception e) {

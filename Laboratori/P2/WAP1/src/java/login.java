@@ -43,6 +43,10 @@ public class login extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         String username = request.getParameter("username");
+
+    
+        
+        
         String password = request.getParameter("password");
         Connection connection = null;
         try {
@@ -90,7 +94,7 @@ public class login extends HttpServlet {
             else {
                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
                out.println("Username or Password incorrect");
-               response.sendRedirect("login.jsp");
+               response.sendRedirect("error.jsp");
             }
         }
         catch(SQLException | ClassNotFoundException e)
