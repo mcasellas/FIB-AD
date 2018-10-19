@@ -55,7 +55,8 @@ public class login extends HttpServlet {
             
             // Connexió Sergi
             try {
-                connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
+                connection = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+                
                 Statement statement = connection.createStatement();
                 statement.setQueryTimeout(30);
             }
