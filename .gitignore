@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 
 .DS_Store
-Laboratori/P2/WAP1/nbproject
-Laboratori/P2/WAP1/build
+Laboratori/P2/WAP1/nbproject/*
+Laboratori/P2/WAP1/build/*
+/Laboratori/P3/P3_SOAP/build/
