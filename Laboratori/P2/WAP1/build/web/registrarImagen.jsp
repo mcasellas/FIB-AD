@@ -52,7 +52,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li ><a href="#">Inici</a></li>
+            <li ><a href="./menu.jsp">Inici</a></li>
             <li class="active"><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
             <li><a href="./list.jsp">Llista les imatges</a></li>
             <li><a href="./buscarImagen.jsp">Busca una imatge</a></li>

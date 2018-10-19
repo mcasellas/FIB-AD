@@ -166,9 +166,17 @@
 </div>  
 <%
             }
-        }
+else {
+%>
+<h4>No hi ha cap imatge relacionada amb la teva cerca </h4>
+<%
     }
-                     %>
+               
+}
+        }
+
+%>
+   
       
       </div>
 
