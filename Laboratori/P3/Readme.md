@@ -55,10 +55,12 @@ List SearchbyKeywords (String keywords);
 
 Para comprobar que el servicio web funciona correctamente desarrolla dos tipos distintos de aplicación cliente, una Aplicación Java y una nueva aplicación web.
 
+
 ## Trabajo adicional:
 
 Para mejorar la nota de esta parte de la práctica, podéis implementar una operación que realice una búsqueda combinada, por ejemplo, por título y autor o por título y descripción.
 
-## Entrega de la práctica:
+
+## Entrega de la práctica:
 
 Se tiene que entregar un documento con la respuesta a las cuestiones iniciales y el código del servicio web desarrollado. También se tiene que entregar un informe que explique brevemente el trabajo realizado y las ampliaciones desarrolladas.
