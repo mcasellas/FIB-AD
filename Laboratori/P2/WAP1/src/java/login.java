@@ -34,28 +34,29 @@ public class login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         PrintWriter out = response.getWriter();
-        
+
         String username = request.getParameter("username");
 
-    
-        
-        
+
+
+
         String password = request.getParameter("password");
         Connection connection = null;
         try {
-            
+
             Class.forName("org.sqlite.JDBC");
-            
+
             // Connexió Sergi
             try {
                 connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
+                //connection = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
                 Statement statement = connection.createStatement();
                 statement.setQueryTimeout(30);
             }
@@ -69,20 +70,20 @@ public class login extends HttpServlet {
                 catch(Exception ex){
                     System.out.println("No es troba cap base de dades d'usuaris");
                 }
-                
+
             }
-                
-       
-            
-            
+
+
+
+
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, password);
 
         ResultSet rs = preparedStatement.executeQuery();
-        
+
         Statement stmts = (Statement) connection.createStatement();
-        
+
             if(rs.next()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("username",username);
@@ -100,7 +101,7 @@ public class login extends HttpServlet {
         catch(SQLException | ClassNotFoundException e)
         {
           System.err.println(e.getMessage());
-        }   
+        }
         finally
         {
           try
@@ -113,7 +114,7 @@ public class login extends HttpServlet {
             // connection close failed.
             System.err.println(e.getMessage());
           }
-        }  
+        }
     }
 
     /**
