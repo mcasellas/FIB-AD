@@ -416,7 +416,8 @@ public class FotOkWS {
             statement.setQueryTimeout(30);
             try {
                 PreparedStatement getphotos = con.prepareStatement("SELECT * FROM imatges WHERE autor LIKE ?");
-                getphotos.setString(1, author);
+                String cerca = '%' + author + '%';
+                getphotos.setString(1, cerca);
                 ResultSet rs = getphotos.executeQuery();
                 while (rs.next()) {
                     ImageWS temp = new ImageWS();
