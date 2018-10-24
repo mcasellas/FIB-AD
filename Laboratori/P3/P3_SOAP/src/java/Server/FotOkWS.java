@@ -102,8 +102,10 @@ public class FotOkWS {
         Connection con = null;
         ImageWS temp = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P3\\P3_SOAP\\FotOK.db");
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+            // create a database connection
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
             java.sql.Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
             PreparedStatement getid = con.prepareStatement("SELECT * FROM imatges WHERE id = ?");
@@ -155,7 +157,10 @@ public class FotOkWS {
         int id;
         
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P3\\P3_SOAP\\FotOK.db");
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+            // create a database connection
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
 
@@ -212,10 +217,13 @@ public class FotOkWS {
         //TODO write your implementation code here:
         Connection conn = null;
         try {
-            Class.forName("org.sqlite.JDBC");
+           
             try {
-                conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P3\\P3_SOAP\\FotOK.db");
-                Statement statement = conn.createStatement();
+                Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+            // create a database connection
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+            Statement statement = conn.createStatement();
                 statement.setQueryTimeout(30);
 
             } catch (SQLException e) {
@@ -257,12 +265,14 @@ public class FotOkWS {
      * @return
      */
     @WebMethod(operationName = "searchByTitle")
-    public List searchByTitle(@WebParam(name = "title") String title) {
+    public List searchByTitle(@WebParam(name = "title") String title) throws ClassNotFoundException {
         //TODO write your implementation code here:
         Connection con = null;
         ArrayList<ImageWS> resultat = new ArrayList<>();
         try {
-            con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P3\\P3_SOAP\\FotOK.db");
+  
+            // create a database connection
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
             try {
@@ -321,7 +331,10 @@ public class FotOkWS {
             Connection con = null;
         ArrayList<ImageWS> resultat = new ArrayList<>();
         try {
-            con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P3\\P3_SOAP\\FotOK.db");
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+            // create a database connection
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
             try {
@@ -380,7 +393,10 @@ public class FotOkWS {
                 Connection con = null;
         ArrayList<ImageWS> resultat = new ArrayList<ImageWS>();
         try {
-            con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P3\\P3_SOAP\\FotOK.db");
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+            // create a database connection
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
             try {
@@ -437,13 +453,16 @@ public class FotOkWS {
     public List searchByKeywords(@WebParam(name = "keywords") String keywords) {
         //TODO write your implementation code here:
         Connection con = null;
-        ArrayList<ImageWS> resultat = new ArrayList<>();
+        ArrayList<ImageWS> resultat = new ArrayList<ImageWS>();
         try {
-            con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P3\\P3_SOAP\\FotOK.db");
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+            // create a database connection
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
             try {
-                PreparedStatement getphotos = con.prepareStatement("SELECT * FROM imatges WHERE tags LIKE ?");
+                PreparedStatement getphotos = con.prepareStatement("SELECT * FROM IMATGES WHERE TAGS LIKE ?");
                 getphotos.setString(1, keywords);
                 ResultSet rs = getphotos.executeQuery();
                 while (rs.next()) {
@@ -473,7 +492,7 @@ public class FotOkWS {
                 }
         finally {
             try {
-                if (con != null) {
+                if (con != null) {ﬁﬁﬁ
                     con.close();
                 }
 
@@ -483,8 +502,6 @@ public class FotOkWS {
                 return null;
             }
         }
-        
         return resultat;
     }
-
 }
