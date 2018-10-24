@@ -36,20 +36,24 @@ public class FotOkWS {
     public List listImages()   {
 
         Connection con = null;
-        List<ImageWS> resultat = new List<>();
-
+        List<ImageWS> resultat = new ArrayList<ImageWS>();
+        
         try {
-            Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P3\\P3_SOAP\\FotOK.db");
+            
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+            // create a database connection
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+            
             java.sql.Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
-            PreparedStatement getid = con.prepareStatement("SELECT * FROM imatges ORDER BY datac DESC");
+            PreparedStatement getid = con.prepareStatement("SELECT * FROM IMATGES ORDER BY DATAC DESC");
             ResultSet rs = getid.executeQuery();
 
            // int i = 0;
 
             while (rs.next()) {
-                ImageWS temp = null;
+                ImageWS temp = new ImageWS();
                 temp.filename = rs.getString("filename");
                 temp.id = rs.getInt("id");
                 temp.titol = rs.getString("titol");
@@ -75,12 +79,14 @@ public class FotOkWS {
                     con.close();
                 }
 
-            } catch (SQLException e) {
+            } 
+            catch (SQLException e) {
                 // connection close failed.
                 System.err.println(e.getMessage());
                 return null;
             }
         }
+        
         return resultat;
     }
 

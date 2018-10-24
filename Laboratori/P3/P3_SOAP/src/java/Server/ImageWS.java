@@ -33,6 +33,9 @@ public class ImageWS {
         this.username = username;
     }
 
+    public ImageWS() {
+    }
+
     public String getFilename() {
         return filename;
     }
@@ -104,12 +107,5 @@ public class ImageWS {
     public void setUsername(String username) {
         this.username = username;
     }
-    
-    
-    
-    
   
-  
-  
-    
 }
