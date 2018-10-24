@@ -215,15 +215,21 @@ public class FotOkWS {
     @WebMethod(operationName = "modifyImage")
     public int modifyImage(@WebParam(name = "image") ImageWS image) {
         //TODO write your implementation code here:
-        Connection conn = null;
+        Connection con = null;
         try {
 
             try {
-                Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
 
+<<<<<<< HEAD
                 // create a database connection
                 conn = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
                 Statement statement = conn.createStatement();
+=======
+            // create a database connection
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+            Statement statement = con.createStatement();
+>>>>>>> be0f54ab5cd692a6a57706128c1db540b3e2d14f
                 statement.setQueryTimeout(30);
 
             } catch (SQLException e) {
@@ -231,7 +237,7 @@ public class FotOkWS {
                 return 0;
             }
             try {
-                PreparedStatement pujafoto = conn.prepareStatement("UPDATE Imatges SET titol = ?, datac = ?, tags = ?, descripcio = ?, autor = ? WHERE id = ?");
+                PreparedStatement pujafoto = con.prepareStatement("UPDATE Imatges SET titol = ?, datac = ?, tags = ?, descripcio = ?, autor = ? WHERE id = ?");
                 pujafoto.setString(1, image.getTitol());
                 pujafoto.setString(2, image.getDatac());
                 pujafoto.setString(3, image.getTags());
@@ -246,8 +252,8 @@ public class FotOkWS {
             return 0;
         } finally {
             try {
-                if (conn != null) {
-                    conn.close();
+                if (con != null) {
+                    con.close();
                 }
             } catch (SQLException e) {
                 // connection close failed.
@@ -265,12 +271,16 @@ public class FotOkWS {
      * @return
      */
     @WebMethod(operationName = "searchByTitle")
-    public List searchByTitle(@WebParam(name = "title") String title) throws ClassNotFoundException {
+    public List searchByTitle(@WebParam(name = "title") String title) {
         //TODO write your implementation code here:
         Connection con = null;
-        ArrayList<ImageWS> resultat = new ArrayList<>();
+        ArrayList<ImageWS> resultat = new ArrayList<ImageWS>();
         try {
+<<<<<<< HEAD
 
+=======
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+>>>>>>> be0f54ab5cd692a6a57706128c1db540b3e2d14f
             // create a database connection
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
             Statement statement = con.createStatement();
@@ -298,10 +308,21 @@ public class FotOkWS {
                 return null;
             }
 
+<<<<<<< HEAD
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             return null;
         } finally {
+=======
+        }
+        catch (SQLException e){
+                    System.err.println(e.getMessage());
+                    return null;
+                } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+>>>>>>> be0f54ab5cd692a6a57706128c1db540b3e2d14f
             try {
                 if (con != null) {
                     con.close();
@@ -326,8 +347,13 @@ public class FotOkWS {
     @WebMethod(operationName = "searchByCreaDate")
     public List searchByCreaDate(@WebParam(name = "creaDate") String creaDate) {
         //TODO write your implementation code here:
+<<<<<<< HEAD
         Connection con = null;
         ArrayList<ImageWS> resultat = new ArrayList<>();
+=======
+            Connection con = null;
+        ArrayList<ImageWS> resultat = new ArrayList<ImageWS>();
+>>>>>>> be0f54ab5cd692a6a57706128c1db540b3e2d14f
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
 
@@ -359,12 +385,23 @@ public class FotOkWS {
                 return null;
             }
 
+<<<<<<< HEAD
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             return null;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+=======
+        }
+        catch (SQLException e){
+                    System.err.println(e.getMessage());
+                    return null;
+                } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+>>>>>>> be0f54ab5cd692a6a57706128c1db540b3e2d14f
             try {
                 if (con != null) {
                     con.close();
@@ -421,12 +458,23 @@ public class FotOkWS {
                 return null;
             }
 
+<<<<<<< HEAD
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             return null;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+=======
+        }
+        catch (SQLException e){
+                    System.err.println(e.getMessage());
+                    return null;
+                } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+>>>>>>> be0f54ab5cd692a6a57706128c1db540b3e2d14f
             try {
                 if (con != null) {
                     con.close();
@@ -484,12 +532,23 @@ public class FotOkWS {
                 return null;
             }
 
+<<<<<<< HEAD
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             return null;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+=======
+        }
+        catch (SQLException e){
+                    System.err.println(e.getMessage());
+                    return null;
+                } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+>>>>>>> be0f54ab5cd692a6a57706128c1db540b3e2d14f
             try {
                 if (con != null) {
                     con.close();
