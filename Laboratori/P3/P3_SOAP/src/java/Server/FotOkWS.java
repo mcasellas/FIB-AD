@@ -191,6 +191,8 @@ public class FotOkWS {
 
         } catch (SQLException ex) {
             System.out.println("No es troba cap base de dades d'usuaris");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (conn != null) {
@@ -215,15 +217,15 @@ public class FotOkWS {
     @WebMethod(operationName = "modifyImage")
     public int modifyImage(@WebParam(name = "image") ImageWS image)  {
         //TODO write your implementation code here:
-        Connection conn = null;
+        Connection con = null;
         try {
            
             try {
-                Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
 
             // create a database connection
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
-            Statement statement = conn.createStatement();
+            Statement statement = con.createStatement();
                 statement.setQueryTimeout(30);
 
             } catch (SQLException e) {
@@ -246,8 +248,8 @@ public class FotOkWS {
             return 0;
         } finally {
             try {
-                if (conn != null) {
-                    conn.close();
+                if (con != null) {
+                    con.close();
                 }
             } catch (SQLException e) {
                 // connection close failed.
@@ -265,12 +267,12 @@ public class FotOkWS {
      * @return
      */
     @WebMethod(operationName = "searchByTitle")
-    public List searchByTitle(@WebParam(name = "title") String title) throws ClassNotFoundException {
+    public List searchByTitle(@WebParam(name = "title") String title) {
         //TODO write your implementation code here:
         Connection con = null;
-        ArrayList<ImageWS> resultat = new ArrayList<>();
+        ArrayList<ImageWS> resultat = new ArrayList<ImageWS>();
         try {
-  
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
             // create a database connection
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
             Statement statement = con.createStatement();
@@ -303,7 +305,9 @@ public class FotOkWS {
         catch (SQLException e){
                     System.err.println(e.getMessage());
                     return null;
-                }
+                } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
         finally {
             try {
                 if (con != null) {
@@ -329,7 +333,7 @@ public class FotOkWS {
     public List searchByCreaDate(@WebParam(name = "creaDate") String creaDate) {
         //TODO write your implementation code here:
             Connection con = null;
-        ArrayList<ImageWS> resultat = new ArrayList<>();
+        ArrayList<ImageWS> resultat = new ArrayList<ImageWS>();
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
 
@@ -365,7 +369,9 @@ public class FotOkWS {
         catch (SQLException e){
                     System.err.println(e.getMessage());
                     return null;
-                }
+                } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
         finally {
             try {
                 if (con != null) {
@@ -404,7 +410,7 @@ public class FotOkWS {
                 getphotos.setString(1, author);
                 ResultSet rs = getphotos.executeQuery();
                 while (rs.next()) {
-                    ImageWS temp = null;
+                    ImageWS temp = new ImageWS();
                     temp.filename = rs.getString("filename");
                     temp.id = rs.getInt("id");
                     temp.titol = rs.getString("titol");
@@ -427,7 +433,9 @@ public class FotOkWS {
         catch (SQLException e){
                     System.err.println(e.getMessage());
                     return null;
-                }
+                } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
         finally {
             try {
                 if (con != null) {
@@ -466,7 +474,7 @@ public class FotOkWS {
                 getphotos.setString(1, keywords);
                 ResultSet rs = getphotos.executeQuery();
                 while (rs.next()) {
-                    ImageWS temp = null;
+                    ImageWS temp = new ImageWS();
                     temp.filename = rs.getString("filename");
                     temp.id = rs.getInt("id");
                     temp.titol = rs.getString("titol");
@@ -489,7 +497,9 @@ public class FotOkWS {
         catch (SQLException e){
                     System.err.println(e.getMessage());
                     return null;
-                }
+                } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
         finally {
             try {
                 if (con != null) {ﬁﬁﬁ
