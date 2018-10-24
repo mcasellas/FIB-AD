@@ -233,7 +233,7 @@ public class FotOkWS {
                 return 0;
             }
             try {
-                PreparedStatement pujafoto = conn.prepareStatement("UPDATE Imatges SET titol = ?, datac = ?, tags = ?, descripcio = ?, autor = ? WHERE id = ?");
+                PreparedStatement pujafoto = con.prepareStatement("UPDATE Imatges SET titol = ?, datac = ?, tags = ?, descripcio = ?, autor = ? WHERE id = ?");
                 pujafoto.setString(1, image.getTitol());
                 pujafoto.setString(2, image.getDatac());
                 pujafoto.setString(3, image.getTags());
@@ -502,7 +502,7 @@ public class FotOkWS {
         }
         finally {
             try {
-                if (con != null) {ﬁﬁﬁ
+                if (con != null) {
                     con.close();
                 }
 
