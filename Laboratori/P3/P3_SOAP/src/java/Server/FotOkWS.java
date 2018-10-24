@@ -33,25 +33,24 @@ public class FotOkWS {
      * @return
      */
     @WebMethod(operationName = "listImages")
-    public List listImages()   {
+    public List listImages() {
 
         Connection con = null;
         List<ImageWS> resultat = new ArrayList<ImageWS>();
-        
+
         try {
-            
+
             Class.forName("org.apache.derby.jdbc.ClientDriver");
 
             // create a database connection
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
-            
+
             java.sql.Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
             PreparedStatement getid = con.prepareStatement("SELECT * FROM IMATGES ORDER BY DATAC DESC");
             ResultSet rs = getid.executeQuery();
 
-           // int i = 0;
-
+            // int i = 0;
             while (rs.next()) {
                 ImageWS temp = new ImageWS();
                 temp.filename = rs.getString("filename");
@@ -79,14 +78,13 @@ public class FotOkWS {
                     con.close();
                 }
 
-            } 
-            catch (SQLException e) {
+            } catch (SQLException e) {
                 // connection close failed.
                 System.err.println(e.getMessage());
                 return null;
             }
         }
-        
+
         return resultat;
     }
 
@@ -100,7 +98,7 @@ public class FotOkWS {
     public ImageWS searchById(@WebParam(name = "id") int id) {
         //TODO write your implementation code here:
         Connection con = null;
-        ImageWS temp = null;
+        ImageWS temp = new ImageWS();
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
 
@@ -111,18 +109,18 @@ public class FotOkWS {
             PreparedStatement getid = con.prepareStatement("SELECT * FROM imatges WHERE id = ?");
             getid.setInt(1, id);
             ResultSet rs = getid.executeQuery();
-
-            temp.filename = rs.getString("filename");
-            temp.id = rs.getInt("id");
-            temp.titol = rs.getString("titol");
-            temp.descripcio = rs.getString("descripcio");
-            temp.tags = rs.getString("tags");
-            temp.autor = rs.getString("autor");
-            temp.datac = rs.getString("datac");
-            temp.timestamp = rs.getString("timestamp");
-            temp.username = rs.getString("username");
-
-        } catch ( SQLException e) {
+            if (rs.next()) {
+                temp.filename = rs.getString("filename");
+                temp.id = rs.getInt("id");
+                temp.titol = rs.getString("titol");
+                temp.descripcio = rs.getString("descripcio");
+                temp.tags = rs.getString("tags");
+                temp.autor = rs.getString("autor");
+                temp.datac = rs.getString("datac");
+                temp.timestamp = rs.getString("timestamp");
+                temp.username = rs.getString("username");
+            }
+        } catch (SQLException e) {
             System.out.println("Error amb la base de dades");
             System.err.println(e.getMessage());
         } catch (ClassNotFoundException ex) {
@@ -155,7 +153,7 @@ public class FotOkWS {
         String timestamp = Long.toString(time);
         Connection conn = null;
         int id;
-        
+
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
 
@@ -191,6 +189,8 @@ public class FotOkWS {
 
         } catch (SQLException ex) {
             System.out.println("No es troba cap base de dades d'usuaris");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (conn != null) {
@@ -213,17 +213,17 @@ public class FotOkWS {
      * @return
      */
     @WebMethod(operationName = "modifyImage")
-    public int modifyImage(@WebParam(name = "image") ImageWS image)  {
+    public int modifyImage(@WebParam(name = "image") ImageWS image) {
         //TODO write your implementation code here:
         Connection conn = null;
         try {
-           
+
             try {
                 Class.forName("org.apache.derby.jdbc.ClientDriver");
 
-            // create a database connection
-            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
-            Statement statement = conn.createStatement();
+                // create a database connection
+                conn = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+                Statement statement = conn.createStatement();
                 statement.setQueryTimeout(30);
 
             } catch (SQLException e) {
@@ -270,7 +270,7 @@ public class FotOkWS {
         Connection con = null;
         ArrayList<ImageWS> resultat = new ArrayList<>();
         try {
-  
+
             // create a database connection
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
             Statement statement = con.createStatement();
@@ -280,7 +280,7 @@ public class FotOkWS {
                 getphotos.setString(1, title);
                 ResultSet rs = getphotos.executeQuery();
                 while (rs.next()) {
-                    ImageWS temp = null;
+                    ImageWS temp = new ImageWS();
                     temp.filename = rs.getString("filename");
                     temp.id = rs.getInt("id");
                     temp.titol = rs.getString("titol");
@@ -293,18 +293,15 @@ public class FotOkWS {
 
                     resultat.add(temp);
                 }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                return null;
             }
-            catch (SQLException e){
-                    System.err.println(e.getMessage());
-                    return null;
-                }
 
-        }
-        catch (SQLException e){
-                    System.err.println(e.getMessage());
-                    return null;
-                }
-        finally {
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } finally {
             try {
                 if (con != null) {
                     con.close();
@@ -316,19 +313,20 @@ public class FotOkWS {
                 return null;
             }
         }
-        
+
         return resultat;
     }
 
     /**
      * Web service operation
+     *
      * @param creaDate
-     * @return 
+     * @return
      */
     @WebMethod(operationName = "searchByCreaDate")
     public List searchByCreaDate(@WebParam(name = "creaDate") String creaDate) {
         //TODO write your implementation code here:
-            Connection con = null;
+        Connection con = null;
         ArrayList<ImageWS> resultat = new ArrayList<>();
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -339,10 +337,11 @@ public class FotOkWS {
             statement.setQueryTimeout(30);
             try {
                 PreparedStatement getphotos = con.prepareStatement("SELECT * FROM imatges WHERE datac LIKE ?");
-                getphotos.setString(1, creaDate);
+                String cerca = '%' + creaDate + '%';
+                getphotos.setString(1, cerca);
                 ResultSet rs = getphotos.executeQuery();
                 while (rs.next()) {
-                    ImageWS temp = null;
+                    ImageWS temp = new ImageWS();
                     temp.filename = rs.getString("filename");
                     temp.id = rs.getInt("id");
                     temp.titol = rs.getString("titol");
@@ -355,18 +354,17 @@ public class FotOkWS {
 
                     resultat.add(temp);
                 }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                return null;
             }
-            catch (SQLException e){
-                    System.err.println(e.getMessage());
-                    return null;
-                }
 
-        }
-        catch (SQLException e){
-                    System.err.println(e.getMessage());
-                    return null;
-                }
-        finally {
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
             try {
                 if (con != null) {
                     con.close();
@@ -378,19 +376,20 @@ public class FotOkWS {
                 return null;
             }
         }
-        
+
         return resultat;
     }
 
     /**
      * Web service operation
+     *
      * @param author
-     * @return 
+     * @return
      */
     @WebMethod(operationName = "searchByAuthor")
     public List searchByAuthor(@WebParam(name = "author") String author) {
         //TODO write your implementation code here:
-                Connection con = null;
+        Connection con = null;
         ArrayList<ImageWS> resultat = new ArrayList<ImageWS>();
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -404,7 +403,7 @@ public class FotOkWS {
                 getphotos.setString(1, author);
                 ResultSet rs = getphotos.executeQuery();
                 while (rs.next()) {
-                    ImageWS temp = null;
+                    ImageWS temp = new ImageWS();
                     temp.filename = rs.getString("filename");
                     temp.id = rs.getInt("id");
                     temp.titol = rs.getString("titol");
@@ -417,18 +416,17 @@ public class FotOkWS {
 
                     resultat.add(temp);
                 }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                return null;
             }
-            catch (SQLException e){
-                    System.err.println(e.getMessage());
-                    return null;
-                }
 
-        }
-        catch (SQLException e){
-                    System.err.println(e.getMessage());
-                    return null;
-                }
-        finally {
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
             try {
                 if (con != null) {
                     con.close();
@@ -440,20 +438,21 @@ public class FotOkWS {
                 return null;
             }
         }
-        
+
         return resultat;
     }
 
     /**
      * Web service operation
+     *
      * @param keywords
-     * @return 
+     * @return
      */
     @WebMethod(operationName = "searchByKeywords")
     public List searchByKeywords(@WebParam(name = "keywords") String keywords) {
         //TODO write your implementation code here:
         Connection con = null;
-        ArrayList<ImageWS> resultat = new ArrayList<ImageWS>();
+        List<ImageWS> resultat = new ArrayList<ImageWS>();
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
 
@@ -462,11 +461,12 @@ public class FotOkWS {
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
             try {
-                PreparedStatement getphotos = con.prepareStatement("SELECT * FROM IMATGES WHERE TAGS LIKE ?");
-                getphotos.setString(1, keywords);
+                PreparedStatement getphotos = con.prepareStatement("SELECT * FROM IMATGES WHERE tags LIKE ?");
+                String cerca = '%' + keywords + '%';
+                getphotos.setString(1, cerca);
                 ResultSet rs = getphotos.executeQuery();
                 while (rs.next()) {
-                    ImageWS temp = null;
+                    ImageWS temp = new ImageWS();
                     temp.filename = rs.getString("filename");
                     temp.id = rs.getInt("id");
                     temp.titol = rs.getString("titol");
@@ -479,20 +479,19 @@ public class FotOkWS {
 
                     resultat.add(temp);
                 }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                return null;
             }
-            catch (SQLException e){
-                    System.err.println(e.getMessage());
-                    return null;
-                }
 
-        }
-        catch (SQLException e){
-                    System.err.println(e.getMessage());
-                    return null;
-                }
-        finally {
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
             try {
-                if (con != null) {ﬁﬁﬁ
+                if (con != null) {
                     con.close();
                 }
 
