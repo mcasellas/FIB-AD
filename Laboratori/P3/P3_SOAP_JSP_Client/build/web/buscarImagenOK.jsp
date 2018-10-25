@@ -1,4 +1,7 @@
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="server.ImageWS"%>
+<%@page import="server.ImageWS"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
@@ -66,37 +69,41 @@
       
       <div class="row">
         
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Nova imatge</h3>
-            </div>
-            <div class="panel-body">
-              <form class="form-signin" action="buscarImatges" method="POST">
+            
+<%
+    List<Object> resultat = (List<Object>) request.getAttribute("list");
+
+    Iterator<Object> it = resultat.iterator();
                 
            
-            
-            <input class="form-control" type="text" id="text" name="text" required autofocus>
-            <select name="accio" id="accio">
-                <option value="titol">Titol</option>
-                <option value="autor">Autor</option>
-                <option value="datac">Data de creació</option>
-                <option value="tags">Tags</option>
-            </select>
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
-      </form>
-                
-      
-            </div>
-          </div>
-          
+    while (it.hasNext()) {
+       Object image = it.next();
+                    ImageWS mobj = ImageWS.class.cast(image);
+        %>
+            <div class="row">
        
+                <div class="col-sm-6">
+                  <img src="./Image/<%= mobj.getFilename() %>" data-src="holder.js/200x200" class="img-thumbnail" >
+                </div><!-- /.col-sm-4 -->
+                <div class="col-sm-6">
+            <ul class="list-group">
+            <li class="list-group-item">Títol: <%= mobj.getTitol() %></li>
+            <li class="list-group-item">Data creació: <%= mobj.getDatac() %></li>
+            <li class="list-group-item">Descripció: <%= mobj.getDescripcio() %></li>
+            <li class="list-group-item">Autor: <%= mobj.getAutor() %></li>
+            <li class="list-group-item">Tags: <%= mobj.getTags() %></li>
+          </ul>
         
-      </div>
-      
-      
-      
+                
+</div>  
+<%
+            }
+%>
    
+     
+      </div>
+
+      </div>
 
     </div> <!-- /container -->
 

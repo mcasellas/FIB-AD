@@ -6,6 +6,11 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Math.log;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
 import server.FotOkWS_Service;
+import server.ImageWS;
+
 
 /**
  *
@@ -36,36 +43,41 @@ public class buscarImatges extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String accio = request.getParameter("accio");
         String text = request.getParameter("text");
         
+        
+       
+
         server.FotOkWS port = service.getFotOkWSPort();
+        List<Object> resultat = new ArrayList<Object>();
+
         
         switch(accio) {
             case "titol":
-                port.searchByTitle(text);
+                resultat = port.searchByTitle(text);
                 break;
             case "autor":
-                port.searchByAuthor(text);
+                resultat = port.searchByAuthor(text);
                 break;
             case "datac":
-                port.searchByCreaDate(text);
+                resultat = port.searchByCreaDate(text);
                 break;
             case "tags":
-                port.searchByKeywords(text);
+                resultat = port.searchByKeywords(text);
                 break;
         }
+        
+      
+                    
+                    
+       
+        request.setAttribute("list", resultat);
+
+        RequestDispatcher rd = request.getRequestDispatcher("buscarImagenOK.jsp");
+        rd.forward(request, response);
+             
     }
 
-    private java.util.List<java.lang.Object> searchByCreaDate(java.lang.String creaDate) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        server.FotOkWS port = service.getFotOkWSPort();
-        return port.searchByCreaDate(creaDate);
     }
-
-
-
-    
-
-}

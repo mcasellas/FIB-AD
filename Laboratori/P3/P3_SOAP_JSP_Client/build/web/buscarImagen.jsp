@@ -72,15 +72,16 @@
             </div>
             <div class="panel-body">
               <form class="form-signin" action="buscarImatges" method="POST">
-                  
+                
+           
+            
+            <input class="form-control" type="text" id="text" name="text" required autofocus>
             <select name="accio" id="accio">
                 <option value="titol">Titol</option>
                 <option value="autor">Autor</option>
                 <option value="datac">Data de creació</option>
                 <option value="tags">Tags</option>
             </select>
-            <input class="form-control" type="text" id="tags" name="tags" required autofocus>
-     
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
       </form>
@@ -95,69 +96,7 @@
       
       
       
-      <div class="row">
-        
-                  
-<%
-  ArrayList<String> pdts = null;
-  ArrayList<String> titolA = null;
-  ArrayList<String> descripcioA = null;
-  ArrayList<String> tagsA = null;
-  ArrayList<String> autorA = null;
-  ArrayList<String> datacA = null;
-  ArrayList<String> userA = null;
-  ArrayList<Integer> idA = null;
-  try {
-      pdts = (ArrayList<String>) request.getAttribute("list");
-      titolA = (ArrayList<String>) request.getAttribute("titol");
-      descripcioA = (ArrayList<String>) request.getAttribute("descripcio");
-      tagsA = (ArrayList<String>) request.getAttribute("tags");
-      autorA = (ArrayList<String>) request.getAttribute("autor");
-      datacA = (ArrayList<String>) request.getAttribute("datac");
-      userA = (ArrayList<String>) request.getAttribute("user");
-      idA = (ArrayList<Integer>) request.getAttribute("id");
-  }
-  catch (Exception e) {
-      pdts = null;
-      System.err.println(e.getMessage());
-  }
-  if(pdts!=null){
-    for(int i=0; i < pdts.size();i++){
-        if (pdts.get(i)!="ERRCODE21"){
-        %>
-            <div class="row">
-       
-                <div class="col-sm-6">
-                  <img src="./Image/<%= pdts.get(i) %>" data-src="holder.js/200x200" class="img-thumbnail" >
-                </div><!-- /.col-sm-4 -->
-                <div class="col-sm-6">
-            <ul class="list-group">
-            <li class="list-group-item">Títol: <%= titolA %></li>
-            <li class="list-group-item">Data creació: <%= datacA %></li>
-            <li class="list-group-item">Descripció: <%= descripcioA %></li>
-            <li class="list-group-item">Autor: <%= autorA %></li>
-            <li class="list-group-item">Tags: <%= tagsA %></li>
-          </ul>
-        
-                
-</div>  
-<%
-            }
-else {
-%>
-<h4>No hi ha cap imatge relacionada amb la teva cerca </h4>
-<%
-    }
-               
-}
-        }
-
-%>
    
-      
-      </div>
-
-      </div>
 
     </div> <!-- /container -->
 
