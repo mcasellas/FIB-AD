@@ -94,9 +94,16 @@
             <li class="list-group-item">Autor: <%= mobj.getAutor() %></li>
             <li class="list-group-item">Tags: <%= mobj.getTags() %></li>
           </ul>
-          
+            <form class="w3-container" action="./modificarImagen.jsp" method="POST">
+                <input type="hidden" name="id" value ="<%= mobj.getId() %>">
+                <p>
+                    <button type="submit" class="btn btn-sm btn-primary">Editar</button>
+                </p>
+            </form> 
         </div><!-- /.col-sm-4 -->
+        
       </div>
+          
                    
     
        

@@ -1,4 +1,2 @@
-Thu Oct 25 18:54:14 CEST 2018 : Servidor de red Apache Derby: Se ha iniciado 10.11.1.2 - (1629631) y está listo para aceptar las conexiones en el puerto 1527
-----------------------------------------------------------------
-Thu Oct 25 19:23:29 CEST 2018: cerrando motor de Derby
-----------------------------------------------------------------
+Thu Oct 25 20:35:22 CEST 2018 : Could not listen on port 1527 on host localhost:
+ java.net.BindException: Address already in use (Bind failed)

@@ -7,21 +7,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 
-<%
-        String user = null;
-        if(session.getAttribute("username") == null){
-                response.sendRedirect("login.jsp");
-        }else user = (String) session.getAttribute("username");
-        String userName = null;
-        String sessionID = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies !=null){
-        for(Cookie cookie : cookies){
-                if(cookie.getName().equals("username")) userName = cookie.getValue();
-                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-        }
-        }
-    %>  
+
     
     
 <!DOCTYPE html>
@@ -85,9 +71,14 @@
               <h3 class="panel-title">Nova imatge</h3>
             </div>
             <div class="panel-body">
-              <form class="form-signin" action="buscarImagen" method="POST">
-     
-        
+              <form class="form-signin" action="buscarImatges" method="POST">
+                  
+            <select name="accio" id="accio">
+                <option value="titol">Titol</option>
+                <option value="autor">Autor</option>
+                <option value="datac">Data de creació</option>
+                <option value="tags">Tags</option>
+            </select>
             <input class="form-control" type="text" id="tags" name="tags" required autofocus>
      
 
@@ -148,21 +139,7 @@
             <li class="list-group-item">Tags: <%= tagsA %></li>
           </ul>
         
-                <%
-                if (userA.get(i).equals(userName)){ 
-                %>
-                    <form class="w3-container" action="./modificarImagen.jsp" method="POST">
-                        <input type="hidden" name="titol" value ="<%=titolA.get(i)%>">
-                        <input type="hidden" name="descripcio" value ="<%=descripcioA.get(i)%>">
-                        <input type="hidden" name="data" value ="<%=datacA.get(i)%>">
-                        <input type="hidden" name="tags" value ="<%=tagsA.get(i)%>">
-                        <input type="hidden" name="autor" value ="<%=autorA.get(i)%>">
-                        <input type="hidden" name="id" value ="<%=idA.get(i)%>">
-                       <button type="submit" class="btn btn-sm btn-primary">Editar</button>
-                    </form> 
-                <%
-                }
-%>
+                
 </div>  
 <%
             }

@@ -5,22 +5,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 
-<%
-        String user = null;
-        if(session.getAttribute("username") == null){
-                response.sendRedirect("login.jsp");
-        }else user = (String) session.getAttribute("username");
-        String userName = null;
-        String sessionID = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies !=null){
-        for(Cookie cookie : cookies){
-                if(cookie.getName().equals("username")) userName = cookie.getValue();
-                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-        }
-        }
-    %>  
-    
+
     
 <!DOCTYPE html>
 <html lang="en">

@@ -68,7 +68,7 @@
               <h3 class="panel-title">Nova imatge</h3>
             </div>
             <div class="panel-body">
-            <form class="form-signin" action="registrarImagen" method="POST" enctype="multipart/form-data">
+            <form class="form-signin" action="registrarImatge" method="POST">
      
         
            
