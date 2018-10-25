@@ -47,7 +47,7 @@ public class FotOkWS {
 
             java.sql.Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
-            PreparedStatement getid = con.prepareStatement("SELECT * FROM IMATGES ORDER BY DATAC DESC");
+            PreparedStatement getid = con.prepareStatement("SELECT * FROM IMATGES ORDER BY ID");
             ResultSet rs = getid.executeQuery();
 
             // int i = 0;
