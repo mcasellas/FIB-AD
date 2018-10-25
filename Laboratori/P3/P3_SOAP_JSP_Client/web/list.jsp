@@ -5,21 +5,6 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 
-<%
-        String user = null;
-        if(session.getAttribute("username") == null){
-                response.sendRedirect("login.jsp");
-        }else user = (String) session.getAttribute("username");
-        String userName = null;
-        String sessionID = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies !=null){
-        for(Cookie cookie : cookies){
-                if(cookie.getName().equals("username")) userName = cookie.getValue();
-                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-        }
-        }
-    %>  
     
     
 <!DOCTYPE html>
@@ -109,27 +94,7 @@
             <li class="list-group-item">Autor: <%= rs.getString("autor") %></li>
             <li class="list-group-item">Tags: <%= rs.getString("tags") %></li>
           </ul>
-        <%
-                       if (rs.getString("username").equals(userName)){ 
-                       %>
-                        <form class="w3-container" action="./modificarImagen.jsp" method="POST">
-                            <input type="hidden" name="titol" value ="<%=rs.getString("titol")%>">
-                            <input type="hidden" name="descripcio" value ="<%=rs.getString("descripcio")%>">
-                            <input type="hidden" name="data" value ="<%=rs.getString("datac")%>">
-                            <input type="hidden" name="tags" value ="<%=rs.getString("tags")%>">
-                            <input type="hidden" name="autor" value ="<%=rs.getString("autor")%>">
-                            <input type="hidden" name="id" value="<%= rs.getInt("id")%>">
-                            <input type="hidden" name="filename" value="<%= rs.getString("filename")%>">
-                            <p>
-        
-        <button type="submit" class="btn btn-sm btn-primary">Editar</button>
-        
-      </p>
-                
-            </form> 
-                        <%
-                        }
-                     %>
+          
         </div><!-- /.col-sm-4 -->
       </div>
                    
