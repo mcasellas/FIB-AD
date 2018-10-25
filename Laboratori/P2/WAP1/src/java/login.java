@@ -45,8 +45,6 @@ public class login extends HttpServlet {
         String username = request.getParameter("username");
 
 
-
-
         String password = request.getParameter("password");
         Connection connection = null;
         try {
