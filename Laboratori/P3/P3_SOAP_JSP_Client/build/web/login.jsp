@@ -5,7 +5,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 
-
+ 
     
     
 <!DOCTYPE html>
@@ -38,53 +38,61 @@
           </button>
           <a class="navbar-brand" href="#">FotOK</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="./menu.jsp">Inici</a></li>
-            <li><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
-            <li><a href="./list.jsp">Llista les imatges</a></li>
-            <li><a href="./buscarImagen.jsp">Busca una imatge</a></li>
-            <li><form class="form-signin" action="logout" method="POST">
-     
-       
-        <button class="btn btn-sm btn-warning btn-block" type="submit">Logout</button>
-      </form> </li>
-          </ul>
-        </div><!--/.nav-collapse -->
+        
       </div>
     </nav>
 
     <div class="container theme-showcase" role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Hola!</h1>
-        <p>Benvingut a <strong>FotOK</strong>,</p>
-        <p>La WebApp per fotògrafs professionals i aficionats.</p>
-      </div>
-
-      
-      <div class="page-header">
-        <h1>Què pots fer?</h1>
-      </div>
       
       <div class="row">
-        
-          <div class="list-group">
-            <a href="./registrarImagen.jsp" class="list-group-item active">
-              Registra una imatge
-            </a>
-          
-            <a href="./list.jsp" class="list-group-item">Llista les imatges</a>
-            <a href="./buscarImagen.jsp" class="list-group-item">Busca imatges</a>
- 
-          </div>
+          <div class="col-sm-4">
+               <div class="jumbotron">
+         
+         <img src="./logo.png" class="img-thumbnail" >
+              </div>
+              </div>
+        <div class="col-sm-4">
+           <div class="jumbotron">
+        <h1>FotOK</h1>
+
+        <p>La WebApp per fotògrafs professionals i aficionats.</p>
         
       </div>
+        </div><!-- /.col-sm-4 -->
+        
+        <div class="col-sm-4">
+            <div class="jumbotron">
+         <form class="form-signin" action="login" method="POST">
+     
+       
+        <input name="username" type="text" id="user" class="form-control" placeholder="Usuari" required autofocus>
+     
+        <input name="password" type="password" id="pass" class="form-control" placeholder="Contrasenya" required>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+      </form>
+                </div>
+      </div>
+      
+      
+     
+
+    
+      
+      
       
       
       
 
+
+    </div> <!-- /container -->
+    <div class="container">
+
+      <div class="well">
+        <p>By Sergi Sendrós i Marc Casellas</p>
+      </div>
 
     </div> <!-- /container -->
 

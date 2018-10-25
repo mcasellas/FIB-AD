@@ -5,7 +5,21 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 
-
+<%
+        String user = null;
+        if(session.getAttribute("username") == null){
+                response.sendRedirect("login.jsp");
+        }else user = (String) session.getAttribute("username");
+        String userName = null;
+        String sessionID = null;
+        Cookie[] cookies = request.getCookies();
+        if(cookies !=null){
+        for(Cookie cookie : cookies){
+                if(cookie.getName().equals("username")) userName = cookie.getValue();
+                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+        }
+        }
+    %>  
     
     
 <!DOCTYPE html>
@@ -20,9 +34,7 @@
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="theme.css" rel="stylesheet">
-    
-    <link rel="shortcut icon" href="./favicon.ico">
-
+<link rel="shortcut icon" href="./favicon.ico">
   </head>
 
   <body>
@@ -40,8 +52,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="./menu.jsp">Inici</a></li>
-            <li><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
+            <li ><a href="#">Inici</a></li>
+            <li class="active"><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
             <li><a href="./list.jsp">Llista les imatges</a></li>
             <li><a href="./buscarImagen.jsp">Busca una imatge</a></li>
             <li><form class="form-signin" action="logout" method="POST">
@@ -57,30 +69,53 @@
     <div class="container theme-showcase" role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Hola!</h1>
-        <p>Benvingut a <strong>FotOK</strong>,</p>
-        <p>La WebApp per fotògrafs professionals i aficionats.</p>
-      </div>
+      
 
       
       <div class="page-header">
-        <h1>Què pots fer?</h1>
+        <h1>Modificar imatge:</h1>
       </div>
-      
+       <%
+        String titol = request.getParameter("titol");
+        String data = request.getParameter("data");
+        String tag =  request.getParameter("tags");
+        String descrip =  request.getParameter("descripcio");
+        String autor = request.getParameter("autor");
+        String id = request.getParameter("id");
+        String filename = request.getParameter("filename");
+    %>
       <div class="row">
         
-          <div class="list-group">
-            <a href="./registrarImagen.jsp" class="list-group-item active">
-              Registra una imatge
-            </a>
-          
-            <a href="./list.jsp" class="list-group-item">Llista les imatges</a>
-            <a href="./buscarImagen.jsp" class="list-group-item">Busca imatges</a>
- 
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Editar imatge</h3>
+            </div>
+            <div class="panel-body">
+              <form class="form-signin" action="modificarImagen" method="POST" >
+     
+        
+           
+            <input class="form-control" type="text" name="titol" placeholder="Títol" value="<%= titol %>" required>
+            <input  class="form-control" type="text" name="descripcio" placeholder="Descripció" value="<%= descrip %>" required>
+            <input class="form-control" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " value="<%= tag %>" required>
+            <input  class="form-control" type="text" name="autor" placeholder="Autor" value="<%= autor %>" required>
+            <input  class="form-control" type="date" name="datac" value="<%= data %>" required>
+            <input type="hidden" name="username" value="<%= userName %>"  >
+            <input type="hidden" name="id" value="<%= id %>"  >
+
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Puja</button>
+      </form>
+                
+               
+            </div>
           </div>
+          
+       
         
       </div>
+        
+        
       
       
       

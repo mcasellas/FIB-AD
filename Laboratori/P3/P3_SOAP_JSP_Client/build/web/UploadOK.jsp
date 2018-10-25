@@ -5,7 +5,21 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 
-
+<%
+        String user = null;
+        if(session.getAttribute("username") == null){
+                response.sendRedirect("login.jsp");
+        }else user = (String) session.getAttribute("username");
+        String userName = null;
+        String sessionID = null;
+        Cookie[] cookies = request.getCookies();
+        if(cookies !=null){
+        for(Cookie cookie : cookies){
+                if(cookie.getName().equals("username")) userName = cookie.getValue();
+                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+        }
+        }
+    %>  
     
     
 <!DOCTYPE html>
@@ -20,9 +34,7 @@
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="theme.css" rel="stylesheet">
-    
-    <link rel="shortcut icon" href="./favicon.ico">
-
+<link rel="shortcut icon" href="./favicon.ico">
   </head>
 
   <body>
@@ -40,7 +52,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="./menu.jsp">Inici</a></li>
+            <li><a href="./menu.jsp">Inici</a></li>
             <li><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
             <li><a href="./list.jsp">Llista les imatges</a></li>
             <li><a href="./buscarImagen.jsp">Busca una imatge</a></li>
@@ -58,29 +70,24 @@
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Hola!</h1>
-        <p>Benvingut a <strong>FotOK</strong>,</p>
-        <p>La WebApp per fotògrafs professionals i aficionats.</p>
-      </div>
-
-      
-      <div class="page-header">
-        <h1>Què pots fer?</h1>
-      </div>
-      
-      <div class="row">
+        <h1>La imatge s'ha pujat correctament!</h1>
+        <div class="row">
         
           <div class="list-group">
             <a href="./registrarImagen.jsp" class="list-group-item active">
-              Registra una imatge
+              Registra una altre imatge
             </a>
           
-            <a href="./list.jsp" class="list-group-item">Llista les imatges</a>
-            <a href="./buscarImagen.jsp" class="list-group-item">Busca imatges</a>
+            <a href="./menu.jsp" class="list-group-item">Torna al menú</a>
+   
  
           </div>
         
       </div>
+      </div>
+
+      
+     
       
       
       
