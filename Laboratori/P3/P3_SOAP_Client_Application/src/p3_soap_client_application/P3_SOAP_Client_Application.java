@@ -29,7 +29,6 @@ public class P3_SOAP_Client_Application {
         
         switch (entrada) {
             case 1:
-                
                 break;
             case 2:
                 break;
@@ -40,11 +39,19 @@ public class P3_SOAP_Client_Application {
                 
                 while (it.hasNext()) {
                     Object image = it.next();
-                    System.out.println(image.getTitol());
+                    ImageWS mobj = ImageWS.class.cast(image);
+                    System.out.println("Títol: " + mobj.getTitol());
+                    System.out.println("Descripció: " + mobj.getDescripcio());
+                    System.out.println("Autor: " + mobj.getAutor());
+                    System.out.println("Data creació: " + mobj.getDatac());
+                    System.out.println("Tags: " + mobj.getTags());
+                    System.out.println("Username: " + mobj.getUsername());
+                    System.out.println(" ");
                 }
 
                 break;
             case 4:
+                
                 break;
         }
         System.out.println(entrada);
