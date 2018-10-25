@@ -1,5 +1,8 @@
 .DS_Store
-
-/Laboratori/P3/P3_SOAP/build/
-/Laboratori/P3/P3_SOAP_Client_Application/build/
-/Laboratori/P3/P3_SOAP/dist/
+**/build/**
+<<<<<<< HEAD
+/Laboratori/P3/P3_SOAP_Client_Application/nbproject/private/
+=======
+**/dist/**
+**/nbproject/**
+>>>>>>> 0d17791a25f8732b80f9f199f389f22859dac9dc

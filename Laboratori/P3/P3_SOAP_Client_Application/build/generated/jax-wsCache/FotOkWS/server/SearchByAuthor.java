@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para searchByAuthor complex type.
+ * <p>Java class for searchByAuthor complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="searchByAuthor">
@@ -34,7 +34,7 @@ public class SearchByAuthor {
     protected String author;
 
     /**
-     * Obtiene el valor de la propiedad author.
+     * Gets the value of the author property.
      * 
      * @return
      *     possible object is
@@ -46,7 +46,7 @@ public class SearchByAuthor {
     }
 
     /**
-     * Define el valor de la propiedad author.
+     * Sets the value of the author property.
      * 
      * @param value
      *     allowed object is
