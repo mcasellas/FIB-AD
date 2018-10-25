@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for searchByCreaDate complex type.
+ * <p>Clase Java para searchByCreaDate complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="searchByCreaDate">
@@ -34,7 +34,7 @@ public class SearchByCreaDate {
     protected String creaDate;
 
     /**
-     * Gets the value of the creaDate property.
+     * Obtiene el valor de la propiedad creaDate.
      * 
      * @return
      *     possible object is
@@ -46,7 +46,7 @@ public class SearchByCreaDate {
     }
 
     /**
-     * Sets the value of the creaDate property.
+     * Define el valor de la propiedad creaDate.
      * 
      * @param value
      *     allowed object is

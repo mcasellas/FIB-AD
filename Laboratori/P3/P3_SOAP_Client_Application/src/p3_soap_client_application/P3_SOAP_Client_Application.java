@@ -20,6 +20,10 @@ public class P3_SOAP_Client_Application {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("Introdueix el teu nom d'usuari");
+        Scanner us = new Scanner(System.in);
+        String usrnm = us.nextLine();
+
         System.out.println("1 - Registrar Imatge");
         System.out.println("2 - Modificar Imatge");
         System.out.println("3 - Llistar imatges");
@@ -29,35 +33,31 @@ public class P3_SOAP_Client_Application {
         int entrada = sc.nextInt();
 
         switch (entrada) {
-            
+
             case 1:
-                ImageWS result = new ImageWS();  
+                ImageWS result = new ImageWS();
                 sc.nextLine();
-                        
+
                 System.out.println("Entra el títol");
                 result.setTitol(sc.nextLine());
-                
+
                 System.out.println("Entra la descripció");
                 result.setDescripcio(sc.nextLine());
-                
+
                 System.out.println("Entra els tags (separats per ';')");
                 result.setTags(sc.nextLine());
-                
+
                 System.out.println("Entra l'autor");
                 result.setAutor(sc.nextLine());
-                
+
                 System.out.println("Entra la data de creació (format 2018-10-25)");
                 result.setDatac(sc.nextLine());
-                
-                
-                       
+
                 registerImage(result);
-                
-                
+
                 // Username
                 // Filename
                 // ID
-                
                 break;
             case 2:
                 System.out.println("Entra la ID de la imatge a modificar");
@@ -73,9 +73,9 @@ public class P3_SOAP_Client_Application {
                     System.out.println("5. Tags: " + resultat.getTags());
                     System.out.println("6. Sortir ");
                     System.out.println(" ");
-                    
-                int valor = sc.nextInt();
-                Scanner mod = new Scanner(System.in);
+
+                    int valor = sc.nextInt();
+                    Scanner mod = new Scanner(System.in);
                     switch (valor) {
                         case 1:
                             System.out.println("Entra el nou títol");
@@ -100,12 +100,10 @@ public class P3_SOAP_Client_Application {
                         case 6:
                             acabat = true;
                             modifyImage(resultat);
-                            break;  
+                            break;
                     }
                 }
-                
-                
-                
+
                 break;
             case 3:
                 List<Object> res = new ArrayList<Object>();
@@ -124,6 +122,64 @@ public class P3_SOAP_Client_Application {
                     System.out.println("Username: " + mobj.getUsername());
                     System.out.println(" ");
                 }
+                
+                System.out.println("1 - Modificar una imatge");
+                System.out.println("2 - Sortir");
+                
+                Scanner entrance = new Scanner(System.in);
+                int value = entrance.nextInt();
+                if (value == 2) break;
+                else {
+                System.out.println("Introdueix el id de la imatge que vols modificar:");    
+                Scanner usmodif = new Scanner(System.in);
+                ImageWS modif = new ImageWS();
+                modif = searchById(usmodif.nextInt());
+                System.out.println("username: " + modif.getUsername());
+                if (modif.getUsername().equals(usrnm)){
+                    boolean acabataux=false;
+                    while (!acabataux) {
+                    System.out.println("-- Sel·lecciona el camp que vols modificar --");
+                    System.out.println("1. Títol: " + modif.getTitol());
+                    System.out.println("2. Descripció: " + modif.getDescripcio());
+                    System.out.println("3. Autor: " + modif.getAutor());
+                    System.out.println("4. Data creació: " + modif.getDatac());
+                    System.out.println("5. Tags: " + modif.getTags());
+                    System.out.println("6. Sortir ");
+                    System.out.println(" ");
+
+                    int valor = sc.nextInt();
+                    Scanner mod = new Scanner(System.in);
+                    switch (valor) {
+                        case 1:
+                            System.out.println("Entra el nou títol");
+                            modif.setTitol(mod.nextLine());
+                            break;
+                        case 2:
+                            System.out.println("Entra la nova descripció:");
+                            modif.setDescripcio(mod.nextLine());
+                            break;
+                        case 3:
+                            System.out.println("Entra el nou autor:");
+                            modif.setAutor(mod.nextLine());
+                            break;
+                        case 4:
+                            System.out.println("Entra la nova data de creació (format 2018-10-26):");
+                            modif.setDatac(mod.nextLine());
+                            break;
+                        case 5:
+                            System.out.println("Entra els nous tags separats per ';':");
+                            modif.setTags(mod.nextLine());
+                            break;
+                        case 6:
+                            acabataux = true;
+                            modifyImage(modif);
+                            break;
+                    }
+                }
+                    
+                }
+                }
+                
 
                 break;
             case 4:
@@ -184,7 +240,7 @@ public class P3_SOAP_Client_Application {
                             System.out.println("Tags: " + mobjaux2.getTags());
                             System.out.println("Username: " + mobjaux2.getUsername());
                             System.out.println(" ");
-                        
+
                         }
                         break;
                     case 4:
@@ -206,7 +262,7 @@ public class P3_SOAP_Client_Application {
                         }
                         break;
                     case 5:
-                       String entradaaux5 = sc2.nextLine();
+                        String entradaaux5 = sc2.nextLine();
                         List<Object> resultataux5 = new ArrayList<Object>();
                         resultataux5 = searchByCreaDate(entradaaux5);
                         Iterator<Object> itaux5 = resultataux5.iterator();

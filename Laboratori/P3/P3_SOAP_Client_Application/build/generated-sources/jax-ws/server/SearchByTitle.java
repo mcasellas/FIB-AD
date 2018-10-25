@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for searchByTitle complex type.
+ * <p>Clase Java para searchByTitle complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="searchByTitle">
@@ -34,7 +34,7 @@ public class SearchByTitle {
     protected String title;
 
     /**
-     * Gets the value of the title property.
+     * Obtiene el valor de la propiedad title.
      * 
      * @return
      *     possible object is
@@ -46,7 +46,7 @@ public class SearchByTitle {
     }
 
     /**
-     * Sets the value of the title property.
+     * Define el valor de la propiedad title.
      * 
      * @param value
      *     allowed object is
