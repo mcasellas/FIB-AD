@@ -23,20 +23,20 @@ public class P3_SOAP_Client_Application {
         System.out.println("2 - Modificar Imatge");
         System.out.println("3 - Llistar imatges");
         System.out.println("4 - Buscador d'imatges");
-        
+
         Scanner sc = new Scanner(System.in);
         int entrada = sc.nextInt();
-        
+
         switch (entrada) {
             case 1:
                 break;
             case 2:
                 break;
-            case 3: 
+            case 3:
                 List<Object> resultat = new ArrayList<Object>();
-                resultat=listImages();
+                resultat = listImages();
                 Iterator<Object> it = resultat.iterator();
-                
+
                 while (it.hasNext()) {
                     Object image = it.next();
                     ImageWS mobj = ImageWS.class.cast(image);
@@ -51,7 +51,26 @@ public class P3_SOAP_Client_Application {
 
                 break;
             case 4:
-                
+                System.out.println("1 - Buscar per Id");
+                System.out.println("2 - Buscar per Titol");
+                System.out.println("3 - Buscar per Autor");
+                System.out.println("4 - Buscar per Tag");
+                System.out.println("5 - Buscar per Data");
+                Scanner sc2 = new Scanner(System.in);
+                int entrada2 = sc2.nextInt();
+                switch (entrada) {
+                    case 1:
+                    break;
+                    case 2:
+                    break;
+                    case 3:
+                    break;
+                    case 4:
+                    break;
+                    case 5:
+                    break;
+                    
+                }
                 break;
         }
         System.out.println(entrada);
