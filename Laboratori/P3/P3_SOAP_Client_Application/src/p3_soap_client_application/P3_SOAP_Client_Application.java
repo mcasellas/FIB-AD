@@ -60,15 +60,62 @@ public class P3_SOAP_Client_Application {
                 
                 break;
             case 2:
+                System.out.println("Entra la ID de la imatge a modificar");
+                ImageWS resultat = new ImageWS();
+                resultat = searchById(sc.nextInt());
+                boolean acabat = false;
+                while (!acabat) {
+                    System.out.println("-- Sel·lecciona el camp que vols modificar --");
+                    System.out.println("1. Títol: " + resultat.getTitol());
+                    System.out.println("2. Descripció: " + resultat.getDescripcio());
+                    System.out.println("3. Autor: " + resultat.getAutor());
+                    System.out.println("4. Data creació: " + resultat.getDatac());
+                    System.out.println("5. Tags: " + resultat.getTags());
+                    System.out.println("6. Sortir ");
+                    System.out.println(" ");
+                    
+                int valor = sc.nextInt();
+                Scanner mod = new Scanner(System.in);
+                    switch (valor) {
+                        case 1:
+                            System.out.println("Entra el nou títol");
+                            resultat.setTitol(mod.nextLine());
+                            break;
+                        case 2:
+                            System.out.println("Entra la nova descripció:");
+                            resultat.setDescripcio(mod.nextLine());
+                            break;
+                        case 3:
+                            System.out.println("Entra el nou autor:");
+                            resultat.setAutor(mod.nextLine());
+                            break;
+                        case 4:
+                            System.out.println("Entra la nova data de creació (format 2018-10-26):");
+                            resultat.setDatac(mod.nextLine());
+                            break;
+                        case 5:
+                            System.out.println("Entra els nous tags separats per ';':");
+                            resultat.setTags(mod.nextLine());
+                            break;
+                        case 6:
+                            acabat = true;
+                            modifyImage(resultat);
+                            break;  
+                    }
+                }
+                
+                
+                
                 break;
             case 3:
-                List<Object> resultat = new ArrayList<Object>();
-                resultat = listImages();
-                Iterator<Object> it = resultat.iterator();
+                List<Object> res = new ArrayList<Object>();
+                res = listImages();
+                Iterator<Object> it = res.iterator();
 
                 while (it.hasNext()) {
                     Object image = it.next();
                     ImageWS mobj = ImageWS.class.cast(image);
+                    System.out.println("Id: " + mobj.getId());
                     System.out.println("Títol: " + mobj.getTitol());
                     System.out.println("Descripció: " + mobj.getDescripcio());
                     System.out.println("Autor: " + mobj.getAutor());
