@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para imageWS complex type.
+ * <p>Java class for imageWS complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="imageWS">
@@ -58,7 +58,7 @@ public class ImageWS {
     protected String username;
 
     /**
-     * Obtiene el valor de la propiedad autor.
+     * Gets the value of the autor property.
      * 
      * @return
      *     possible object is
@@ -70,7 +70,7 @@ public class ImageWS {
     }
 
     /**
-     * Define el valor de la propiedad autor.
+     * Sets the value of the autor property.
      * 
      * @param value
      *     allowed object is
@@ -82,7 +82,7 @@ public class ImageWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad datac.
+     * Gets the value of the datac property.
      * 
      * @return
      *     possible object is
@@ -94,7 +94,7 @@ public class ImageWS {
     }
 
     /**
-     * Define el valor de la propiedad datac.
+     * Sets the value of the datac property.
      * 
      * @param value
      *     allowed object is
@@ -106,7 +106,7 @@ public class ImageWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcio.
+     * Gets the value of the descripcio property.
      * 
      * @return
      *     possible object is
@@ -118,7 +118,7 @@ public class ImageWS {
     }
 
     /**
-     * Define el valor de la propiedad descripcio.
+     * Sets the value of the descripcio property.
      * 
      * @param value
      *     allowed object is
@@ -130,7 +130,7 @@ public class ImageWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad filename.
+     * Gets the value of the filename property.
      * 
      * @return
      *     possible object is
@@ -142,7 +142,7 @@ public class ImageWS {
     }
 
     /**
-     * Define el valor de la propiedad filename.
+     * Sets the value of the filename property.
      * 
      * @param value
      *     allowed object is
@@ -154,7 +154,7 @@ public class ImageWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -162,7 +162,7 @@ public class ImageWS {
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -170,7 +170,7 @@ public class ImageWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad tags.
+     * Gets the value of the tags property.
      * 
      * @return
      *     possible object is
@@ -182,7 +182,7 @@ public class ImageWS {
     }
 
     /**
-     * Define el valor de la propiedad tags.
+     * Sets the value of the tags property.
      * 
      * @param value
      *     allowed object is
@@ -194,7 +194,7 @@ public class ImageWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad timestamp.
+     * Gets the value of the timestamp property.
      * 
      * @return
      *     possible object is
@@ -206,7 +206,7 @@ public class ImageWS {
     }
 
     /**
-     * Define el valor de la propiedad timestamp.
+     * Sets the value of the timestamp property.
      * 
      * @param value
      *     allowed object is
@@ -218,7 +218,7 @@ public class ImageWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad titol.
+     * Gets the value of the titol property.
      * 
      * @return
      *     possible object is
@@ -230,7 +230,7 @@ public class ImageWS {
     }
 
     /**
-     * Define el valor de la propiedad titol.
+     * Sets the value of the titol property.
      * 
      * @param value
      *     allowed object is
@@ -242,7 +242,7 @@ public class ImageWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad username.
+     * Gets the value of the username property.
      * 
      * @return
      *     possible object is
@@ -254,7 +254,7 @@ public class ImageWS {
     }
 
     /**
-     * Define el valor de la propiedad username.
+     * Sets the value of the username property.
      * 
      * @param value
      *     allowed object is

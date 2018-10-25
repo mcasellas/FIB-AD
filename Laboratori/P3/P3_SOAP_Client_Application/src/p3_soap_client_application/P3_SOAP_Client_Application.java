@@ -5,6 +5,7 @@
  */
 package p3_soap_client_application;
 
+import java.text.SimpleDateFormat;
 import server.ImageWS;
 import java.util.*;
 
@@ -28,7 +29,35 @@ public class P3_SOAP_Client_Application {
         int entrada = sc.nextInt();
 
         switch (entrada) {
+            
             case 1:
+                ImageWS result = new ImageWS();  
+                sc.nextLine();
+                        
+                System.out.println("Entra el títol");
+                result.setTitol(sc.nextLine());
+                
+                System.out.println("Entra la descripció");
+                result.setDescripcio(sc.nextLine());
+                
+                System.out.println("Entra els tags (separats per ';')");
+                result.setTags(sc.nextLine());
+                
+                System.out.println("Entra l'autor");
+                result.setAutor(sc.nextLine());
+                
+                System.out.println("Entra la data de creació (format 2018-10-25)");
+                result.setDatac(sc.nextLine());
+                
+                
+                       
+                registerImage(result);
+                
+                
+                // Username
+                // Filename
+                // ID
+                
                 break;
             case 2:
                 break;

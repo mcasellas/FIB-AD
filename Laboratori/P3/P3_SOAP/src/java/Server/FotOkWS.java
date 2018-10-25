@@ -169,10 +169,12 @@ public class FotOkWS {
             } else {
                 id = 0;
             }
+            
+            String filename = timestamp + ".jpg";
 
             try {
                 PreparedStatement pujafoto = conn.prepareStatement("INSERT INTO imatges(filename,id,titol,descripcio,tags,autor,datac,timestamp,username) VALUES(?,?,?,?,?,?,?,?,?)");
-                pujafoto.setString(1, image.getFilename());
+                pujafoto.setString(1, filename);
                 pujafoto.setInt(2, id);
                 pujafoto.setString(3, image.getTitol());
                 pujafoto.setString(4, image.getDescripcio());
