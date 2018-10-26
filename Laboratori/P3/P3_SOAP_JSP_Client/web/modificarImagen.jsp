@@ -1,26 +1,10 @@
+<%@page import="server.ImageWS"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
-
-<%
-        String user = null;
-        if(session.getAttribute("username") == null){
-                response.sendRedirect("login.jsp");
-        }else user = (String) session.getAttribute("username");
-        String userName = null;
-        String sessionID = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies !=null){
-        for(Cookie cookie : cookies){
-                if(cookie.getName().equals("username")) userName = cookie.getValue();
-                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-        }
-        }
-    %>  
-    
     
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +40,7 @@
             <li class="active"><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
             <li><a href="./list.jsp">Llista les imatges</a></li>
             <li><a href="./buscarImagen.jsp">Busca una imatge</a></li>
-            <li><form class="form-signin" action="logout" method="POST">
+           
      
        
         <button class="btn btn-sm btn-warning btn-block" type="submit">Logout</button>
@@ -68,22 +52,21 @@
 
     <div class="container theme-showcase" role="main">
 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      
-
-      
+     
       <div class="page-header">
         <h1>Modificar imatge:</h1>
       </div>
        <%
-        String titol = request.getParameter("titol");
-        String data = request.getParameter("data");
-        String tag =  request.getParameter("tags");
-        String descrip =  request.getParameter("descripcio");
-        String autor = request.getParameter("autor");
-        String id = request.getParameter("id");
-        String filename = request.getParameter("filename");
-    %>
+       
+        int id = Integer.parseInt(request.getParameter("id"));
+        ImageWS imatge = new ImageWS();
+        
+        server.FotOkWS_Service service = new server.FotOkWS_Service();
+	server.FotOkWS port = service.getFotOkWSPort();
+	 
+	server.ImageWS result = port.searchById(id);
+        
+       %>
       <div class="row">
         
           <div class="panel panel-default">
@@ -91,16 +74,15 @@
               <h3 class="panel-title">Editar imatge</h3>
             </div>
             <div class="panel-body">
-              <form class="form-signin" action="modificarImagen" method="POST" >
+              <form class="form-signin" action="modificarImatge" method="POST" >
      
         
            
-            <input class="form-control" type="text" name="titol" placeholder="Títol" value="<%= titol %>" required>
-            <input  class="form-control" type="text" name="descripcio" placeholder="Descripció" value="<%= descrip %>" required>
-            <input class="form-control" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " value="<%= tag %>" required>
-            <input  class="form-control" type="text" name="autor" placeholder="Autor" value="<%= autor %>" required>
-            <input  class="form-control" type="date" name="datac" value="<%= data %>" required>
-            <input type="hidden" name="username" value="<%= userName %>"  >
+            <input class="form-control" type="text" name="titol" placeholder="Títol" value="<%= result.getTitol() %>" required>
+            <input  class="form-control" type="text" name="descripcio" placeholder="Descripció" value="<%= result.getDescripcio() %>" required>
+            <input class="form-control" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " value="<%= result.getTags() %>" required>
+            <input  class="form-control" type="text" name="autor" placeholder="Autor" value="<%= result.getAutor() %>" required>
+            <input  class="form-control" type="date" name="datac" value="<%= result.getDatac() %>" required>
             <input type="hidden" name="id" value="<%= id %>"  >
 
 

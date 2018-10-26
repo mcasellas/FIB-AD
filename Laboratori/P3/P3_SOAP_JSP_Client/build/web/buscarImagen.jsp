@@ -7,21 +7,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 
-<%
-        String user = null;
-        if(session.getAttribute("username") == null){
-                response.sendRedirect("login.jsp");
-        }else user = (String) session.getAttribute("username");
-        String userName = null;
-        String sessionID = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies !=null){
-        for(Cookie cookie : cookies){
-                if(cookie.getName().equals("username")) userName = cookie.getValue();
-                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-        }
-        }
-    %>  
+
     
     
 <!DOCTYPE html>
@@ -61,7 +47,7 @@
             <li><form class="form-signin" action="logout" method="POST">
      
        
-        <button class="btn btn-sm btn-warning btn-block" type="submit">Logout</button>
+ 
       </form> </li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -85,11 +71,17 @@
               <h3 class="panel-title">Nova imatge</h3>
             </div>
             <div class="panel-body">
-              <form class="form-signin" action="buscarImagen" method="POST">
-     
-        
-            <input class="form-control" type="text" id="tags" name="tags" required autofocus>
-     
+              <form class="form-signin" action="buscarImatges" method="POST">
+                
+           
+            
+            <input class="form-control" type="text" id="text" name="text" required autofocus>
+            <select name="accio" id="accio">
+                <option value="titol">Titol</option>
+                <option value="autor">Autor</option>
+                <option value="datac">Data de creació</option>
+                <option value="tags">Tags</option>
+            </select>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
       </form>
@@ -104,83 +96,7 @@
       
       
       
-      <div class="row">
-        
-                  
-<%
-  ArrayList<String> pdts = null;
-  ArrayList<String> titolA = null;
-  ArrayList<String> descripcioA = null;
-  ArrayList<String> tagsA = null;
-  ArrayList<String> autorA = null;
-  ArrayList<String> datacA = null;
-  ArrayList<String> userA = null;
-  ArrayList<Integer> idA = null;
-  try {
-      pdts = (ArrayList<String>) request.getAttribute("list");
-      titolA = (ArrayList<String>) request.getAttribute("titol");
-      descripcioA = (ArrayList<String>) request.getAttribute("descripcio");
-      tagsA = (ArrayList<String>) request.getAttribute("tags");
-      autorA = (ArrayList<String>) request.getAttribute("autor");
-      datacA = (ArrayList<String>) request.getAttribute("datac");
-      userA = (ArrayList<String>) request.getAttribute("user");
-      idA = (ArrayList<Integer>) request.getAttribute("id");
-  }
-  catch (Exception e) {
-      pdts = null;
-      System.err.println(e.getMessage());
-  }
-  if(pdts!=null){
-    for(int i=0; i < pdts.size();i++){
-        if (pdts.get(i)!="ERRCODE21"){
-        %>
-            <div class="row">
-       
-                <div class="col-sm-6">
-                  <img src="./Image/<%= pdts.get(i) %>" data-src="holder.js/200x200" class="img-thumbnail" >
-                </div><!-- /.col-sm-4 -->
-                <div class="col-sm-6">
-            <ul class="list-group">
-            <li class="list-group-item">Títol: <%= titolA %></li>
-            <li class="list-group-item">Data creació: <%= datacA %></li>
-            <li class="list-group-item">Descripció: <%= descripcioA %></li>
-            <li class="list-group-item">Autor: <%= autorA %></li>
-            <li class="list-group-item">Tags: <%= tagsA %></li>
-          </ul>
-        
-                <%
-                if (userA.get(i).equals(userName)){ 
-                %>
-                    <form class="w3-container" action="./modificarImagen.jsp" method="POST">
-                        <input type="hidden" name="titol" value ="<%=titolA.get(i)%>">
-                        <input type="hidden" name="descripcio" value ="<%=descripcioA.get(i)%>">
-                        <input type="hidden" name="data" value ="<%=datacA.get(i)%>">
-                        <input type="hidden" name="tags" value ="<%=tagsA.get(i)%>">
-                        <input type="hidden" name="autor" value ="<%=autorA.get(i)%>">
-                        <input type="hidden" name="id" value ="<%=idA.get(i)%>">
-                       <button type="submit" class="btn btn-sm btn-primary">Editar</button>
-                    </form> 
-                <%
-                }
-%>
-</div>  
-<%
-            }
-else {
-%>
-<h4>No hi ha cap imatge relacionada amb la teva cerca </h4>
-<%
-    }
-               
-}
-        }
-
-%>
    
-      
-      </div>
-
-      </div>
 
     </div> <!-- /container -->
 

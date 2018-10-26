@@ -5,21 +5,6 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 
-<%
-        String user = null;
-        if(session.getAttribute("username") == null){
-                response.sendRedirect("login.jsp");
-        }else user = (String) session.getAttribute("username");
-        String userName = null;
-        String sessionID = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies !=null){
-        for(Cookie cookie : cookies){
-                if(cookie.getName().equals("username")) userName = cookie.getValue();
-                if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-        }
-        }
-    %>  
     
     
 <!DOCTYPE html>
@@ -59,7 +44,7 @@
             <li><form class="form-signin" action="logout" method="POST">
      
        
-        <button class="btn btn-sm btn-warning btn-block" type="submit">Logout</button>
+        
       </form> </li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -83,10 +68,10 @@
               <h3 class="panel-title">Nova imatge</h3>
             </div>
             <div class="panel-body">
-              <form class="form-signin" action="registrarImagen" method="POST" enctype="multipart/form-data">
+            <form class="form-signin" action="registrarImatge" method="POST">
      
         
-            <input class="form-control" type="file" id="imatge" name="imatge" required autofocus>
+           
             <input class="form-control" type="text" name="titol" placeholder="Títol" required>
             <input  class="form-control" type="text" name="descripcio" placeholder="Descripció" required>
             <input class="form-control" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " required>
