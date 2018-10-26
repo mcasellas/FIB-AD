@@ -68,12 +68,11 @@ public class buscarImatges extends HttpServlet {
                 resultat = port.searchByKeywords(text);
                 break;
         }
-        
-      
-                    
-                    
-       
+        String estat = "correcte";
+        if (resultat.isEmpty()) estat = "error";
+        request.setAttribute("estat", estat);
         request.setAttribute("list", resultat);
+        
 
         RequestDispatcher rd = request.getRequestDispatcher("buscarImagenOK.jsp");
         rd.forward(request, response);

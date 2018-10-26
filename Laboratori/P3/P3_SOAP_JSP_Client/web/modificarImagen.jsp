@@ -40,7 +40,7 @@
             <li class="active"><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
             <li><a href="./list.jsp">Llista les imatges</a></li>
             <li><a href="./buscarImagen.jsp">Busca una imatge</a></li>
-            <li><form class="form-signin" action="logout" method="POST">
+           
      
        
         <button class="btn btn-sm btn-warning btn-block" type="submit">Logout</button>

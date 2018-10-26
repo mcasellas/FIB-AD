@@ -50,7 +50,7 @@
             <li><form class="form-signin" action="logout" method="POST">
      
        
-        <button class="btn btn-sm btn-warning btn-block" type="submit">Logout</button>
+       
       </form> </li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -70,10 +70,13 @@
       <div class="row">
         
             
-<%
-    List<Object> resultat = (List<Object>) request.getAttribute("list");
-
-    Iterator<Object> it = resultat.iterator();
+<%  
+    String estat = (String) request.getAttribute("estat");
+    
+    if (estat != "error") {
+    List<ImageWS> resultat = (List<ImageWS>) request.getAttribute("list");
+    
+    Iterator<ImageWS> it = resultat.iterator();
                 
            
     while (it.hasNext()) {
@@ -98,6 +101,41 @@
 </div>  
 <%
             }
+}
+else {
+%>
+<div class="row">
+        
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">No s'ha trobat cap coincidència. Torna-ho a provar.</h3>
+            </div>
+            <div class="panel-body">
+              <form class="form-signin" action="buscarImatges" method="POST">
+                
+           
+            
+            <input class="form-control" type="text" id="text" name="text" required autofocus>
+            <select name="accio" id="accio">
+                <option value="titol">Titol</option>
+                <option value="autor">Autor</option>
+                <option value="datac">Data de creació</option>
+                <option value="tags">Tags</option>
+            </select>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
+      </form>
+                
+      
+            </div>
+          </div>
+          
+       
+        
+      </div>
+<%
+            }
+
 %>
    
      
