@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
-  <services>
-<<<<<<< HEAD
-    <service name="FotOkWS">
-      <implementation-class>Server.FotOkWS</implementation-class>
-    </service>
-=======
->>>>>>> bdfbacf3ad9157d70b5f706e53d5ba7d51b1b403
-  </services>
-  <clients/>
+    <services/>
+    <clients/>
 </jax-ws>
