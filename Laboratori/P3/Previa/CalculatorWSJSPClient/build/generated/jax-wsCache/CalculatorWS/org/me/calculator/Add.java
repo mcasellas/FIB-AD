@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para add complex type.
+ * <p>Java class for add complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="add"&gt;
@@ -37,7 +37,7 @@ public class Add {
     protected int j;
 
     /**
-     * Obtiene el valor de la propiedad i.
+     * Gets the value of the i property.
      * 
      */
     public int getI() {
@@ -45,7 +45,7 @@ public class Add {
     }
 
     /**
-     * Define el valor de la propiedad i.
+     * Sets the value of the i property.
      * 
      */
     public void setI(int value) {
@@ -53,7 +53,7 @@ public class Add {
     }
 
     /**
-     * Obtiene el valor de la propiedad j.
+     * Gets the value of the j property.
      * 
      */
     public int getJ() {
@@ -61,7 +61,7 @@ public class Add {
     }
 
     /**
-     * Define el valor de la propiedad j.
+     * Sets the value of the j property.
      * 
      */
     public void setJ(int value) {
