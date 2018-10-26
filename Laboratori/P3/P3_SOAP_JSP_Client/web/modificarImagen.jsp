@@ -43,7 +43,7 @@
            
      
        
-        <button class="btn btn-sm btn-warning btn-block" type="submit">Logout</button>
+       
       </form> </li>
           </ul>
         </div><!--/.nav-collapse -->
