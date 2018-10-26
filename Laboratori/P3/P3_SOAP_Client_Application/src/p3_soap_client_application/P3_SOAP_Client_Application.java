@@ -29,7 +29,8 @@ public class P3_SOAP_Client_Application {
         System.out.println("3 - Llistar imatges");
         System.out.println("4 - Buscador d'imatges");
 
-            switch (entrada) {
+        Scanner sc = new Scanner(System.in);
+        int entrada = sc.nextInt();
 
         switch (entrada) {
 
@@ -121,15 +122,15 @@ public class P3_SOAP_Client_Application {
                     System.out.println("Username: " + mobj.getUsername());
                     System.out.println(" ");
                 }
-
+                
                 System.out.println("1 - Modificar una imatge");
                 System.out.println("2 - Sortir");
-
+                
                 Scanner entrance = new Scanner(System.in);
                 int value = entrance.nextInt();
                 if (value == 2) break;
                 else {
-                System.out.println("Introdueix el id de la imatge que vols modificar:");
+                System.out.println("Introdueix el id de la imatge que vols modificar:");    
                 Scanner usmodif = new Scanner(System.in);
                 ImageWS modif = new ImageWS();
                 modif = searchById(usmodif.nextInt());
@@ -175,10 +176,10 @@ public class P3_SOAP_Client_Application {
                             break;
                     }
                 }
-
+                    
                 }
                 }
-
+                
 
                 break;
             case 4:
@@ -196,7 +197,6 @@ public class P3_SOAP_Client_Application {
 
                         Object image = searchById(entradaaux1);
                         ImageWS mobj = ImageWS.class.cast(image);
-                        System.out.println("Id: " + mobj.getId());
                         System.out.println("Títol: " + mobj.getTitol());
                         System.out.println("Descripció: " + mobj.getDescripcio());
                         System.out.println("Autor: " + mobj.getAutor());
@@ -204,7 +204,6 @@ public class P3_SOAP_Client_Application {
                         System.out.println("Tags: " + mobj.getTags());
                         System.out.println("Username: " + mobj.getUsername());
                         System.out.println(" ");
-                    }
 
                         break;
                     case 2:
@@ -278,89 +277,13 @@ public class P3_SOAP_Client_Application {
                             System.out.println("Tags: " + mobjaux2.getTags());
                             System.out.println("Username: " + mobjaux2.getUsername());
                             System.out.println(" ");
+                        }
+                        break;
 
-                            break;
-                        case 2:
-                            String entradaaux2 = sc2.nextLine();
-                            List<Object> resultataux2 = new ArrayList<Object>();
-                            resultataux2 = searchByTitle(entradaaux2);
-                            Iterator<Object> itaux2 = resultataux2.iterator();
-
-                            while (itaux2.hasNext()) {
-                                Object imageaux2 = itaux2.next();
-                                ImageWS mobjaux2 = ImageWS.class.cast(imageaux2);
-                                System.out.println("Títol: " + mobjaux2.getTitol());
-                                System.out.println("Descripció: " + mobjaux2.getDescripcio());
-                                System.out.println("Autor: " + mobjaux2.getAutor());
-                                System.out.println("Data creació: " + mobjaux2.getDatac());
-                                System.out.println("Tags: " + mobjaux2.getTags());
-                                System.out.println("Username: " + mobjaux2.getUsername());
-                                System.out.println(" ");
-                            }
-                            break;
-                        case 3:
-                            String entradaaux3 = sc2.nextLine();
-                            List<Object> resultataux3 = new ArrayList<Object>();
-                            resultataux3 = searchByAuthor(entradaaux3);
-                            Iterator<Object> itaux3 = resultataux3.iterator();
-
-                            while (itaux3.hasNext()) {
-                                Object imageaux2 = itaux3.next();
-                                ImageWS mobjaux2 = ImageWS.class.cast(imageaux2);
-                                System.out.println("Títol: " + mobjaux2.getTitol());
-                                System.out.println("Descripció: " + mobjaux2.getDescripcio());
-                                System.out.println("Autor: " + mobjaux2.getAutor());
-                                System.out.println("Data creació: " + mobjaux2.getDatac());
-                                System.out.println("Tags: " + mobjaux2.getTags());
-                                System.out.println("Username: " + mobjaux2.getUsername());
-                                System.out.println(" ");
-
-                            }
-                            break;
-                        case 4:
-                            String entradaaux4 = sc2.nextLine();
-                            List<Object> resultataux4 = new ArrayList<Object>();
-                            resultataux4 = searchByKeywords(entradaaux4);
-                            Iterator<Object> itaux4 = resultataux4.iterator();
-
-                            while (itaux4.hasNext()) {
-                                Object imageaux2 = itaux4.next();
-                                ImageWS mobjaux2 = ImageWS.class.cast(imageaux2);
-                                System.out.println("Títol: " + mobjaux2.getTitol());
-                                System.out.println("Descripció: " + mobjaux2.getDescripcio());
-                                System.out.println("Autor: " + mobjaux2.getAutor());
-                                System.out.println("Data creació: " + mobjaux2.getDatac());
-                                System.out.println("Tags: " + mobjaux2.getTags());
-                                System.out.println("Username: " + mobjaux2.getUsername());
-                                System.out.println(" ");
-                            }
-                            break;
-                        case 5:
-                           String entradaaux5 = sc2.nextLine();
-                            List<Object> resultataux5 = new ArrayList<Object>();
-                            resultataux5 = searchByCreaDate(entradaaux5);
-                            Iterator<Object> itaux5 = resultataux5.iterator();
-
-                            while (itaux5.hasNext()) {
-                                Object imageaux2 = itaux5.next();
-                                ImageWS mobjaux2 = ImageWS.class.cast(imageaux2);
-                                System.out.println("Títol: " + mobjaux2.getTitol());
-                                System.out.println("Descripció: " + mobjaux2.getDescripcio());
-                                System.out.println("Autor: " + mobjaux2.getAutor());
-                                System.out.println("Data creació: " + mobjaux2.getDatac());
-                                System.out.println("Tags: " + mobjaux2.getTags());
-                                System.out.println("Username: " + mobjaux2.getUsername());
-                                System.out.println(" ");
-                            }
-                            break;
-
-                    }
-                    break;
-                case 5:
-                    sortir = true;
-                    break;
-            }
+                }
+                break;
         }
+        System.out.println(entrada);
     }
 
     private static java.util.List<java.lang.Object> listImages() {
