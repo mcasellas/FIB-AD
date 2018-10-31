@@ -46,7 +46,7 @@ public class GenericResource {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public String getHtml() {
-        return "<html><head/><body><h1>Sergi ets un pringui</h1></body></html>";
+        return "<html><head/><body><h1>Holiii</h1></body></html>";
         //throw new UnsupportedOperationException();
     }
     
@@ -138,7 +138,7 @@ public String searchByID (@PathParam("id") int id){
 @GET
 @Produces(MediaType.TEXT_HTML)
 public String searchByTitle (@PathParam("title") String title){
-    return null;
+    return "<html><head/><body><h1>Hello world</h1></body></html>";
 }
 /**
 * GET method to search images by creation date
