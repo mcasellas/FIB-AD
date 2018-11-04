@@ -22,6 +22,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
+
 /**
  * REST Web Service
  *
@@ -29,6 +30,68 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("generic")
 public class GenericResource {
+    
+    
+    
+String banner = "<!DOCTYPE html>" 
++ " <html lang='en'>"
++ "   <head>"
++ "     <meta charset='utf-8'>"
++ "     <meta http-equiv='X-UA-Compatible' content='IE=edge'>"
++ "     <meta name='viewport' content='width=device-width, initial-scale=1'>"
++ "     <meta name='description' content=''>"
++ "     <meta name='author' content=''>"
++ "     <title>FotOK</title>"
++ "     <link href='http://localhost:8080/RestAD/css/bootstrap.min.css' rel='stylesheet'>"
++ "     <link href='http://localhost:8080/RestAD/css/bootstrap-theme.min.css' rel='stylesheet'>"
++ "     <link href='http://localhost:8080/RestAD/theme.css' rel='stylesheet'>"
++ " <link rel='shortcut icon' href='./favicon.ico'>"
++ "   </head>"
++ "   <body>"
++ "     <nav class='navbar navbar-inverse navbar-fixed-top'>"
++ "       <div class='container'>"
++ "         <div class='navbar-header'>"
++ "           <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='f"
++ "             <span class='sr-only'>Toggle navigation</span>"
++ "             <span class='icon-bar'></span>"
++ "             <span class='icon-bar'></span>"
++ "             <span class='icon-bar'></span>"
++ "           </button>"
++ "           <a class='navbar-brand' href='#'>FotOK</a>"
++ "         </div>"
++ "         <div id='navbar' class='navbar-collapse collapse'>"
++ "           <ul class='nav navbar-nav'>"
++ "             <li ><a href='http://localhost:8080/RestAD//menu.jsp'>Inici</a></li>"
++ "             <li><a href='http://localhost:8080/RestAD//registrarImagen.jsp'>Registrar Imatge</a></li>"
++ "             <li><a href='http://localhost:8080/RestAD//list.jsp'>Llista les imatges</a></li>"
++ "             <li><a href='http://localhost:8080/RestAD//buscarImagen.jsp'>Busca una imatge</a></li>"
++ "             <li><form class='form-signin' action='logout' method='POST'>"
++ "      "
++ "        "
++ "    "
++ "       </form> </li>"
++ "           </ul>"
++ "         </div><!--/.nav-collapse -->"
++ "       </div>"
++ "     </nav>"
++ "     <div class='container theme-showcase' role='main'>"
++ "       <div class='page-header'>"
++ "         <h1>";
+
+String mig = "</h1>"
++ "       </div>"
++ "       "
++ "       <div class='row'>";
+
+String footer = "</div>"
++ "</div>"
++ "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>"
++ "<script>window.jQuery || document.write(\'<script src=\"http://localhost:8080/RestAD/../../assets/js/vendor/jquery.min.js\"/>\')</script>"
++ "<script src='http://localhost:8080/RestAD/js/bootstrap.min.js'></script>"
++ "<script src='http://localhost:8080/RestAD/js/docs.min.js'></script>"
++ "<script src='http://localhost:8080/RestAD/js/ie10-viewport-bug-workaround.js'></script>"
++ "</body>"
++ "</html>";
 
     @Context
     private UriInfo context;
@@ -46,7 +109,9 @@ public class GenericResource {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public String getHtml() {
-        return "<html><head/><body><h1>Holiii</h1></body></html>";
+        
+        
+        return banner + "Llistar imatges:" + mig + footer;
         //throw new UnsupportedOperationException();
     }
     
@@ -91,7 +156,8 @@ public String modifyImage (@FormParam("title") String title,
     @Produces(MediaType.TEXT_HTML)
     public String listImages () throws ClassNotFoundException {
         Connection con = null;
-        String resultat = null;
+        String resultat = "<h3>No hi han imatges<h3>";
+        Boolean esPrimer = true;
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
@@ -102,7 +168,35 @@ public String modifyImage (@FormParam("title") String title,
             ResultSet rs = getid.executeQuery();
             
             while (rs.next()) {
-                resultat = "<html><head/><body><h1>" + rs.getString("autor ") + "</h1></body></html>";
+         if (esPrimer) {
+             esPrimer = false;
+             resultat = "";        
+         }        
+         resultat += "<div class='row'>"
+  + "    <div class='col-sm-6'>"
+  + "      <img src='http://localhost:8080/RestAD/Image/" + rs.getString("filename") +  "' class='img-thumbnail' >"
++ ""
+  + "    </div><!-- /.col-sm-4 -->"
+  + "    <div class='col-sm-6'>"
+  + "        <ul class='list-group'>"
+  + "        <li class='list-group-item'>Títol: " + rs.getString("titol") +  "</li>"
+  + "        <li class='list-group-item'>Data creació: " + rs.getString("datac") +  "</li>"
+  + "        <li class='list-group-item'>Descripció: " + rs.getString("descripcio") +  "</li>"
+  + "        <li class='list-group-item'>Autor: " + rs.getString("autor") +  "</li>"
+  + "        <li class='list-group-item'>Tags: " + rs.getString("tags") +  "</li>"
+  + "      </ul>"
+  + "        <form class='w3-container' action='./modificarImagen.jsp' method='POST'>"
+  + "            <input type='hidden' name='id' value ='<%= mobj.getId() %>'>"
+  + "            <p>"
+  + "                <button type='submit' class='btn btn-sm btn-primary'>Editar</button>"
+  + "            </p>"
+  + "        </form> "
+  + "    </div><!-- /.col-sm-4 -->"
+  + "    "
+  + "  </div>       ";
+        
+  
+         
 
             }
         }
@@ -113,7 +207,7 @@ public String modifyImage (@FormParam("title") String title,
         }
            
         
-        return resultat;
+        return banner + "Llistar imatges:" + mig + resultat + footer;
           
             
         
@@ -138,7 +232,7 @@ public String searchByID (@PathParam("id") int id){
 @GET
 @Produces(MediaType.TEXT_HTML)
 public String searchByTitle (@PathParam("title") String title){
-    return "<html><head/><body><h1>Hello world</h1></body></html>";
+    return null;
 }
 /**
 * GET method to search images by creation date

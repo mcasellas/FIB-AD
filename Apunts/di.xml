@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DIDL xmlns="urn:mpeg:mpeg21:2006:07-DIDL-NS"
+  xmlns:didl-msx="urn:mpeg:maf:schema:mediastreaming:DIDLextensions"
+  xmlns:didmodel="urn:mpeg:mpeg21:2002:02-DIDMODEL-NS"
+  xmlns:dii="urn:mpeg:mpeg21:2002:01-DII-NS"
+  xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
+  xmlns:ipmpdidl="urn:mpeg:mpeg21:2004:01-IPMPDIDL-NS"
+  xmlns:ipmpinfo="urn:mpeg:mpeg21:2004:01-IPMPINFO-NS"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:mpeg21:2002:02-DIDMODEL-NS ./schemasDI/didmodel.xsd urn:mpeg:mpeg21:2002:01-DII-NS ./schemasDI/dii.xsd urn:mpeg:mpeg21:2006:07-DIDL-NS ./schemasDI/didl.xsd urn:mpeg:mpeg21:2004:01-IPMPINFO-NS ./schemasDI/ipmpinfo.xsd urn:mpeg:mpeg21:2004:01-IPMPDIDL-NS ./schemasDI/ipmpdidl.xsd urn:mpeg:maf:schema:mediastreaming:DIDLextensions ./schemasDI/didl-msx.xsd">
+  <DIDLInfo>
+    <dsig:Signature>
+      <dsig:SignedInfo>
+        <dsig:CanonicalizationMethod Algorithm=""/>
+        <dsig:SignatureMethod Algorithm="">DSA</dsig:SignatureMethod>
+        <dsig:Reference>
+          <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+          <dsig:DigestValue>/td+t8v5fCcVq4fjzhcu3QQh+34=</dsig:DigestValue>
+        </dsig:Reference>
+      </dsig:SignedInfo>
+      <dsig:SignatureValue>XWVrhrGqJ4FgaffhNWsUd/gkkKUHENHfQS/oRw31Xk2WDDL5hydglQ==</dsig:SignatureValue>
+    </dsig:Signature>
+  </DIDLInfo>
+  <Item>
+    <Descriptor>
+      <Statement mimeType="text/xml">
+        <dii:Identifier>URN:MIPAMS:DCI:50067865-A410:DITEM</dii:Identifier>
+      </Statement>
+    </Descriptor>
+    <Descriptor>
+      <Statement mimeType="text/xml">
+        <didl-msx:Metadata>
+          <didl-msx:StructuredData ref="urn:ipos:2007:IPOS-NS">
+            <ipos:IPOSMetadata xmlns:ipos="urn:ipos:2007:IPOS-NS" xsi:schemaLocation="urn:ipos:2007:IPOS-NS ./schemasDI/ipos-ds.xsd">
+              <ipos:title xmlns:ipos="urn:ipos:2007:IPOS-NS">dexter</ipos:title>
+              <ipos:type xmlns:ipos="urn:ipos:2007:IPOS-NS">TV Series</ipos:type>
+              <ipos:genre xmlns:ipos="urn:ipos:2007:IPOS-NS">crime</ipos:genre>
+              <ipos:genre xmlns:ipos="urn:ipos:2007:IPOS-NS">mystery</ipos:genre>
+              <ipos:genre xmlns:ipos="urn:ipos:2007:IPOS-NS">drama</ipos:genre>
+              <ipos:creator xmlns:ipos="urn:ipos:2007:IPOS-NS">ptbuyer</ipos:creator>
+              <ipos:format xmlns:ipos="urn:ipos:2007:IPOS-NS">MPEG-21</ipos:format>
+              <ipos:duration xmlns:ipos="urn:ipos:2007:IPOS-NS">39</ipos:duration>
+              <ipos:synopsis xmlns:ipos="urn:ipos:2007:IPOS-NS">Dexter world of police analyst by day, and serial killer by night, is rocked when he is privately contacted by another serial killer...</ipos:synopsis>
+              <ipos:shootingDate xmlns:ipos="urn:ipos:2007:IPOS-NS">2012-07-01T00:00:00</ipos:shootingDate>
+              <ipos:broadcastDate xmlns:ipos="urn:ipos:2007:IPOS-NS">2012-07-08T00:00:00</ipos:broadcastDate>
+              <ipos:keyword xmlns:ipos="urn:ipos:2007:IPOS-NS">blood</ipos:keyword>
+              <ipos:target xmlns:ipos="urn:ipos:2007:IPOS-NS">TV-MA</ipos:target>
+              <ipos:target xmlns:ipos="urn:ipos:2007:IPOS-NS">TV-14</ipos:target>
+              <ipos:chapterTitle xmlns:ipos="urn:ipos:2007:IPOS-NS"> cocodrile</ipos:chapterTitle>
+              <ipos:chapterNumber xmlns:ipos="urn:ipos:2007:IPOS-NS">1</ipos:chapterNumber>
+              <ipos:seasonNumber xmlns:ipos="urn:ipos:2007:IPOS-NS">1</ipos:seasonNumber>
+            </ipos:IPOSMetadata>
+          </didl-msx:StructuredData>
+        </didl-msx:Metadata>
+      </Statement>
+    </Descriptor>
+    <Item>
+      <Descriptor>
+        <Statement mimeType="text/xml">
+          <dii:Identifier>URN:MIPAMS:DCI:50067866-A410:DITEM</dii:Identifier>
+        </Statement>
+      </Descriptor>
+      <Descriptor>
+        <Statement mimeType="text/xml">
+          <didl-msx:Metadata>
+            <didl-msx:StructuredData ref="urn:ipos:2007:IPOS-NS">
+              <ipos:IPOSMetadata xmlns:ipos="urn:ipos:2007:IPOS-NS" xsi:schemaLocation="urn:ipos:2007:IPOS-NS ./schemasDI/ipos-ds.xsd">
+                <ipos:title xmlns:ipos="urn:ipos:2007:IPOS-NS">portada</ipos:title>
+                <ipos:creator xmlns:ipos="urn:ipos:2007:IPOS-NS"/>
+                <ipos:format xmlns:ipos="urn:ipos:2007:IPOS-NS">image/png</ipos:format>
+                <ipos:synopsis xmlns:ipos="urn:ipos:2007:IPOS-NS">imagen de la portada</ipos:synopsis>
+              </ipos:IPOSMetadata>
+            </didl-msx:StructuredData>
+          </didl-msx:Metadata>
+        </Statement>
+      </Descriptor>
+      <Component>
+        <Resource mimeType="mov" ref="URN_MIPAMS_DCI_50067866-A410_DITEM.mov"/>
+      </Component>
+    </Item>
+    <Item>
+      <Descriptor>
+        <Statement mimeType="text/xml">
+          <dii:Identifier>URN:MIPAMS:DCI:50067867-A410:DITEM</dii:Identifier>
+        </Statement>
+      </Descriptor>
+      <Descriptor>
+        <Statement mimeType="text/xml">
+          <didl-msx:Metadata>
+            <didl-msx:StructuredData ref="urn:ipos:2007:IPOS-NS">
+              <ipos:IPOSMetadata xmlns:ipos="urn:ipos:2007:IPOS-NS" xsi:schemaLocation="urn:ipos:2007:IPOS-NS ./schemasDI/ipos-ds.xsd">
+                <ipos:title xmlns:ipos="urn:ipos:2007:IPOS-NS">video</ipos:title>
+                <ipos:creator xmlns:ipos="urn:ipos:2007:IPOS-NS"/>
+                <ipos:language xmlns:ipos="urn:ipos:2007:IPOS-NS">ca_ES</ipos:language>
+                <ipos:format xmlns:ipos="urn:ipos:2007:IPOS-NS">video/mpeg</ipos:format>
+                <ipos:synopsis xmlns:ipos="urn:ipos:2007:IPOS-NS">fichero de video</ipos:synopsis>
+              </ipos:IPOSMetadata>
+            </didl-msx:StructuredData>
+          </didl-msx:Metadata>
+        </Statement>
+      </Descriptor>
+      <Component>
+        <Resource mimeType="jpg" ref="URN_MIPAMS_DCI_50067867-A410_DITEM.jpg"/>
+      </Component>
+    </Item>
+  </Item>
+</DIDL>
