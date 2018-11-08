@@ -215,7 +215,15 @@ public String registerImage (@FormParam("title") String title,
        
      
 
-        resultat = "La imatge s'ha enregistrat correctament";  
+        resultat = "<h3>La imatge s'ha enregistrat correctament<h3>"
++ "<div class='list-group'><div class='list-group'>"
++ "<a href='./registrarImagen.jsp' class='list-group-item active'>"
++ "Registra una altre imatge"
++ "</a>"
++ ""
++ "<a href='./webresources/generic/list' class='list-group-item'>Llista les imatges</a>"
++ ""
++ "</div>";
 
     }
     catch (SQLException e) {
@@ -335,8 +343,13 @@ public String modifyImage (@PathParam("id") int id, @FormParam("title") String t
                 updateFoto.setInt(6, id);
            
                 int num = updateFoto.executeUpdate();
-                System.out.println(id + "maincra" + num);
-                resultat = "<h3>S'ha modificat la imatge correctament<h3>";
+                
+                
+                resultat = "<h3>S'ha modificat la imatge correctament<h3>"
++ "<div class='list-group'><div class='list-group'>"
++ "<a href='./webresources/generic/list' class='list-group-item active'>Llista les imatges</a>"
++ ""
++ "</div>";
        
                 
             
@@ -436,7 +449,7 @@ public String searchByTitle (@PathParam("title") String title) throws ClassNotFo
         con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
 
         PreparedStatement getphotos = con.prepareStatement("SELECT * FROM imatges WHERE TITOL LIKE ?");
-        String cerca = '%' + title + '%';
+        String cerca = "%" + title + "%";
         getphotos.setString(1, cerca);
         ResultSet rs = getphotos.executeQuery();
         resultat = llistarImatges(rs);  

@@ -68,15 +68,15 @@
             </div>
             <div class="panel-body">
               <form onchange="afegirPath()" id="formulari" class="form-signin" action="./webresources/generic/searchByID/" method="GET">
-                
-            <input class="form-control" type="number" id="text" name="text" required autofocus>
-            <select name="accio" id="accio">
+               <select name="accio" id="accio">
                 <option value="ID">Id</option>
                 <option value="Title">Titol</option>
                 <option value="Author">Autor</option>
                 <option value="CreationDate">Data de creació</option>
                 <option value="Keywords">Tags</option>
-            </select>
+            </select> 
+            <input class="form-control" type="number" id="text" name="text" required autofocus>
+            
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
       </form>
