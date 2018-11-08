@@ -42,13 +42,11 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="./menu.jsp">Inici</a></li>
             <li><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
-            <li><a href="./list.jsp">Llista les imatges</a></li>
+            <li><a href="./webresources/generic/list">Llista les imatges</a></li>
             <li><a href="./buscarImagen.jsp">Busca una imatge</a></li>
-            <li><form class="form-signin" action="logout" method="POST">
-     
-       
-        
-      </form> </li>
+            <li>
+                <form class="form-signin" action="logout" method="POST"></form> 
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -75,7 +73,7 @@
               Registra una imatge
             </a>
           
-            <a href="./list.jsp" class="list-group-item">Llista les imatges</a>
+            <a href="./webresources/generic/list" class="list-group-item">Llista les imatges</a>
             <a href="./buscarImagen.jsp" class="list-group-item">Busca imatges</a>
  
           </div>

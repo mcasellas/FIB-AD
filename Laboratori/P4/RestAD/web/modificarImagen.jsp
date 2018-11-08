@@ -36,15 +36,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li ><a href="#">Inici</a></li>
-            <li class="active"><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
-            <li><a href="./list.jsp">Llista les imatges</a></li>
+            <li><a href="./menu.jsp">Inici</a></li>
+            <li><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
+            <li><a href="./webresources/generic/list">Llista les imatges</a></li>
             <li><a href="./buscarImagen.jsp">Busca una imatge</a></li>
-           
-     
-       
-       
-      </form> </li>
+            <li>
+                <form class="form-signin" action="logout" method="POST"></form> 
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

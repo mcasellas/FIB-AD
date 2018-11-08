@@ -1,7 +1,7 @@
-Wed Oct 31 10:04:50 CET 2018 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
+Wed Nov 07 22:50:32 CET 2018 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Wed Oct 31 10:04:51 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0166-c95e-4361-ffffb5d6c2e7 
+Wed Nov 07 22:50:40 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0166-f027-cbfe-ffffb5d6c2e7 
 on database directory /Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/DataBases/fotOK with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
 Loaded from file:/Applications/NetBeans/glassfish-4.1.1/javadb/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,9 +12,3 @@ os.arch=x86_64
 os.version=10.14
 derby.system.home=/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/DataBases
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Wed Oct 31 12:38:20 CET 2018: Shutting down Derby engine
-----------------------------------------------------------------
-Wed Oct 31 12:38:20 CET 2018:
-Shutting down instance a816c00e-0166-c95e-4361-ffffb5d6c2e7 on database directory /Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/DataBases/fotOK with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
-----------------------------------------------------------------

@@ -37,15 +37,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li ><a href="./menu.jsp">Inici</a></li>
+            <li><a href="./menu.jsp">Inici</a></li>
             <li class="active"><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
-            <li><a href="./list.jsp">Llista les imatges</a></li>
+            <li><a href="./webresources/generic/list">Llista les imatges</a></li>
             <li><a href="./buscarImagen.jsp">Busca una imatge</a></li>
-            <li><form class="form-signin" action="logout" method="POST">
-     
-       
-        
-      </form> </li>
+            <li>
+                <form class="form-signin" action="logout" method="POST"></form> 
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -68,15 +66,15 @@
               <h3 class="panel-title">Nova imatge</h3>
             </div>
             <div class="panel-body">
-            <form class="form-signin" action="registrarImatge" method="POST">
+            <form class="form-signin" action="./webresources/generic/register" method="POST">
      
         
            
-            <input class="form-control" type="text" name="titol" placeholder="Títol" required>
-            <input  class="form-control" type="text" name="descripcio" placeholder="Descripció" required>
-            <input class="form-control" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " required>
-            <input  class="form-control" type="text" name="autor" placeholder="Autor" required>
-            <input  class="form-control" type="date" name="datac" required>
+            <input class="form-control" type="text" name="title" placeholder="Títol" required>
+            <input  class="form-control" type="text" name="description" placeholder="Descripció" required>
+            <input class="form-control" type="text" name="keywords" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " required>
+            <input  class="form-control" type="text" name="author" placeholder="Autor" required>
+            <input  class="form-control" type="date" name="creation" required>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Puja</button>
       </form>
@@ -84,16 +82,10 @@
                
             </div>
           </div>
-          
-       
-        
       </div>
         
         
-      
-      
-      
-
+    
 
     </div> <!-- /container -->
 

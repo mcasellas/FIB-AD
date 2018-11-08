@@ -8,8 +8,6 @@
 <%@page import="java.sql.Connection"%>
 
 
-    
-    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,15 +38,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li ><a href="./menu.jsp">Inici</a></li>
+            <li><a href="./menu.jsp">Inici</a></li>
             <li><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
-            <li ><a href="./list.jsp">Llista les imatges</a></li>
+            <li><a href="./webresources/generic/list">Llista les imatges</a></li>
             <li class="active"><a href="./buscarImagen.jsp">Busca una imatge</a></li>
-            <li><form class="form-signin" action="logout" method="POST">
-     
-       
- 
-      </form> </li>
+            <li>
+                <form class="form-signin" action="logout" method="POST"></form> 
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -71,22 +67,20 @@
               <h3 class="panel-title">Nova imatge</h3>
             </div>
             <div class="panel-body">
-              <form class="form-signin" action="buscarImatges" method="POST">
+              <form onchange="afegirPath()" id="formulari" class="form-signin" action="./webresources/generic/searchByID/" method="GET">
                 
-           
-            
-            <input class="form-control" type="text" id="text" name="text" required autofocus>
+            <input class="form-control" type="number" id="text" name="text" required autofocus>
             <select name="accio" id="accio">
-                <option value="titol">Titol</option>
-                <option value="autor">Autor</option>
-                <option value="datac">Data de creació</option>
-                <option value="tags">Tags</option>
+                <option value="ID">Id</option>
+                <option value="Title">Titol</option>
+                <option value="Author">Autor</option>
+                <option value="CreationDate">Data de creació</option>
+                <option value="Keywords">Tags</option>
             </select>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
       </form>
-                
-      
+               
             </div>
           </div>
           
@@ -99,7 +93,17 @@
    
 
     </div> <!-- /container -->
-
+    <script>
+        function afegirPath() {
+            var accio = document.getElementById("accio").value;
+            
+            document.getElementById("text").type = accio == "ID" ? "number" : "text";
+            
+            var data = document.getElementById("text").value;
+            var result = "./webresources/generic/search" + accio + '/' + data;
+            document.getElementById("formulari").action = result;
+        }
+    </script>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
