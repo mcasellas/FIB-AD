@@ -241,14 +241,8 @@ public String modifyImageForm (@PathParam("id") int id) throws ClassNotFoundExce
             Statement statement = con.createStatement();
 
             statement.setQueryTimeout(30);
-
-            } catch (SQLException e) {
-                System.out.println("No es troba cap base de dades d'usuaris");
-                System.err.println(e.getMessage());
-            }
-            try {
-                
-                PreparedStatement getImatge = con.prepareStatement("SELECT * FROM IMATGES WHERE ID = ?");
+            
+            PreparedStatement getImatge = con.prepareStatement("SELECT * FROM IMATGES WHERE ID = ?");
             
                 getImatge.setInt(1, id);
                 ResultSet rs = getImatge.executeQuery();
@@ -264,11 +258,13 @@ public String modifyImageForm (@PathParam("id") int id) throws ClassNotFoundExce
                     + "  </form>";
                 }
                 
-                
-                
-            } catch (SQLException e) {
+
+            } 
+            catch (SQLException e) {
+                System.out.println("No es troba cap base de dades d'usuaris");
                 System.err.println(e.getMessage());
             }
+            
         } catch (ClassNotFoundException ex) {
             System.err.println(ex.getMessage());
         } finally {
