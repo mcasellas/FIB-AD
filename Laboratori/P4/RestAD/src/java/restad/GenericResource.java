@@ -104,6 +104,8 @@ private String llistarImatges(ResultSet rs) {
              esPrimer = false;
              resultat = "";        
          }        
+         
+         String url = "http://localhost:8080/RestAD/webresources/generic/modify/1";
   
          resultat += "<div class='row'>"
   + "    <div class='col-sm-6'>"
@@ -117,9 +119,9 @@ private String llistarImatges(ResultSet rs) {
   + "        <li class='list-group-item'>Descripció: " + rs.getString("descripcio") +  "</li>"
   + "        <li class='list-group-item'>Autor: " + rs.getString("autor") +  "</li>"
   + "        <li class='list-group-item'>Tags: " + rs.getString("tags") +  "</li>"
-  + "      </ul>"
+ + "      </ul>"
   + "        <form class='w3-container' action='http://localhost:8080/RestAD/webresources/generic/modify' method='POST'>"
-  + "            <input type='hidden' name='id' value='1'>"
+  + "            <input type='hidden' name='id' value='" + rs.getString("id") + "'>"
   + "            <p>"
   + "                <button type='submit' class='btn btn-sm btn-primary'>Editar</button>"
   + "            </p>"
@@ -224,10 +226,15 @@ public String registerImage (@FormParam("title") String title,
     return banner + "Pujar imatge:" + mig + resultat + footer;
 }
 
+/**
+* GET method to modify by id
+* @param id
+* @return
+*/
 @Path("modify")
 @POST
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED) @Produces(MediaType.TEXT_HTML)
-public String modifyImageForm (@PathParam("id") int id) throws ClassNotFoundException {
+public String modifyImage (@FormParam("id") int id) throws ClassNotFoundException {
     //TODO write your implementation code here:
         Connection con = null;
         String resultat = "Error";
@@ -241,14 +248,20 @@ public String modifyImageForm (@PathParam("id") int id) throws ClassNotFoundExce
             Statement statement = con.createStatement();
 
             statement.setQueryTimeout(30);
-            
-            PreparedStatement getImatge = con.prepareStatement("SELECT * FROM IMATGES WHERE ID = ?");
-            
+
+            } catch (SQLException e) {
+                System.out.println("No es troba cap base de dades d'usuaris");
+                System.err.println(e.getMessage());
+            }
+            try {
+                
+                PreparedStatement getImatge = con.prepareStatement("SELECT * FROM IMATGES WHERE ID = ?");
+       
                 getImatge.setInt(1, id);
                 ResultSet rs = getImatge.executeQuery();
                 
                 while (rs.next()) { 
-                    resultat = "<form class='form-signin' action='./webresources/generic/modify_values' method='POST'>"
+                    resultat = "<form class='form-signin' action='http://localhost:8080/RestAD/webresources/generic/modify_values/" + rs.getString("id") +"' method='POST'>"
                     + " <input class='form-control' value='" + rs.getString("titol") +  "' type='text' name='title' placeholder='Títol' required>"
                     + "      <input  class='form-control' value='" + rs.getString("descripcio") +  "' type='text' name='description' placeholder='Descripció' required>"
                     + "     <input class='form-control' value='" + rs.getString("tags") +  "' type='text' name='keywords' placeholder='Tags separats amb ;  Exemple: (naturalesa;animals;maincra) ' required>"
@@ -258,13 +271,11 @@ public String modifyImageForm (@PathParam("id") int id) throws ClassNotFoundExce
                     + "  </form>";
                 }
                 
-
-            } 
-            catch (SQLException e) {
-                System.out.println("No es troba cap base de dades d'usuaris");
+                
+                
+            } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }
-            
         } catch (ClassNotFoundException ex) {
             System.err.println(ex.getMessage());
         } finally {
@@ -285,6 +296,7 @@ public String modifyImageForm (@PathParam("id") int id) throws ClassNotFoundExce
 
 /**
 * POST method to register a new image
+* @param id
 * @param title
 * @param description
 * @param keywords
@@ -292,12 +304,12 @@ public String modifyImageForm (@PathParam("id") int id) throws ClassNotFoundExce
 * @param crea_date
 * @return
 */
-@Path("modify_values")
+@Path("modify_values/{id}")
 @POST
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED) @Produces(MediaType.TEXT_HTML)
-public String modifyImage (@FormParam("title") String title,
+public String modifyImage (@PathParam("id") int id, @FormParam("title") String title,
 @FormParam("description") String description, @FormParam("keywords") String keywords, @FormParam("author") String author, @FormParam("creation") String creation){
-    //TODO write your implementation code here:
+   
         Connection con = null;
         String resultat = "<h3>No s'ha pogut modificar la imatge<h3>";
         try {
@@ -311,27 +323,19 @@ public String modifyImage (@FormParam("title") String title,
         
         Class.forName("org.apache.derby.jdbc.ClientDriver");
         con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+    
+ 
         
-        int id = 0;
-        
-        PreparedStatement getid = con.prepareStatement("SELECT MAX(id) FROM imatges");
-            ResultSet rs = getid.executeQuery();
-            if (rs.next()) {
-                id = rs.getInt(1) + 1;
-            } 
-
-        PreparedStatement pujafoto = con.prepareStatement("UPDATE Imatges SET titol = ?, datac = ?, tags = ?, descripcio = ?, autor = ? WHERE id = ?");
-                pujafoto.setString(1, filename);
-                pujafoto.setInt(2, id);
-                pujafoto.setString(3, title);
-                pujafoto.setString(4, description);
-                pujafoto.setString(5, keywords);
-                pujafoto.setString(6, author);
-                pujafoto.setString(7, creation);
-                pujafoto.setString(8, timestamp);
-                pujafoto.setString(9, "admin");
-                pujafoto.executeUpdate();
-                
+        PreparedStatement updateFoto = con.prepareStatement("UPDATE IMATGES SET TITOL = ?, DATAC = ?, TAGS = ?, DESCRIPCIO = ?, AUTOR = ? WHERE ID = ?");
+                updateFoto.setString(1, title);
+                updateFoto.setString(2, creation);
+                updateFoto.setString(3, keywords);
+                updateFoto.setString(4, description);
+                updateFoto.setString(5, author);
+                updateFoto.setInt(6, id);
+           
+                int num = updateFoto.executeUpdate();
+                System.out.println(id + "maincra" + num);
                 resultat = "<h3>S'ha modificat la imatge correctament<h3>";
        
                 
