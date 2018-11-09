@@ -24,9 +24,9 @@ String datac = request.getParameter("datac");
 String user=null;
 Cookie[] cookies = request.getCookies();
    if(cookies !=null){
-   for(Cookie cookie : cookies){
-           if(cookie.getName().equals("username")) user = cookie.getValue();
-   }
+     for(Cookie cookie : cookies){
+             if(cookie.getName().equals("username")) user = cookie.getValue();
+     }
    }
 
 Date date= new Date();
@@ -54,9 +54,9 @@ try {
        // Connexió Marc
        catch(SQLException e) {
            try{
-           conn = DriverManager.getConnection("jdbc:sqlite:FotOK.db");
-           Statement statement = conn.createStatement();
-           statement.setQueryTimeout(30);
+             conn = DriverManager.getConnection("jdbc:sqlite:FotOK.db");
+             Statement statement = conn.createStatement();
+             statement.setQueryTimeout(30);
            }
            catch(SQLException ex){
                System.out.println("No es troba cap base de dades d'usuaris");
@@ -70,23 +70,22 @@ try {
    else id=0;
 
    try{
-   PreparedStatement pujafoto = conn.prepareStatement("INSERT INTO imatges(filename,id,titol,descripcio,tags,autor,datac,timestamp,username) VALUES(?,?,?,?,?,?,?,?,?)");
-   pujafoto.setString(1,fileName);
-   pujafoto.setInt(2,id);
-   pujafoto.setString(3,titol);
-   pujafoto.setString(4,descripcio);
-   pujafoto.setString(5,tags);
-   pujafoto.setString(6,autor);
-   pujafoto.setString(7,datac);
-   pujafoto.setString(8,timestamp);
-   pujafoto.setString(9,user);
-   pujafoto.executeUpdate();
+     PreparedStatement pujafoto = conn.prepareStatement("INSERT INTO imatges(filename,id,titol,descripcio,tags,autor,datac,timestamp,username) VALUES(?,?,?,?,?,?,?,?,?)");
+     pujafoto.setString(1,fileName);
+     pujafoto.setInt(2,id);
+     pujafoto.setString(3,titol);
+     pujafoto.setString(4,descripcio);
+     pujafoto.setString(5,tags);
+     pujafoto.setString(6,autor);
+     pujafoto.setString(7,datac);
+     pujafoto.setString(8,timestamp);
+     pujafoto.setString(9,user);
+     pujafoto.executeUpdate();
    }
    catch (SQLException e){
         response.sendRedirect("error.jsp");
    }
-   out = new FileOutputStream(new File(path + File.separator
-           + fileName));
+   out = new FileOutputStream(new File(path + File.separator + fileName));
    filecontent = filePart.getInputStream();
 
    int read = 0;
@@ -97,58 +96,59 @@ try {
    }
    writer.println("New file " + fileName + " created at " + path);
    LOGGER.log(Level.INFO, "File{0}being uploaded to {1}",
-           new Object[]{fileName, path});
-    response.sendRedirect("UploadOK.jsp");
+   new Object[]{fileName, path});
+   response.sendRedirect("UploadOK.jsp");
 }
 
 
 catch (FileNotFoundException fne) {
-   writer.println("You either did not specify a file to upload or are "
-           + "trying to upload a file to a protected or nonexistent "
-           + "location.");
-   writer.println("<br/> ERROR: " + fne.getMessage());
+    writer.println("You either did not specify a file to upload or are "
+    + "trying to upload a file to a protected or nonexistent "
+    + "location.");
+    writer.println("<br/> ERROR: " + fne.getMessage());
 
-   LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}",
-           new Object[]{fne.getMessage()});
+    LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}",
+    new Object[]{fne.getMessage()});
     response.sendRedirect("error.jsp");
-}      catch (SQLException ex) {
-          Logger.getLogger(registrarImagen.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (ClassNotFoundException ex) {
-          Logger.getLogger(registrarImagen.class.getName()).log(Level.SEVERE, null, ex);
-      } finally {
-   if (out != null) {
-       out.close();
-   }
-   if (filecontent != null) {
-       filecontent.close();
-   }
-   if (writer != null) {
-       writer.close();
-   }
-    try
-     {
-       if(conn != null)
-         conn.close();
-     }
-     catch(SQLException e)
-     {
-       // connection close failed.
-       System.err.println(e.getMessage());
-     }
+}      
+catch (SQLException ex) {
+    Logger.getLogger(registrarImagen.class.getName()).log(Level.SEVERE, null, ex);
+}
+catch (ClassNotFoundException ex) {
+    Logger.getLogger(registrarImagen.class.getName()).log(Level.SEVERE, null, ex);
+}
+finally {
+    if (out != null) {
+        out.close();
+    }
+    if (filecontent != null) {
+        filecontent.close();
+    }
+    if (writer != null) {
+        writer.close();
+    }
+    try {
+        if(conn != null)
+        conn.close();
+    }
+    catch(SQLException e) {
+        // connection close failed.
+        System.err.println(e.getMessage());
+    }
 }
 
 }
 
 private String getFileName(final Part part) {
-final String partHeader = part.getHeader("content-disposition");
-LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
-for (String content : part.getHeader("content-disposition").split(";")) {
-   if (content.trim().startsWith("filename")) {
-       return content.substring(
-               content.indexOf('=') + 1).trim().replace("\"", "");
-   }
-}
-return null;
+    final String partHeader = part.getHeader("content-disposition");
+    LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
+    for (String content : part.getHeader("content-disposition").split(";")) {
+        if (content.trim().startsWith("filename")) {
+            return content.substring(
+            content.indexOf('=') + 1).trim().replace("\"", "");
+        }
+    }
+    return null;
 }
 
 
@@ -176,11 +176,135 @@ return null;
 1. Copia en el cuadro la operación de registro de una imagen en SOAP.
 
 ``` java
+@WebMethod(operationName = "registerImage")
+    public int registerImage(@WebParam(name = "image") ImageWS image) {
+
+        Date date = new Date();
+        long time = date.getTime();
+        String timestamp = Long.toString(time);
+        Connection conn = null;
+        int id;
+
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+            // create a database connection
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+            Statement statement = conn.createStatement();
+            statement.setQueryTimeout(30);
+
+            PreparedStatement getid = conn.prepareStatement("SELECT MAX(id) FROM imatges");
+            ResultSet rs = getid.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1) + 1;
+            } else {
+                id = 0;
+            }
+
+            String filename = timestamp + ".jpg";
+
+            try {
+                PreparedStatement pujafoto = conn.prepareStatement("INSERT INTO imatges(filename,id,titol,descripcio,tags,autor,datac,timestamp,username) VALUES(?,?,?,?,?,?,?,?,?)");
+                pujafoto.setString(1, filename);
+                pujafoto.setInt(2, id);
+                pujafoto.setString(3, image.getTitol());
+                pujafoto.setString(4, image.getDescripcio());
+                pujafoto.setString(5, image.getTags());
+                pujafoto.setString(6, image.getAutor());
+                pujafoto.setString(7, image.getDatac());
+                pujafoto.setString(8, timestamp);
+                pujafoto.setString(9, image.getUsername());
+                pujafoto.executeUpdate();
+
+            } catch (SQLException e) {
+                return 0;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("No es troba cap base de dades d'usuaris");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+        return 1;
+    }
 ```
 2. Copia en el cuadro la operación de búsqueda por título en SOAP.
 
+``` java
+@WebMethod(operationName = "searchByTitle")
+    public List searchByTitle(@WebParam(name = "title") String title) {
+        //TODO write your implementation code here:
+        Connection con = null;
+        ArrayList<ImageWS> resultat = new ArrayList<ImageWS>();
+        try {
+
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+            // create a database connection
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+            Statement statement = con.createStatement();
+            statement.setQueryTimeout(30);
+            try {
+                PreparedStatement getphotos = con.prepareStatement("SELECT * FROM imatges WHERE titol LIKE ?");
+                getphotos.setString(1, title);
+                ResultSet rs = getphotos.executeQuery();
+                while (rs.next()) {
+                    ImageWS temp = new ImageWS();
+                    temp.filename = rs.getString("filename");
+                    temp.id = rs.getInt("id");
+                    temp.titol = rs.getString("titol");
+                    temp.descripcio = rs.getString("descripcio");
+                    temp.tags = rs.getString("tags");
+                    temp.autor = rs.getString("autor");
+                    temp.datac = rs.getString("datac");
+                    temp.timestamp = rs.getString("timestamp");
+                    temp.username = rs.getString("username");
+
+                    resultat.add(temp);
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+                return null;
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FotOkWS.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+            try {
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+                return null;
+            }
+        }
+
+        return resultat;
+    }
+```
 
 3. Copia en el cuadro el código que llama a una de las operaciones del servicio web de imágenes en SOAP.
+
+``` html
+
+```
 
 
 ## Práctica 4:
