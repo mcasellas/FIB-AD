@@ -1,8 +1,9 @@
 # Informe final prácticas 2 a 5
 Contesta a las siguientes cuestiones referentes a las prácticas.
 
-## Práctica 2
+## Práctica 2:
 1. Copia en el cuadro el código del servlet que recoge los datos del formulario para registrar una imagen, guardarlos en la base de datos y almacenar el fichero con la imagen en disco.
+
 
 ``` java
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -171,76 +172,31 @@ return null;
       </form>
 ```
 
-## Práctica 3
+## Práctica 3:
 1. Copia en el cuadro la operación de registro de una imagen en SOAP.
 
+``` java
+```
 2. Copia en el cuadro la operación de búsqueda por título en SOAP.
 
 
 3. Copia en el cuadro el código que llama a una de las operaciones del servicio web de imágenes en SOAP.
 
 
-
-
-
-
-## Práctica 4
+## Práctica 4:
 1. Copia en el cuadro la operación para modificar una imagen ya existente en REST.
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 2. Copia en el cuadro la operación para buscar una imagen por palabra clave en REST.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 3. Copia en el cuadro el código que llama a una de las operaciones del servicio web de imágenes en REST.
 
-
-
-
-
-
-
-
-## Práctica 5
+## Práctica 5:
 1. Compara los siguientes aspectos de la funcionalidad desarrollada en las prácticas 2, 3 y 4.
 Facilidad de implementación de la parte cliente y la parte servidor.
 
-
-
-
 2. Tiempo de respuesta para la funcionalidad de registro de imagen. Para poder realizar la comparación, comenta la parte de upload de la página en la Práctica 2.
-
-
-
 
 3. Compara el formato de las peticiones y las respuestas en SOAP y REST. ¿Cómo se realiza el envío de objetos complejos como por ejemplo las listas en ambos servicios?
 
-
-
-
-
-## Todas las prácticas
+## Todas las prácticas:
 1. Detalla las ampliaciones que hayas realizado en cada práctica. Algunos ejemplos de ampliaciones son: funcionalidades extra de gestión de imágenes (p. e. borrado), jsp para gestión de errores, funciones extra de búsqueda, etc. Puedes copiar el código correspondiente a cada ampliación.
