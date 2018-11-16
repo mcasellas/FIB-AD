@@ -303,16 +303,419 @@ private String getFileName(final Part part) {
 3. Copia en el cuadro el código que llama a una de las operaciones del servicio web de imágenes en SOAP.
 
 ``` html
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>FotOK</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="theme.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">FotOK</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li ><a href="./menu.jsp">Inici</a></li>
+            <li class="active"><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
+            <li><a href="./list.jsp">Llista les imatges</a></li>
+            <li><a href="./buscarImagen.jsp">Busca una imatge</a></li>
+            <li><form class="form-signin" action="logout" method="POST">
+
+
+
+      </form> </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+
+
+
+      <div class="page-header">
+        <h1>Registrar imatge:</h1>
+      </div>
+
+      <div class="row">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Nova imatge</h3>
+            </div>
+            <div class="panel-body">
+            <form class="form-signin" action="registrarImatge" method="POST">
+
+
+
+            <input class="form-control" type="text" name="titol" placeholder="Títol" required>
+            <input  class="form-control" type="text" name="descripcio" placeholder="Descripció" required>
+            <input class="form-control" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " required>
+            <input  class="form-control" type="text" name="autor" placeholder="Autor" required>
+            <input  class="form-control" type="date" name="datac" required>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Puja</button>
+      </form>
+
+
+            </div>
+          </div>
+
+
+
+      </div>
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
 ```
 
 
 ## Práctica 4:
 1. Copia en el cuadro la operación para modificar una imagen ya existente en REST.
 
+Para modificar una imagen usamos dos operaciones, una para modificar los campos, y otra que se encarga de hacer la modificacion en la base de datos.
+
+```JavaScript
+/**
+* GET method to modify by id
+* @param id
+* @return
+*/
+@Path("modify")
+@POST
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED) @Produces(MediaType.TEXT_HTML)
+public String modifyImage (@FormParam("id") int id) throws ClassNotFoundException {
+    //TODO write your implementation code here:
+        Connection con = null;
+        String resultat = "Error";
+        try {
+
+            try {
+                Class.forName("org.apache.derby.jdbc.ClientDriver");
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+
+
+            Statement statement = con.createStatement();
+
+            statement.setQueryTimeout(30);
+
+            } catch (SQLException e) {
+                System.out.println("No es troba cap base de dades d'usuaris");
+                System.err.println(e.getMessage());
+            }
+            try {
+
+                PreparedStatement getImatge = con.prepareStatement("SELECT * FROM IMATGES WHERE ID = ?");
+
+                getImatge.setInt(1, id);
+                ResultSet rs = getImatge.executeQuery();
+
+                while (rs.next()) {
+                    resultat = "<form class='form-signin' action='http://localhost:8080/RestAD/webresources/generic/modify_values/" + rs.getString("id") +"' method='POST'>"
+                    + " <input class='form-control' value='" + rs.getString("titol") +  "' type='text' name='title' placeholder='Títol' required>"
+                    + "      <input  class='form-control' value='" + rs.getString("descripcio") +  "' type='text' name='description' placeholder='Descripció' required>"
+                    + "     <input class='form-control' value='" + rs.getString("tags") +  "' type='text' name='keywords' placeholder='Tags separats amb ;  Exemple: (naturalesa;animals;maincra) ' required>"
+                    + "     <input  class='form-control' value='" + rs.getString("autor") +  "' type='text' name='author' placeholder='Autor' required>"
+                    + "     <input  class='form-control' value='" + rs.getString("datac") +  "' type='date' name='creation' required>"
+                    + " <button class='btn btn-lg btn-primary btn-block' type='submit'>Puja</button>"
+                    + "  </form>";
+                }
+
+
+
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        } catch (ClassNotFoundException ex) {
+            System.err.println(ex.getMessage());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+
+        }
+        return banner + "Modificar imatge:" + mig + resultat + footer;
+}
+
+
+
+/**
+* POST method to register a new image
+* @param id
+* @param title
+* @param description
+* @param keywords
+* @param author
+* @param crea_date
+* @return
+*/
+@Path("modify_values/{id}")
+@POST
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED) @Produces(MediaType.TEXT_HTML)
+public String modifyImage (@PathParam("id") int id, @FormParam("title") String title,
+@FormParam("description") String description, @FormParam("keywords") String keywords, @FormParam("author") String author, @FormParam("creation") String creation){
+
+        Connection con = null;
+        String resultat = "<h3>No s'ha pogut modificar la imatge<h3>";
+        try {
+
+            try {
+
+                Date date = new Date();
+        long time = date.getTime();
+        String timestamp = Long.toString(time);
+        String filename = timestamp + ".jpg";
+
+        Class.forName("org.apache.derby.jdbc.ClientDriver");
+        con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+
+
+
+        PreparedStatement updateFoto = con.prepareStatement("UPDATE IMATGES SET TITOL = ?, DATAC = ?, TAGS = ?, DESCRIPCIO = ?, AUTOR = ? WHERE ID = ?");
+                updateFoto.setString(1, title);
+                updateFoto.setString(2, creation);
+                updateFoto.setString(3, keywords);
+                updateFoto.setString(4, description);
+                updateFoto.setString(5, author);
+                updateFoto.setInt(6, id);
+
+                int num = updateFoto.executeUpdate();
+
+
+                resultat = "<h3>S'ha modificat la imatge correctament<h3>"
++ "<div class='list-group'><div class='list-group'>"
++ "<a href='./webresources/generic/list' class='list-group-item active'>Llista les imatges</a>"
++ ""
++ "</div>";
+
+
+
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        } catch (ClassNotFoundException ex) {
+            System.err.println(ex.getMessage());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+
+        }
+        return banner + "Modificar imatges:" + mig + resultat + footer;
+}
+
+```
+
 2. Copia en el cuadro la operación para buscar una imagen por palabra clave en REST.
 
+```java
+/**
+* GET method to search images by keyword
+* @param keywords
+* @return
+*/
+@Path("searchKeywords/{keywords}")
+@GET
+@Produces(MediaType.TEXT_HTML)
+public String searchByKeywords (@PathParam("keywords") String
+keywords) throws ClassNotFoundException{
+    Connection con = null;
+    String resultat = "<h3>No hi han imatges<h3>";
+    try {
+        Class.forName("org.apache.derby.jdbc.ClientDriver");
+        con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
+
+        PreparedStatement getphotos = con.prepareStatement("SELECT * FROM imatges WHERE TAGS LIKE ?");
+        String cerca = '%' + keywords + '%';
+        getphotos.setString(1, cerca);
+        ResultSet rs = getphotos.executeQuery();
+        resultat = llistarImatges(rs);  
+
+    }
+    catch (SQLException e) {
+            System.out.println("Error amb la base de dades");
+
+            System.err.println(e.getMessage());
+        }
+    return banner + "Buscar imatges per tags:" + mig + resultat + footer;
+}
+```
+
+
 3. Copia en el cuadro el código que llama a una de las operaciones del servicio web de imágenes en REST.
+
+Código que llama a las operaciones de búsqueda de imagenes.
+
+```html
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>FotOK</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="theme.css" rel="stylesheet">
+<link rel="shortcut icon" href="./favicon.ico">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">FotOK</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="./menu.jsp">Inici</a></li>
+            <li><a href="./registrarImagen.jsp">Registrar Imatge</a></li>
+            <li><a href="./webresources/generic/list">Llista les imatges</a></li>
+            <li class="active"><a href="./buscarImagen.jsp">Busca una imatge</a></li>
+            <li>
+                <form class="form-signin" action="logout" method="POST"></form>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+
+
+
+      <div class="page-header">
+        <h1>Buscar imatges:</h1>
+      </div>
+
+      <div class="row">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Nova imatge</h3>
+            </div>
+            <div class="panel-body">
+              <form onchange="afegirPath()" id="formulari" class="form-signin" action="./webresources/generic/searchByID/" method="GET">
+               <select name="accio" id="accio">
+                <option value="ID">Id</option>
+                <option value="Title">Titol</option>
+                <option value="Author">Autor</option>
+                <option value="CreationDate">Data de creació</option>
+                <option value="Keywords">Tags</option>
+            </select>
+            <input class="form-control" type="number" id="text" name="text" required autofocus>
+
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
+      </form>
+
+            </div>
+          </div>
+
+
+
+      </div>
+
+
+
+
+
+    </div> <!-- /container -->
+    <script>
+        function afegirPath() {
+            var accio = document.getElementById("accio").value;
+
+            document.getElementById("text").type = accio == "ID" ? "number" : "text";
+
+            var data = document.getElementById("text").value;
+            var result = "./webresources/generic/search" + accio + '/' + data;
+            document.getElementById("formulari").action = result;
+        }
+    </script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
+
+```
 
 ## Práctica 5:
 1. Compara los siguientes aspectos de la funcionalidad desarrollada en las prácticas 2, 3 y 4.

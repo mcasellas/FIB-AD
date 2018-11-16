@@ -1,14 +1,14 @@
-Fri Nov 16 10:18:40 CET 2018 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
+Fri Nov 16 10:52:17 CET 2018 : Servidor de red Apache Derby: Se ha iniciado 10.11.1.2 - (1629631) y está listo para aceptar las conexiones en el puerto 1527
 ----------------------------------------------------------------
-Fri Nov 16 10:18:40 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0167-1bd0-accc-ffffb5d6c2e7 
-on database directory /Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/DataBases/fotOK with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
-Loaded from file:/Applications/NetBeans/glassfish-4.1.1/javadb/lib/derby.jar
+Fri Nov 16 10:52:29 CET 2018:
+ Iniciando instancia a816c00e-0167-1bef-74f5-ffffbaf54d02 de Derby, versión The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): 
+en el directorio de base de datos C:\Users\rando\OneDrive\Documents\GitHub\FIB-AD\Laboratori\DataBases\fotOK con el cargador de clases sun.misc.Launcher$AppClassLoader@144bcfa
+Cargado desde file:/C:/Program%20Files%20(x86)/Java/jdk1.8.0_171/db/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_191-b12
-user.dir=/Applications/NetBeans/glassfish-4.1.1/javadb
-os.name=Mac OS X
-os.arch=x86_64
-os.version=10.14.1
-derby.system.home=/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/DataBases
-Database Class Loader started - derby.database.classpath=''
+java.runtime.version=1.8.0_171-b11
+user.dir=c:\Program Files (x86)\Java\jdk1.8.0_171\db
+os.name=Windows 10
+os.arch=x86
+os.version=10.0
+derby.system.home=C:\Users\rando\OneDrive\Documents\GitHub\FIB-AD\Laboratori\DataBases
+Cargador de clases de base de datos iniciado - derby.database.classpath=''
