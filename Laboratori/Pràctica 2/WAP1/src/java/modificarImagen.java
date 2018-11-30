@@ -53,7 +53,7 @@ public class modificarImagen extends HttpServlet {
                 
                 // Connexió Sergi
                 try {
-                    conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
+                    conn = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
                     Statement statement = conn.createStatement();
                     statement.setQueryTimeout(30);
                     

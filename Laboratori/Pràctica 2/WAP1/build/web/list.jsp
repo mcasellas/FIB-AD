@@ -84,7 +84,7 @@
                 String[] res = null;
                 
                 try {
-                    con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
+                    con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
                     Statement statement = con.createStatement();
                     statement.setQueryTimeout(30);
                     PreparedStatement getid = con.prepareStatement("SELECT * FROM imatges ORDER BY datac DESC");

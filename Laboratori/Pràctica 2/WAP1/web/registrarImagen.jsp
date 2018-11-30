@@ -86,7 +86,7 @@
               <form class="form-signin" action="registrarImagen" method="POST" enctype="multipart/form-data">
      
         
-            <input class="form-control" type="file" id="imatge" name="imatge" required autofocus>
+   
             <input class="form-control" type="text" name="titol" placeholder="Títol" required>
             <input  class="form-control" type="text" name="descripcio" placeholder="Descripció" required>
             <input class="form-control" type="text" name="tags" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " required>

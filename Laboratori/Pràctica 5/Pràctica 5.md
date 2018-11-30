@@ -721,9 +721,121 @@ Código que llama a las operaciones de búsqueda de imagenes.
 1. Compara los siguientes aspectos de la funcionalidad desarrollada en las prácticas 2, 3 y 4.
 Facilidad de implementación de la parte cliente y la parte servidor.
 
+Para la practica 2, la implementación tanto del cliente como del servidor fueron las tareas mas complejas. Para el cliente tuvimos que implementar un sistema de sesiones para cada pagina jsp de manera que solo los usuarios registrados pudiesen acceder a los servicios que ofreciamos, luego, los servlets se encargaban de gestionar todos los datos que le pasabmos por fomularios des de la jsp. Un factor importante a tener en cuenta a la hora de la dificultat de implementacion del cliente y el servidor era la poca experiencia que teniamos en la implementación de servicios, cosa que gracias a esta primera practica nos hizo mucho mas fácil el desarrollo de las siguientes. En esta implementación, la base de datos se accedia mediante una función que primero probaba la conexión con un integrante del grupo, y luego, en caso de fallo con el otro. Para las siguintes prácticas la base de datos se implementó de forma distinta para facilitar su uso, conexión y gestión.
+
+Para la práctica 3, la mayor dificultad fue entender como funcionaba el servicio a traves de llamadas a funciones, para esta práctica, la implementacion de la base de datos la integramos directamente en netbeans, porque los integrantes del grupo trabajamos con diferentes sistemas operativos, y nos resultaba mas facil que implementar funciones de conexión a base de datos en directorios.
+
+La practica 4 fue la mas sencilla en cuanto implementacion del cliente, ya que la mayoria de paginas html nos las retornaba el mismo servidor. Tuvimos que crear algunas pocas paginas de navegacion y el resto eran las funciones SOAP. La implmentación del servidor no fue muy difícil, generabamos las cabeceras con dos strings para mantener el diseño de la web, y luego implementabamos una fusión del codigo java y html que nos retornaba la página que pedia la petición.
+
 2. Tiempo de respuesta para la funcionalidad de registro de imagen. Para poder realizar la comparación, comenta la parte de upload de la página en la Práctica 2.
+
+EL tiempo de respuesta se corresponde a la linea verde para cada implementación.
+
+Para cada implementación los tiempos de respuesta son los siguientes:
+
+Práctica 2: 17.27 ms
+
+Práctica 3: 117.14 ms
+
+Práctica 4: 29.03 ms
+
+Práctica 2
+![](assets/Pràctica 5-89b2c962.PNG)
+
+
+Práctica 3
+![](assets/Pràctica 5-4601c33e.png)
+
+
+Práctica 4
+![](assets/Pràctica 5-84490012.png)
+
 
 3. Compara el formato de las peticiones y las respuestas en SOAP y REST. ¿Cómo se realiza el envío de objetos complejos como por ejemplo las listas en ambos servicios?
 
+SOAP
+
+Cabecera petición.
+
+```
+GET /P3_SOAP_JSP_Client/list.jsp HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://localhost:8080/P3_SOAP_JSP_Client/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-GB,en;q=0.9,es-ES;q=0.8,es;q=0.7,ca-ES;q=0.6,ca;q=0.5,en-US;q=0.4
+Cookie: JSESSIONID=b2cdff4f1fd1a33605281de3ed8c
+```
+
+
+Cabecera respuesta.
+
+```
+HTTP/1.1 200 OK
+Server: GlassFish Server Open Source Edition  4.1.1
+X-Powered-By: JSP/2.3
+Content-Type: text/html;charset=ISO-8859-1
+Date: Wed, 28 Nov 2018 16:36:17 GMT
+Transfer-Encoding: chunked
+```
+
+
+REST
+
+Cabecera petición.
+
+```
+GET /RestAD/webresources/generic/list HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://localhost:8080/RestAD/webresources/generic/list
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Cookie: JSESSIONID=b23aa045278dc02963ef2bc85260
+```
+
+Cabecera respuesta.
+
+```
+HTTP/1.1 200 OK
+Server: GlassFish Server Open Source Edition  4.1.1
+X-Powered-By: Servlet/3.1 JSP/2.3 (GlassFish Server Open Source Edition  4.1.1  Java/Oracle Corporation/1.8)
+Content-Type: text/html
+Date: Wed, 28 Nov 2018 16:25:37 GMT
+Transfer-Encoding: chunked
+```
+
+En ambos servicios se retorna una pagina html, pero la información se trata de manera distinta. Mientras que en el servicio SOAP, una vez hecha la petición, esta devuelve una lista con todas las imagenes, luego es la propia página jsp que gestiona la informacion de esta, que va generando la pagina html mediante operaciones en Java. Para el servicio Rest, en cambio, al hacer la petición de imágenes es la propia función la que genera el html y lo devuelve en forma de String, de manera que no se pasa ninguna lista.
+
 ## Todas las prácticas:
 1. Detalla las ampliaciones que hayas realizado en cada práctica. Algunos ejemplos de ampliaciones son: funcionalidades extra de gestión de imágenes (p. e. borrado), jsp para gestión de errores, funciones extra de búsqueda, etc. Puedes copiar el código correspondiente a cada ampliación.
+
+Para la práctica 2, implementamos paginas de error jsp para control de errores, para esta práctica eran realmente necesarias especialmente para la subida de ficheros, ya que era la fuente que nos podia causar mas problemas. Estas paginas de error tambien se usan para funcionalidades de subida, modicficacion de imagenes y para el Login. Relacionado con el login, también implementamos un sistema de sesiones mediante cokkies, ya que http es un protocolo sin estado. Estas cookies, nos permetian que cuando alguien se conectase al servicio sea redirigido correctamente, por ejemplo: Una persona quiere acceder a nuestro servicio web, sin embargo, no esta registrado y por lo tanto, no esta en la base de datos. Con el uso de cookies, si esta persona quieren entrar por ejemplo en "http://.../menu.jsp" será redirigido a la pagina de Login ya que no tendrá ninguna sessión iniciada.
+
+El control de sesión, además, nos permitió que en las páginas de listar y de búsqueda  pudiesemos añadir la funcionalidad de que cada usuario pudiese modificar la imagen desde alli, de manera que solo el usuario que ha colgado la imagen puede editarla.
+
+De la misma manera que implementamos un servicio de Login con control de sesion, tambien implementamos un servicio de logout.
+
+Para la implementación de la busqueda en la práctica 2, nuestro web service permite hacer una busqueda general, que busca en todos los campos de "metadatos" que tiene la imagen, ya sea Autor, Título, Tags... Esto nos devuelve un resultado mas amplio de la búsqueda aunque en términos de eficiencia no es tan bueno, ya que tiene que buscar por toda la base de datos, aunque los tiempos de respuesta son cortos y por eso consideramos implementarlo de esa manera. Tener en cuenta que nuestra base de datos es pequeña, por lo tanto tampoco se podia dar un escenario en que la busqueda fuera realmente eficiente.
+
+Para la práctica 3, quisimos intentar aportar la misma experiencia de uso tanto para el cliente web como en el cliente java, de manera que implementamos un cliente java totalmente funcional, con su respectivo menú, y formularios para las funciones. Estos "formularios" se basan en ir pidiendo la información al usuario de manera que es facil trabajar con el webservice desde la consola, ya que en todo momento se muestran todas las funcionalidades disponibles en el momento. La navegación se basa fundamentalmente en acceder a los distintos servicios mediante números de manera que se muestran por pantalla mensajes como:
+
+```
+1-Registrar imagen
+2-Listar imágenes
+3-Modificar imagen
+4-Buscar imagen
+```
+
+Para la práctica 4 implementamos un formulario de busqueda que te dejase buscar por campos, de manera que si por ejemplo, quieres buscar por ID(campo numérico), el campo de texto donde introduciremos las palabras clave solo permite la introducción de números.
+
+Las Prácticas 3 y 4 no incluyen muchas funcionalidades extra respecto a que se pedia en las mismas, aún así, tanto en la práctica 2, 3 y 4 se implementan las siguientes funcionalidades: Hojas de estilo CSS, con el objetivo de tener un web service que permita una navegación mas sencilla resaltando elementos importantes como por ejemplo, botones resaltados en azul para redirección a paginas de "Modificación de imagen" o para la práctica 2, un boton de Logout resaltado en amarillo, intentando cumplir así, las reglas básicas de diseño de interficies. Usamos tambien divisones para repartir bien la información de manera que se muestra clara y precisa de cara al usuario. Todas las prácticas cuentan con un barra superior de navegación, lo que permite al usuario navegar por todas las funcionalidades del web service de manera sencilla.
+
+Finalmente, pero sin importancia, diseñamos algun logo para dar un aspecto mas atractivo al webservice, siempre teniendo en cuenta que el principal objetivo de las prácticas era desarrollar las funcionalidades de estas, y no el diseño en si.

@@ -56,9 +56,9 @@ public class registrarImagen extends HttpServlet {
          response.setContentType("text/html;charset=UTF-8");
 
     // Create path components to save the file
-    final String path = ("C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\web\\Image");
-    final Part filePart = request.getPart("imatge");
-    String fileName = getFileName(filePart);  
+    //final String path = ("C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\web\\Image");
+   //final Part filePart = request.getPart("imatge");
+    //String fileName = getFileName(filePart);  
     int id;
     String titol = request.getParameter("titol");
     String descripcio = request.getParameter("descripcio");
@@ -82,8 +82,8 @@ public class registrarImagen extends HttpServlet {
     Connection conn = null;
     
     
-     int lastDot = fileName.lastIndexOf('.');
-    fileName = timestamp + fileName.substring(lastDot);
+    // int lastDot = fileName.lastIndexOf('.');
+    //fileName = timestamp + fileName.substring(lastDot);
     
     try {
         
@@ -91,7 +91,7 @@ public class registrarImagen extends HttpServlet {
             
             // Connexió Sergi
             try {
-                conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P2\\WAP1\\FotOK.db");
+                conn = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
                 Statement statement = conn.createStatement();
                 statement.setQueryTimeout(30);
             }
@@ -115,7 +115,7 @@ public class registrarImagen extends HttpServlet {
         
         try{
         PreparedStatement pujafoto = conn.prepareStatement("INSERT INTO imatges(filename,id,titol,descripcio,tags,autor,datac,timestamp,username) VALUES(?,?,?,?,?,?,?,?,?)");
-        pujafoto.setString(1,fileName);
+        pujafoto.setString(1,"foto.jpg");
         pujafoto.setInt(2,id);
         pujafoto.setString(3,titol);
         pujafoto.setString(4,descripcio);
@@ -129,7 +129,7 @@ public class registrarImagen extends HttpServlet {
         catch (SQLException e){
              response.sendRedirect("error.jsp");
         }
-        out = new FileOutputStream(new File(path + File.separator
+        /*out = new FileOutputStream(new File(path + File.separator
                 + fileName));
         filecontent = filePart.getInputStream();
 
@@ -141,7 +141,7 @@ public class registrarImagen extends HttpServlet {
         }
         writer.println("New file " + fileName + " created at " + path);
         LOGGER.log(Level.INFO, "File{0}being uploaded to {1}",
-                new Object[]{fileName, path});
+                new Object[]{fileName, path});*/
          response.sendRedirect("UploadOK.jsp");
     } 
     

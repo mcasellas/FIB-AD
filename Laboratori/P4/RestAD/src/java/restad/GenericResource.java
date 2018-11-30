@@ -5,6 +5,7 @@
  */
 package restad;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,7 +24,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 /**
  * REST Web Service
@@ -44,9 +53,9 @@ String banner = "<!DOCTYPE html>"
 + "     <meta name='description' content=''>"
 + "     <meta name='author' content=''>"
 + "     <title>FotOK</title>"
-+ "     <link href='http://localhost:8080/RestAD/css/bootstrap.min.css' rel='stylesheet'>"
-+ "     <link href='http://localhost:8080/RestAD/css/bootstrap-theme.min.css' rel='stylesheet'>"
-+ "     <link href='http://localhost:8080/RestAD/theme.css' rel='stylesheet'>"
++ "     <link href='/RestAD/css/bootstrap.min.css' rel='stylesheet'>"
++ "     <link href='/RestAD/css/bootstrap-theme.min.css' rel='stylesheet'>"
++ "     <link href='/RestAD/theme.css' rel='stylesheet'>"
 + " <link rel='shortcut icon' href='./favicon.ico'>"
 + "   </head>"
 + "   <body>"
@@ -59,14 +68,14 @@ String banner = "<!DOCTYPE html>"
 + "             <span class='icon-bar'></span>"
 + "             <span class='icon-bar'></span>"
 + "           </button>"
-+ "           <a class='navbar-brand' href='#'>FotOK</a>"
++ "           <a class='navbar-brand' href='/RestAD/menu.jsp'>FotOK</a>"
 + "         </div>"
 + "         <div id='navbar' class='navbar-collapse collapse'>"
 + "           <ul class='nav navbar-nav'>"
-+ "             <li ><a href='http://localhost:8080/RestAD/menu.jsp'>Inici</a></li>"
-+ "             <li><a href='http://localhost:8080/RestAD/registrarImagen.jsp'>Registrar Imatge</a></li>"
-+ "             <li><a href='http://localhost:8080/RestAD/webresources/generic/list'>Llista les imatges</a></li>"
-+ "             <li><a href='http://localhost:8080/RestAD/buscarImagen.jsp'>Busca una imatge</a></li>"
++ "             <li ><a href='/RestAD/menu.jsp'>Inici</a></li>"
++ "             <li><a href='/RestAD/registrarImagen.jsp'>Registrar Imatge</a></li>"
++ "             <li><a href='/RestAD/webresources/generic/list'>Llista les imatges</a></li>"
++ "             <li><a href='/RestAD/buscarImagen.jsp'>Busca una imatge</a></li>"
 + "             <li><form class='form-signin' action='logout' method='POST'>"
 + "      "
 + "        "
@@ -88,10 +97,10 @@ String mig = "</h1>"
 String footer = "</div>"
 + "</div>"
 + "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>"
-+ "<script>window.jQuery || document.write(\'<script src=\"http://localhost:8080/RestAD/../../assets/js/vendor/jquery.min.js\"/>\')</script>"
-+ "<script src='http://localhost:8080/RestAD/js/bootstrap.min.js'></script>"
-+ "<script src='http://localhost:8080/RestAD/js/docs.min.js'></script>"
-+ "<script src='http://localhost:8080/RestAD/js/ie10-viewport-bug-workaround.js'></script>"
++ "<script>window.jQuery || document.write(\'<script src=\"../../../../assets/js/vendor/jquery.min.js\"/>\')</script>"
++ "<script src='/RestAD/js/bootstrap.min.js'></script>"
++ "<script src='/RestAD/js/docs.min.js'></script>"
++ "<script src='/RestAD/js/ie10-viewport-bug-workaround.js'></script>"
 + "</body>"
 + "</html>";
 
@@ -105,11 +114,11 @@ private String llistarImatges(ResultSet rs) {
              resultat = "";        
          }        
          
-         String url = "http://localhost:8080/RestAD/webresources/generic/modify/1";
+         String url = "/RestAD/webresources/generic/modify/1";
   
          resultat += "<div class='row'>"
   + "    <div class='col-sm-6'>"
-  + "      <img src='http://localhost:8080/RestAD/Image/" + rs.getString("filename") +  "' class='img-thumbnail' >"
+  + "      <img src='/RestAD/Image/" + rs.getString("filename") +  "' class='img-thumbnail' >"
 + ""
   + "    </div><!-- /.col-sm-4 -->"
   + "    <div class='col-sm-6'>"
@@ -120,7 +129,7 @@ private String llistarImatges(ResultSet rs) {
   + "        <li class='list-group-item'>Autor: " + rs.getString("autor") +  "</li>"
   + "        <li class='list-group-item'>Tags: " + rs.getString("tags") +  "</li>"
  + "      </ul>"
-  + "        <form class='w3-container' action='http://localhost:8080/RestAD/webresources/generic/modify' method='POST'>"
+  + "        <form class='w3-container' action='/RestAD/webresources/generic/modify' method='POST'>"
   + "            <input type='hidden' name='id' value='" + rs.getString("id") + "'>"
   + "            <p>"
   + "                <button type='submit' class='btn btn-sm btn-primary'>Editar</button>"
@@ -179,17 +188,26 @@ private String llistarImatges(ResultSet rs) {
 */
 @Path("register")
 @POST
-@Consumes(MediaType.APPLICATION_FORM_URLENCODED) @Produces(MediaType.TEXT_HTML)
-public String registerImage (@FormParam("title") String title,
-@FormParam("description") String description, @FormParam("keywords") String keywords, @FormParam("author") String author, @FormParam("creation") String creation) throws ClassNotFoundException{
-    Connection con = null;
-    String resultat = "<h3>No s'ha pogut enregistrar la imatge<h3>";
+@Consumes(MediaType.MULTIPART_FORM_DATA)
+@Produces(MediaType.TEXT_HTML)
+public String registerImage (
+        @FormDataParam("title") String title,
+        @FormDataParam("description") String description, 
+        @FormDataParam("keywords") String keywords, 
+        @FormDataParam("author") String author, 
+        @FormDataParam("creation") String creation,     
+        @FormDataParam("file") InputStream uploadedInputStream,
+        @FormDataParam("file") FormDataContentDisposition fileDetail) {
+    
+        Connection con = null;
+        String resultat = "<h3>No s'ha pogut enregistrar la imatge<h3>";
     try {
         Date date = new Date();
         long time = date.getTime();
         String timestamp = Long.toString(time);
         String filename = timestamp + ".jpg";
-        
+        String uploadedFileLocation = "C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P4\\RestAD\\web\\Image\\" + filename;
+        saveToDisk(uploadedInputStream, uploadedFileLocation);
         Class.forName("org.apache.derby.jdbc.ClientDriver");
         con = DriverManager.getConnection("jdbc:derby://localhost:1527/FotOK;user=mcasellas;password=1234");
         
@@ -217,11 +235,11 @@ public String registerImage (@FormParam("title") String title,
 
         resultat = "<h3>La imatge s'ha enregistrat correctament<h3>"
 + "<div class='list-group'><div class='list-group'>"
-+ "<a href='./registrarImagen.jsp' class='list-group-item active'>"
++ "<a href='/RestAD/registrarImagen.jsp' class='list-group-item active'>"
 + "Registra una altre imatge"
 + "</a>"
 + ""
-+ "<a href='./webresources/generic/list' class='list-group-item'>Llista les imatges</a>"
++ "<a href='./list' class='list-group-item'>Llista les imatges</a>"
 + ""
 + "</div>";
 
@@ -230,7 +248,9 @@ public String registerImage (@FormParam("title") String title,
             System.out.println("Error amb la base de dades");
             
             System.err.println(e.getMessage());
-        }
+        } catch (ClassNotFoundException ex) {
+        Logger.getLogger(GenericResource.class.getName()).log(Level.SEVERE, null, ex);
+    }
     return banner + "Pujar imatge:" + mig + resultat + footer;
 }
 
@@ -241,7 +261,8 @@ public String registerImage (@FormParam("title") String title,
 */
 @Path("modify")
 @POST
-@Consumes(MediaType.APPLICATION_FORM_URLENCODED) @Produces(MediaType.TEXT_HTML)
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
+@Produces(MediaType.TEXT_HTML)
 public String modifyImage (@FormParam("id") int id) throws ClassNotFoundException {
     //TODO write your implementation code here:
         Connection con = null;
@@ -269,7 +290,7 @@ public String modifyImage (@FormParam("id") int id) throws ClassNotFoundExceptio
                 ResultSet rs = getImatge.executeQuery();
                 
                 while (rs.next()) { 
-                    resultat = "<form class='form-signin' action='http://localhost:8080/RestAD/webresources/generic/modify_values/" + rs.getString("id") +"' method='POST'>"
+                    resultat = "<form class='form-signin' action='/RestAD/webresources/generic/modify_values/" + rs.getString("id") +"' method='POST'>"
                     + " <input class='form-control' value='" + rs.getString("titol") +  "' type='text' name='title' placeholder='Títol' required>"
                     + "      <input  class='form-control' value='" + rs.getString("descripcio") +  "' type='text' name='description' placeholder='Descripció' required>"
                     + "     <input class='form-control' value='" + rs.getString("tags") +  "' type='text' name='keywords' placeholder='Tags separats amb ;  Exemple: (naturalesa;animals;maincra) ' required>"
@@ -347,7 +368,7 @@ public String modifyImage (@PathParam("id") int id, @FormParam("title") String t
                 
                 resultat = "<h3>S'ha modificat la imatge correctament<h3>"
 + "<div class='list-group'><div class='list-group'>"
-+ "<a href='./webresources/generic/list' class='list-group-item active'>Llista les imatges</a>"
++ "<a href='/RestAD/webresources/generic/list' class='list-group-item active'>Llista les imatges</a>"
 + ""
 + "</div>";
        
@@ -559,4 +580,46 @@ keywords) throws ClassNotFoundException{
     @Consumes(MediaType.TEXT_HTML)
     public void putHtml(String content) {
     }
+
+
+   /* @POST
+    @Path("/upload")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    
+    public String uploadFile(
+        @FormDataParam("file") InputStream uploadedInputStream,
+        @FormDataParam("file") FormDataContentDisposition fileDetail){
+        
+    String uploadedFileLocation = "C:\\Users\\rando\\OneDrive\\Documents\\GitHub\\FIB-AD\\Laboratori\\P4\\RestAD\\web\\Image\\" + fileDetail.getFileName();
+
+    saveToDisk(uploadedInputStream, uploadedFileLocation);
+
+    return uploadedFileLocation;
+}
+*/
+
+    private void saveToDisk(InputStream uploadedInputStream, String uploadedFileLocation) {
+    
+    try {
+        OutputStream out = new FileOutputStream(new File(uploadedFileLocation));
+        int read = 0;
+        byte[] bytes = new byte[1024];
+        
+        out = new FileOutputStream( new File(uploadedFileLocation));
+        while ((read = uploadedInputStream.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+        }
+        out.flush();
+        out.close();
+    }
+    catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
+    
+
+
+
+
+
 }

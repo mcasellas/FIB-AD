@@ -16,8 +16,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>FotOK</title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/RestAD/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/RestAD/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="theme.css" rel="stylesheet">
 
   </head>
@@ -33,7 +33,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">FotOK</a>
+          <a class="navbar-brand" href="/RestAD/menu.jsp">FotOK</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -66,10 +66,10 @@
               <h3 class="panel-title">Nova imatge</h3>
             </div>
             <div class="panel-body">
-            <form class="form-signin" action="./webresources/generic/register" method="POST">
+            <form class="form-signin" action="./webresources/generic/register" method="POST" enctype="multipart/form-data">
      
         
-           
+            <input type="file" name="file"> <br>
             <input class="form-control" type="text" name="title" placeholder="Títol" required>
             <input  class="form-control" type="text" name="description" placeholder="Descripció" required>
             <input class="form-control" type="text" name="keywords" placeholder="Tags separats amb ';'  Exemple: (naturalesa;animals;maincra) " required>
@@ -77,9 +77,7 @@
             <input  class="form-control" type="date" name="creation" required>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Puja</button>
-      </form>
-                
-               
+      </form>         
             </div>
           </div>
       </div>
@@ -95,9 +93,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/docs.min.js"></script>
+    <script src="/RestAD/js/bootstrap.min.js"></script>
+    <script src="/RestAD/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="./js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/RestAD/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
