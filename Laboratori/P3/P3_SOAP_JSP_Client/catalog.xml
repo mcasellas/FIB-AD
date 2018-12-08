@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="file:/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P3/P3_SOAP_Client_Application/xml-resources/web-service-references/FotOkWS/wsdl/localhost_8080/P3_SOAP/FotOkWS.wsdl" uri="src/conf/xml-resources/web-service-references/FotOkWS/wsdl/FotOkWS.wsdl"/>
-    <system systemId="http://localhost:8080/P3_SOAP/FotOkWS?xsd=1" uri="src/conf/xml-resources/web-service-references/FotOkWS/wsdl/localhost_8080/P3_SOAP/FotOkWS.xsd_1.xsd"/>
+    <system systemId="file:/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P3/P3_SOAP_Client_Application/xml-resources/web-service-references/FotOkWS/wsdl/192.168.137.1_8080/P3_SOAP/FotOkWS.wsdl" uri="src/conf/xml-resources/web-service-references/FotOkWS/wsdl/FotOkWS.wsdl"/>
+    <system systemId="http://192.168.137.1:8080/P3_SOAP/FotOkWS?xsd=1" uri="src/conf/xml-resources/web-service-references/FotOkWS/wsdl/192.168.137.1_8080/P3_SOAP/FotOkWS.xsd_1.xsd"/>
+    <system systemId="file:/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P3/P3_SOAP_JSP_Client/web/WEB-INF/wsdl/FotOkWS.wsdl" uri="src/conf/xml-resources/web-service-references/FotOkWS/wsdl/FotOkWS.wsdl"/>
+    <system systemId="file:/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P3/P3_SOAP_JSP_Client/web/WEB-INF/wsdl/FotOkWS.xsd_1.xsd" uri="src/conf/xml-resources/web-service-references/FotOkWS/wsdl/FotOkWS.xsd_1.xsd"/>
 </catalog>

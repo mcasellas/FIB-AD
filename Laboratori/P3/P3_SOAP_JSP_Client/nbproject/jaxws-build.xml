@@ -28,7 +28,7 @@
     </target>
     <target name="wsimport-client-FotOkWS" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/FotOkWS"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/FotOkWS" destdir="${build.generated.dir}/jax-wsCache/FotOkWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/FotOkWS/wsdl/FotOkWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="file:/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P3/P3_SOAP_Client_Application/xml-resources/web-service-references/FotOkWS/wsdl/localhost_8080/P3_SOAP/FotOkWS.wsdl" xnocompile="true" xendorsed="true">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/FotOkWS" destdir="${build.generated.dir}/jax-wsCache/FotOkWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/FotOkWS/wsdl/FotOkWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="file:/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P3/P3_SOAP_JSP_Client/web/WEB-INF/wsdl/FotOkWS.wsdl" xnocompile="true" xendorsed="true" package="server">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/FotOkWS/wsdl/FotOkWS.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/FotOkWS"/>
         </wsimport>

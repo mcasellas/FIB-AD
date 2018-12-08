@@ -83,7 +83,7 @@
                         <div class="row">
        
         <div class="col-sm-6">
-          <img src="./Image/<%= mobj.getFilename() %>" class="img-thumbnail" >
+          <img src="<%= mobj.getFilename() %>" class="img-thumbnail" >
 
         </div><!-- /.col-sm-4 -->
         <div class="col-sm-6">

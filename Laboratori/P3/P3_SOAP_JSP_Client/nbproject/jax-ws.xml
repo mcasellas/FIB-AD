@@ -3,9 +3,9 @@
   <services/>
   <clients>
     <client name="FotOkWS">
-      <wsdl-url>file:/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P3/P3_SOAP_Client_Application/xml-resources/web-service-references/FotOkWS/wsdl/localhost_8080/P3_SOAP/FotOkWS.wsdl</wsdl-url>
+      <wsdl-url>file:/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P3/P3_SOAP_JSP_Client/web/WEB-INF/wsdl/FotOkWS.wsdl</wsdl-url>
       <local-wsdl-file>FotOkWS.wsdl</local-wsdl-file>
-      <package-name>server</package-name>
+      <package-name forceReplace="true">server</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -22,7 +22,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>file:/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P3/P3_SOAP_Client_Application/xml-resources/web-service-references/FotOkWS/wsdl/localhost_8080/P3_SOAP/FotOkWS.wsdl</wsimport-option-value>
+          <wsimport-option-value>file:/Users/marccasellas/Documents/GitHub/FIB-AD/Laboratori/P3/P3_SOAP_JSP_Client/web/WEB-INF/wsdl/FotOkWS.wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -31,6 +31,10 @@
         <wsimport-option>
           <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>package</wsimport-option-name>
+          <wsimport-option-value>server</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>
